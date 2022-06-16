@@ -1,13 +1,8 @@
-// Import dotenv
+// Imports
 require('dotenv').config()
-
-// Import express application and assign it to 'app' variable
 const express = require('express')
 const app = express()
-
-
 const episodePost = require('./models/episodePost')
-
 
 
 // Middleware
@@ -15,56 +10,34 @@ const episodePost = require('./models/episodePost')
 // Convert JSON to JavaScript object
 app.use(express.json())
 
-// Posts
-let episodePosts = [
-  {
-    id: 1,
-    show_name: "Seinfeld",
-    episode_season: 4,
-    episode_number: 11,
-    episode_name: "The Contest",
-    episode_info: "George's mother throws her back out when she falls down after catching George performing a personal act; the gang partakes in a contest of self-denial.",
-  },
-  {
-    id: 2,
-    show_name: "Seinfeld",
-    episode_season: 5,
-    episode_number: 2,
-    episode_name: "The Opposite",
-    episode_info: "George decides to turn his life around by doing the exact opposite of what he would usually do. Elaine is having a lot of bad luck. Jerry keeps breaking even. Kramer gets the coffee table book published.",
-  }
-]
 
-// Routes
-app.get('/api/posts/:id', (request, response) => {
-  // Find post
-  const id = Number(request.params.id)
-  const episodePost = episodePosts.find(post => post.id === id)
-  // If post found
-  if (episodePost) {
-    response.json(episodePost)
-  }
-  // 404 if post not found
-  else {
-    response.status(404).end()
-  }
+// GET routes
+
+app.get('/api/posts/:id', (request, response, next) => {
+  episodePost.findById(request.params.id)
+    .then(post => {
+      // If post found
+      if (post) {
+        response.json(post)
+      }
+      // 404 if post not found
+      else {
+        response.status(404).end()
+      }
+    })
+    // Catch error if 'id' doesn't match mongo identifier format
+    .catch(error => next(error))
 })
 
 app.get('/api/posts', (request, response) => {
-  response.json(episodePosts)
+  // Return all posts
+  episodePost.find({}).then(posts => {
+    response.json(posts)
+  })
 })
 
 
-// Function to generate id
-const generateId = () => {
-  // Check if notes length is greater than 0
-  const maxId = episodePosts.length > 0
-    // If it is, find the max value in notes using map and spread syntax
-    ? Math.max(...episodePosts.map(n => n.id))
-    // If not, then assign 0
-    : 0
-  return maxId + 1
-}
+// POST routes
 
 app.post('/api/posts', (request, response) => {
   const body = request.body
@@ -82,7 +55,6 @@ app.post('/api/posts', (request, response) => {
   
   // Create post object
   const post = new episodePost({
-    id: generateId(),
     showName: body.showName,
     episodeSeason: body.episodeSeason,
     episodeNumber: body.episodeNumber,
@@ -96,6 +68,17 @@ app.post('/api/posts', (request, response) => {
 
 })
 
+// Error handler
+const errorHandler = (error, request, response, next) => {
+  console.log(error.message)
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  }
+  next(error)
+}
+
+// Middleware for error handling
+app.use(errorHandler)
 
 // Server
 const PORT = 3001
