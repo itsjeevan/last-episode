@@ -1,6 +1,14 @@
+// Import dotenv
+require('dotenv').config()
+
 // Import express application and assign it to 'app' variable
 const express = require('express')
 const app = express()
+
+
+const episodePost = require('./models/episodePost')
+
+
 
 // Middleware
 
@@ -8,7 +16,7 @@ const app = express()
 app.use(express.json())
 
 // Posts
-let posts = [
+let episodePosts = [
   {
     id: 1,
     show_name: "Seinfeld",
@@ -28,18 +36,13 @@ let posts = [
 ]
 
 // Routes
-
-app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
-})
-
 app.get('/api/posts/:id', (request, response) => {
   // Find post
   const id = Number(request.params.id)
-  const post = posts.find(post => post.id === id)
+  const episodePost = episodePosts.find(post => post.id === id)
   // If post found
-  if (post) {
-    response.json(post)
+  if (episodePost) {
+    response.json(episodePost)
   }
   // 404 if post not found
   else {
@@ -48,16 +51,16 @@ app.get('/api/posts/:id', (request, response) => {
 })
 
 app.get('/api/posts', (request, response) => {
-  response.json(posts)
+  response.json(episodePosts)
 })
 
 
 // Function to generate id
 const generateId = () => {
   // Check if notes length is greater than 0
-  const maxId = posts.length > 0
+  const maxId = episodePosts.length > 0
     // If it is, find the max value in notes using map and spread syntax
-    ? Math.max(...posts.map(n => n.id))
+    ? Math.max(...episodePosts.map(n => n.id))
     // If not, then assign 0
     : 0
   return maxId + 1
@@ -68,31 +71,29 @@ app.post('/api/posts', (request, response) => {
 
   // If content missing, respond with error
   if (
-    !body.show_name ||
-    !body.episode_season ||
-    !body.episode_number ||
-    !body.episode_name ||
-    !body.episode_info) {
+    !body.showName ||
+    !body.episodeSeason ||
+    !body.episodeNumber ||
+    !body.episodeName ||
+    !body.episodeInfo) {
     // Return, otherwise code continues
-    return response.status(400).json({
-      error: 'Missing content'
-    })
+    return response.status(400).json({ error: 'Missing content' })
   }
   
   // Create post object
-  const post = {
+  const post = new episodePost({
     id: generateId(),
-    show_name: body.show_name,
-    episode_season: body.episode_season,
-    episode_number: body.episode_number,
-    episode_name: body.episode_name,
-    episode_info: body.episode_info
-  }
+    showName: body.showName,
+    episodeSeason: body.episodeSeason,
+    episodeNumber: body.episodeNumber,
+    episodeName: body.episodeName,
+    episodeInfo: body.episodeInfo
+  })
 
-  // Add post to posts
-  posts = posts.concat(post)
-  // Respond with JSON
-  response.json(post)
+  post.save().then(savedEpisodePost => {
+    response.json(savedEpisodePost)
+  })
+
 })
 
 
