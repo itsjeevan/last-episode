@@ -1,3 +1,4 @@
+// Imports
 const mongoose = require('mongoose')
 
 // URL to connect to MongoDB
@@ -20,6 +21,15 @@ const episodePostSchema = new mongoose.Schema({
   episodeNumber: Number,
   episodeName: String,
   episodeInfo: String
+})
+
+// Format object returned by MongoDB by converting 'id' to string
+episodePostSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
 })
 
 // Export model
