@@ -7,20 +7,33 @@ const url = process.env.MONGODB_URI
 // Connect to MongoDB
 console.log('connecting to MongoBD')
 mongoose.connect(url)
-  .then(result => {
-    console.log('connected to MongoDB')
-  })
+  .then(console.log('connected to MongoDB'))
   .catch(error => {
     console.log('error connecting to MongoDBL', error.message)
   })
 
 // Schema for episode post
 const episodePostSchema = new mongoose.Schema({
-  showName: String,
-  episodeSeason: Number,
-  episodeNumber: Number,
-  episodeName: String,
-  episodeInfo: String
+  showName: {
+    type: String,
+    required: true
+  },
+  episodeSeason: {
+    type: Number,
+    required: true
+  },
+  episodeNumber: {
+    type: Number,
+    required: true
+  },
+  episodeName: {
+    type: String,
+    required: true
+  },
+  episodeInfo: {
+    type: String,
+    required: true
+  }
 })
 
 // Format object returned by MongoDB by converting 'id' to string
