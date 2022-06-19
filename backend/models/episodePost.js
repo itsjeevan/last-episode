@@ -1,17 +1,6 @@
 // Imports
 const mongoose = require('mongoose')
 
-// URL to connect to MongoDB
-const url = process.env.MONGODB_URI
-
-// Connect to MongoDB
-console.log('connecting to MongoBD')
-mongoose.connect(url)
-  .then(console.log('connected to MongoDB'))
-  .catch(error => {
-    console.log('error connecting to MongoDBL', error.message)
-  })
-
 // Schema for episode post
 const episodePostSchema = new mongoose.Schema({
   showName: {
@@ -45,5 +34,5 @@ episodePostSchema.set('toJSON', {
   }
 })
 
-// Export model
+// Exports
 module.exports = mongoose.model('episodePost', episodePostSchema)
