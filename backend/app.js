@@ -12,8 +12,8 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(error => {
     console.log('error connecting to MongoDB', error.message)
   })
-  
-  
+
+
 // Middleware
 
 // Convert JSON to JavaScript object

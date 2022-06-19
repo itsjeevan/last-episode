@@ -44,7 +44,7 @@ episodePostsRouter.post('/', (request, response) => {
     // Return, otherwise code continues
     return response.status(400).json({ error: 'Missing content' })
   }
-  
+
   // Create post object
   const post = new episodePost({
     showName: body.showName,
