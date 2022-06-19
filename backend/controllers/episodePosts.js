@@ -5,45 +5,34 @@ const episodePost = require('../models/episodePost')
 
 // GET routes
 
-episodePostsRouter.get('/:id', (request, response, next) => {
-  episodePost.findById(request.params.id)
-    .then(post => {
-      // If post found
-      if (post) {
-        response.json(post)
-      }
-      // 404 if post not found
-      else {
-        response.status(404).end()
-      }
-    })
-    // Catch error if 'id' doesn't match mongo identifier format
-    .catch(error => next(error))
+episodePostsRouter.get('/', async (request, response) => {
+  // Return all posts
+  const posts = await episodePost.find({})
+  response.json(posts)
 })
 
-episodePostsRouter.get('/', (request, response) => {
-  // Return all posts
-  episodePost.find({}).then(posts => {
-    response.json(posts)
-  })
+episodePostsRouter.get('/:id', async (request, response, next) => {
+  try {
+    const post = await episodePost.findById(request.params.id)
+    // If post found
+    if (post) {
+      response.json(post)
+    }
+    // 404 if post not found
+    else {
+      response.status(404).end()
+    }
+  }
+  catch(exception) {
+    next(exception)
+  }
 })
 
 
 // POST routes
 
-episodePostsRouter.post('/', (request, response) => {
+episodePostsRouter.post('/', async (request, response, next) => {
   const body = request.body
-
-  // If content missing, respond with error
-  if (
-    !body.showName ||
-    !body.episodeSeason ||
-    !body.episodeNumber ||
-    !body.episodeName ||
-    !body.episodeInfo) {
-    // Return, otherwise code continues
-    return response.status(400).json({ error: 'Missing content' })
-  }
 
   // Create post object
   const post = new episodePost({
@@ -54,10 +43,13 @@ episodePostsRouter.post('/', (request, response) => {
     episodeInfo: body.episodeInfo
   })
 
-  post.save().then(savedEpisodePost => {
-    response.json(savedEpisodePost)
-  })
-
+  try {
+    const savedEpisdePost = await post.save()
+    response.json(savedEpisdePost)
+  }
+  catch(exception) {
+    next(exception)
+  }
 })
 
 // Exports
