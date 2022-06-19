@@ -20,6 +20,8 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(express.json())
 // Episode Posts Router
 app.use('/api/episodeposts', episodePostsRouter)
+// Unknown endpoint
+app.use(middleware.unknownEndpoint)
 // Error handling
 app.use(middleware.errorHandler)
 
