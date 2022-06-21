@@ -25,7 +25,7 @@ const episodePostSchema = new mongoose.Schema({
   }
 })
 
-// Format object returned by MongoDB by converting 'id' to string
+// Format object returned by MongoDB
 episodePostSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()

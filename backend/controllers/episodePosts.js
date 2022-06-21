@@ -43,6 +43,7 @@ episodePostsRouter.post('/', async (request, response, next) => {
     episodeInfo: body.episodeInfo
   })
 
+  // Save episode post
   try {
     const savedEpisdePost = await post.save()
     response.json(savedEpisdePost)
