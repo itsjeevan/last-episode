@@ -54,6 +54,7 @@ episodePostsRouter.post('/', async (request, response, next) => {
     episodeNumber,
     episodeName,
     episodeInfo,
+    date: new Date(),
     user: user._id
   })
 
