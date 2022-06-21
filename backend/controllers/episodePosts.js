@@ -37,6 +37,14 @@ episodePostsRouter.get('/:id', async (request, response, next) => {
 episodePostsRouter.post('/', async (request, response, next) => {
   const { showName, episodeSeason, episodeNumber, episodeName, episodeInfo } = request.body
 
+  // Check if episode post already exists
+  const existingEpisodePost = await episodePost.find({ showName, episodeSeason, episodeNumber })
+  if (existingEpisodePost.length !== 0) {
+    return response.status(400).json({
+      error: 'a post about this episode already exists'
+    })
+  }
+
   // Create post object
   const post = new episodePost({
     showName,

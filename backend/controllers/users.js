@@ -37,6 +37,7 @@ usersRouter.get('/:id', async (request, response, next) => {
 usersRouter.post('/', async (request, response, next) => {
   const { username, password } = request.body
 
+  // Check if username is taken
   const existingUser = await User.findOne({ username })
   if (existingUser) {
     return response.status(400).json({
