@@ -3,8 +3,14 @@ const mongoose = require('mongoose')
 
 // Schema for user
 const userSchema = new mongoose.Schema({
-  username: String,
-  passwordHash: String,
+  username: {
+    type: String,
+    required: true
+  },
+  passwordHash: {
+    type: String,
+    required: true
+  },
   episodePosts: [
     {
       type: mongoose.Schema.Types.ObjectId,
