@@ -9,14 +9,14 @@ const bcrypt = require('bcrypt')
 // GET all users
 usersRouter.get('/', async (request, response) => {
   // Return all users
-  const users = await User.find({})
+  const users = await User.find({}).populate('episodePosts', { user: 0 })
   return response.json(users)
 })
 
 // GET user by id
 usersRouter.get('/:id', async (request, response, next) => {
   try {
-    const user = await User.findById(request.params.id)
+    const user = await User.findById(request.params.id).populate('episodePosts', { user: 0 })
     // If user found
     if (user) {
       response.json(user)

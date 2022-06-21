@@ -22,6 +22,10 @@ const episodePostSchema = new mongoose.Schema({
   episodeInfo: {
     type: String,
     required: true
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user'
   }
 })
 
