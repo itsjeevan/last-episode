@@ -6,12 +6,14 @@ const bcrypt = require('bcrypt')
 
 // GET routes
 
+// GET all users
 usersRouter.get('/', async (request, response) => {
   // Return all users
   const users = await User.find({})
   return response.json(users)
 })
 
+// GET user by id
 usersRouter.get('/:id', async (request, response, next) => {
   try {
     const user = await User.findById(request.params.id)
@@ -31,11 +33,11 @@ usersRouter.get('/:id', async (request, response, next) => {
 
 // POST routes
 
+// POST new user
 usersRouter.post('/', async (request, response, next) => {
+  const { username, password } = request.body
 
-  const body = request.body
-
-  const existingUser = await User.findOne({ username: body.username })
+  const existingUser = await User.findOne({ username })
   if (existingUser) {
     return response.status(400).json({
       error: 'username taken'
@@ -44,14 +46,15 @@ usersRouter.post('/', async (request, response, next) => {
 
   // Create hashed password
   const saltRounds = 10
-  const passwordHash = await bcrypt.hash(body.password, saltRounds)
+  const passwordHash = await bcrypt.hash(password, saltRounds)
 
   // Create user object
   const user = new User({
-    username: body.username,
-    passwordHash: passwordHash
+    username,
+    passwordHash
   })
 
+  // Save user
   try {
     const savedUser = await user.save()
     response.json(savedUser)

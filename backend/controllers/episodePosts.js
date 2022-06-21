@@ -5,12 +5,14 @@ const episodePost = require('../models/episodePost')
 
 // GET routes
 
+// GET all episode posts
 episodePostsRouter.get('/', async (request, response) => {
   // Return all posts
   const posts = await episodePost.find({})
   response.json(posts)
 })
 
+// GET episode post by id
 episodePostsRouter.get('/:id', async (request, response, next) => {
   try {
     const post = await episodePost.findById(request.params.id)
@@ -31,16 +33,17 @@ episodePostsRouter.get('/:id', async (request, response, next) => {
 
 // POST routes
 
+// POST new episode post
 episodePostsRouter.post('/', async (request, response, next) => {
-  const body = request.body
+  const { showName, episodeSeason, episodeNumber, episodeName, episodeInfo } = request.body
 
   // Create post object
   const post = new episodePost({
-    showName: body.showName,
-    episodeSeason: body.episodeSeason,
-    episodeNumber: body.episodeNumber,
-    episodeName: body.episodeName,
-    episodeInfo: body.episodeInfo
+    showName,
+    episodeSeason,
+    episodeNumber,
+    episodeName,
+    episodeInfo
   })
 
   // Save episode post
