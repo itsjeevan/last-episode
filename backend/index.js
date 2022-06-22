@@ -1,5 +1,6 @@
 // Imports
 require('dotenv').config()
+require('express-async-errors')
 const app = require('./app')
 const http = require('http')
 

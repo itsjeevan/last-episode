@@ -16,29 +16,25 @@ episodeCommentsRouter.get('/', async (request, response) => {
 })
 
 // GET episode comment by id
-episodeCommentsRouter.get('/:id', async (request, response, next) => {
-  try {
-    const comment = await episodeComment.findById(request.params.id)
-      .populate('user')
-      .populate('episodePost')
-    // If comment found
-    if (comment) {
-      response.json(comment)
-    }
-    // 404 if comment not found
-    else {
-      response.status(404).end()
-    }
+episodeCommentsRouter.get('/:id', async (request, response) => {
+  // Find comment
+  const comment = await episodeComment.findById(request.params.id)
+    .populate('user')
+    .populate('episodePost')
+  // If comment found
+  if (comment) {
+    response.json(comment)
   }
-  catch(exception) {
-    next(exception)
+  // 404 if comment not found
+  else {
+    response.status(404).end()
   }
 })
 
 // POST routes
 
 // POST new episode comment
-episodeCommentsRouter.post('/', async (request, response, next) => {
+episodeCommentsRouter.post('/', async (request, response) => {
   const { content, userId, episodePostId } = request.body
 
   // Find user by id
@@ -56,17 +52,12 @@ episodeCommentsRouter.post('/', async (request, response, next) => {
   })
 
   // Save episode comment
-  try {
-    const savedEpisodeComment = await comment.save()
-    userFound.episodeComments = userFound.episodeComments.concat(savedEpisodeComment._id)
-    episodePostFound.episodeComments = episodePostFound.episodeComments.concat(savedEpisodeComment._id)
-    await userFound.save()
-    await episodePostFound.save()
-    response.json(savedEpisodeComment)
-  }
-  catch(exception) {
-    next(exception)
-  }
+  const savedEpisodeComment = await comment.save()
+  userFound.episodeComments = userFound.episodeComments.concat(savedEpisodeComment._id)
+  episodePostFound.episodeComments = episodePostFound.episodeComments.concat(savedEpisodeComment._id)
+  await userFound.save()
+  await episodePostFound.save()
+  response.json(savedEpisodeComment)
 })
 
 // Exports

@@ -16,21 +16,16 @@ usersRouter.get('/', async (request, response) => {
 })
 
 // GET user by id
-usersRouter.get('/:id', async (request, response, next) => {
-  try {
-    const user = await User.findById(request.params.id)
-      .populate('episodePosts')
-      .populate('episodeComments')
-    // If user found
-    if (user) {
-      response.json(user)
-    }
-    else {
-      response.status(404).end()
-    }
+usersRouter.get('/:id', async (request, response) => {
+  const user = await User.findById(request.params.id)
+    .populate('episodePosts')
+    .populate('episodeComments')
+  // If user found
+  if (user) {
+    response.json(user)
   }
-  catch(exception) {
-    next(exception)
+  else {
+    response.status(404).end()
   }
 })
 
@@ -38,7 +33,7 @@ usersRouter.get('/:id', async (request, response, next) => {
 // POST routes
 
 // POST new user
-usersRouter.post('/', async (request, response, next) => {
+usersRouter.post('/', async (request, response) => {
   const { username, password } = request.body
 
   // Check if username is taken
@@ -60,13 +55,8 @@ usersRouter.post('/', async (request, response, next) => {
   })
 
   // Save user
-  try {
-    const savedUser = await user.save()
-    response.json(savedUser)
-  }
-  catch(exception) {
-    next(exception)
-  }
+  const savedUser = await user.save()
+  response.json(savedUser)
 })
 
 // Exports
