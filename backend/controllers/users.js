@@ -9,14 +9,18 @@ const bcrypt = require('bcrypt')
 // GET all users
 usersRouter.get('/', async (request, response) => {
   // Return all users
-  const users = await User.find({}).populate('episodePosts', { user: 0 })
+  const users = await User.find({})
+    .populate('episodePosts')
+    .populate('episodeComments')
   return response.json(users)
 })
 
 // GET user by id
 usersRouter.get('/:id', async (request, response, next) => {
   try {
-    const user = await User.findById(request.params.id).populate('episodePosts', { user: 0 })
+    const user = await User.findById(request.params.id)
+      .populate('episodePosts')
+      .populate('episodeComments')
     // If user found
     if (user) {
       response.json(user)
@@ -38,8 +42,8 @@ usersRouter.post('/', async (request, response, next) => {
   const { username, password } = request.body
 
   // Check if username is taken
-  const existingUser = await User.findOne({ username })
-  if (existingUser) {
+  const userFound = await User.findOne({ username })
+  if (userFound) {
     return response.status(400).json({
       error: 'username taken'
     })

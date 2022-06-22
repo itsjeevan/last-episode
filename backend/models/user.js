@@ -14,7 +14,13 @@ const userSchema = new mongoose.Schema({
   episodePosts: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'episodePost'
+      ref: 'episodePost',
+    }
+  ],
+  episodeComments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'episodeComment'
     }
   ]
 })

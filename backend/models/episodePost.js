@@ -29,8 +29,15 @@ const episodePostSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
-  }
+    ref: 'user',
+    required: true
+  },
+  episodeComments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'episodeComment'
+    }
+  ]
 })
 
 // Format object returned by MongoDB

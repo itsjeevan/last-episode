@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const episodePostsRouter = require('./controllers/episodePosts')
+const episodeCommentsRouter = require('./controllers/episodeComments')
 const usersRouter = require('./controllers/users')
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
@@ -19,10 +20,16 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Convert JSON to JavaScript object
 app.use(express.json())
-// Episode Posts Router
-app.use('/api/episodeposts', episodePostsRouter)
-// Users Router
+
+// Routers
+
+// Users router
 app.use('/api/users', usersRouter)
+// Episode posts router
+app.use('/api/episodeposts', episodePostsRouter)
+// Episode comments router
+app.use('/api/episodecomments', episodeCommentsRouter)
+
 // Unknown endpoint
 app.use(middleware.unknownEndpoint)
 // Error handling

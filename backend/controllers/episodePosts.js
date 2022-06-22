@@ -8,14 +8,18 @@ const User = require('../models/user')
 // GET all episode posts
 episodePostsRouter.get('/', async (request, response) => {
   // Return all posts
-  const posts = await episodePost.find({}).populate('user', { episodePosts: 0 })
+  const posts = await episodePost.find({})
+    .populate('user')
+    .populate('episodeComments')
   response.json(posts)
 })
 
 // GET episode post by id
 episodePostsRouter.get('/:id', async (request, response, next) => {
   try {
-    const post = await episodePost.findById(request.params.id).populate('user', { episodePosts: 0 })
+    const post = await episodePost.findById(request.params.id)
+      .populate('user')
+      .populate('episodeComments')
     // If post found
     if (post) {
       response.json(post)
@@ -37,15 +41,15 @@ episodePostsRouter.post('/', async (request, response, next) => {
   const { showName, episodeSeason, episodeNumber, episodeName, episodeInfo, userId } = request.body
 
   // Check if episode post already exists
-  const existingEpisodePost = await episodePost.find({ showName, episodeSeason, episodeNumber })
-  if (existingEpisodePost.length !== 0) {
+  const episodePostFound = await episodePost.find({ showName, episodeSeason, episodeNumber })
+  if (episodePostFound.length !== 0) {
     return response.status(400).json({
       error: 'a post about this episode already exists'
     })
   }
 
   // Find user by id
-  const user = await User.findById(userId)
+  const userFound = await User.findById(userId)
 
   // Create post object
   const post = new episodePost({
@@ -55,14 +59,14 @@ episodePostsRouter.post('/', async (request, response, next) => {
     episodeName,
     episodeInfo,
     date: new Date(),
-    user: user._id
+    user: userFound._id
   })
 
   // Save episode post
   try {
     const savedEpisodePost = await post.save()
-    user.episodePosts = user.episodePosts.concat(savedEpisodePost._id)
-    await user.save()
+    userFound.episodePosts = userFound.episodePosts.concat(savedEpisodePost._id)
+    await userFound.save()
     response.json(savedEpisodePost)
   }
   catch(exception) {
