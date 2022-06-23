@@ -10,7 +10,9 @@ const App = () => {
     axios
       .get('http://localhost:3001/api/episodeposts')
       .then(response => {
-        console.log(response.data)
+        response.data.forEach(show => {
+          console.log(show)
+        })
       })
   }
 
