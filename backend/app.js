@@ -1,5 +1,6 @@
 // Imports
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const episodePostsRouter = require('./controllers/episodePosts')
 const episodeCommentsRouter = require('./controllers/episodeComments')
@@ -19,6 +20,8 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Middleware
 
+// Added cross-origin resource sharing for frontend
+app.use(cors())
 // Convert JSON to JavaScript object
 app.use(express.json())
 
