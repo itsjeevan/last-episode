@@ -1,44 +1,39 @@
 import { useState } from 'react'
-import episodepostService from './services/episodeposts'
 import axios from 'axios'
 
 const App = () => {
 
   const [show, setShow] = useState('')
   const [showList, setShowList] = useState([])
-  const [seasons, setSeasons] = useState([])
-  const [episodes, setEpisodes] = useState([])
-
+  const [seasonList, setSeasonList] = useState([])
+  const [episodeList, setEpisodeList] = useState([])
+  const [showId, setShowId] = useState('')
 
   const handleOnSubmitForm = async (event) => {
     event.preventDefault()
-    
-    // Search
     const searchResult = await axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${show}&include_adult=false`)
-
     setShowList(searchResult.data.results)
-
-    console.log(searchResult.data.results)
-    
-    // // Get show id from search
-    // const showId = searchResult.data.results[0].id
-    // console.log('show id:', showId)
-    
-    // // Get seasons from show id
-    // const tv = await axios.get(`https://api.themoviedb.org/3/tv/${showId}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
-    // console.log('tv:', tv.data.seasons)
-    
-    // // Get episodes from each season
-    // tv.data.seasons.forEach(async season => {
-      //   const seasonDetail = await axios.get(`https://api.themoviedb.org/3/tv/${showId}/season/${season.season_number}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
-      //   console.log(seasonDetail.data)
-      // })
-      
+    setSeasonList([])
+    setEpisodeList([]) 
   }
     
   const handleOnChangeShow = event => {
     setShow(event.target.value)
   }
+
+  const handleOnClickShow = async id => {
+    const seasons = await axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+    setEpisodeList([])
+    setSeasonList(seasons.data.seasons)
+    setShowId(id)
+    
+  }
+
+  const handleOnClickSeason = async (seasonNumber) => {
+    const seasonDetail = await axios.get(`https://api.themoviedb.org/3/tv/${showId}/season/${seasonNumber}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+    setEpisodeList(seasonDetail.data.episodes)
+  }
+
 
   return (
     <>
@@ -46,10 +41,34 @@ const App = () => {
         <div>show: <input value={show} onChange={handleOnChangeShow} /></div>
         <button type="submit">submit</button>
       </form>
+      <h1>Shows</h1>
       <ul>
         {showList.map(show => {
           return (
-            <li key={show.id}>{show.name}</li>
+            <li key={show.id} onClick={() => handleOnClickShow(show.id)}>
+              {show.name} ({show.first_air_date.substring(0, 4)})
+              <img alt="" src={`https://image.tmdb.org/t/p/w500/${show.backdrop_path}`} />
+            </li>
+            )
+          })}
+      </ul>
+      <h1>Seasons</h1>
+      <ul>
+        {seasonList.map(season => {
+          return (
+            <li key={season.id} onClick={() => handleOnClickSeason(season.season_number)}>
+              {season.name}
+            </li>
+            )
+          })}
+      </ul>
+      <h1>Episodes</h1>
+      <ul>
+        {episodeList.map(episode => {
+          return (
+            <li key={episode.id}>
+              {episode.name}
+            </li>
             )
           })}
       </ul>
