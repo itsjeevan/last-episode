@@ -3,11 +3,31 @@ const mongoose = require('mongoose')
 
 // Schema for episode post
 const episodePostSchema = new mongoose.Schema({
+  showId: {
+    type: Number,
+    required: true
+  },
   showName: {
     type: String,
     required: true
   },
-  episodeSeason: {
+  showImage: {
+    type: String,
+    required: true
+  },
+  seasonId: {
+    type: Number,
+    required: true
+  },
+  seasonNumber: {
+    type: Number,
+    required: true
+  },
+  seasonImage: {
+    type: String,
+    required: true
+  },
+  episodeId: {
     type: Number,
     required: true
   },
@@ -20,6 +40,10 @@ const episodePostSchema = new mongoose.Schema({
     required: true
   },
   episodeInfo: {
+    type: String,
+    required: true
+  },
+  episodeImage: {
     type: String,
     required: true
   },
