@@ -46,20 +46,20 @@ const getTokenFrom = request => {
 
 // POST new episode post
 episodePostsRouter.post('/', async (request, response) => {
-  const { showName, episodeSeason, episodeNumber, episodeName, episodeInfo, userId } = request.body
+  const { showId, showName, showImage, seasonId, seasonNumber, seasonImage, episodeId, episodeNumber, episodeName, episodeInfo, episodeImage, userId } = request.body
 
   // Call helper function and get token
   const token = getTokenFrom(request)
   // Verify validity of token
-  try {
-    jwt.verify(token, process.env.JWT_SECRET)
-  }
-  catch {
-    return response.status(401).json({ error: 'token missing or invalid' })
-  }
+  // try {
+  //   jwt.verify(token, process.env.JWT_SECRET)
+  // }
+  // catch {
+  //   return response.status(401).json({ error: 'token missing or invalid' })
+  // }
 
   // Check if episode post already exists
-  const episodePostFound = await episodePost.find({ showName, episodeSeason, episodeNumber })
+  const episodePostFound = await episodePost.find({ showName, seasonNumber, episodeNumber })
   if (episodePostFound.length !== 0) {
     return response.status(400).json({
       error: 'a post about this episode already exists'
@@ -71,11 +71,17 @@ episodePostsRouter.post('/', async (request, response) => {
 
   // Create post object
   const post = new episodePost({
+    showId,
     showName,
-    episodeSeason,
+    showImage,
+    seasonId,
+    seasonNumber,
+    seasonImage,
+    episodeId,
     episodeNumber,
     episodeName,
     episodeInfo,
+    episodeImage,
     date: new Date(),
     user: userFound._id
   })
