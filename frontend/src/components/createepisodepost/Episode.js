@@ -12,13 +12,10 @@ const Episode = ({ showSelected, seasonSelected, episode }) => {
   const handleOnSubmitFormEpisodePost = async (event) => {
     event.preventDefault()
     const episodePost = {
-      showId: showSelected.id,
       showName: showSelected.name,
-      showImage:showSelected.poster_path,
-      seasonId: seasonSelected.id,
+      showImage: showSelected.poster_path,
       seasonNumber: seasonSelected.season_number,
       seasonImage: seasonSelected.poster_path,
-      episodeId: episodeSelected.id,
       episodeNumber: episodeSelected.episode_number,
       episodeName: episodeSelected.name,
       episodeInfo: episodeSelected.overview,

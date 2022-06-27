@@ -46,7 +46,7 @@ const getTokenFrom = request => {
 
 // POST new episode post
 episodePostsRouter.post('/', async (request, response) => {
-  const { showId, showName, showImage, seasonId, seasonNumber, seasonImage, episodeId, episodeNumber, episodeName, episodeInfo, episodeImage, userId } = request.body
+  const { showName, showImage, seasonNumber, seasonImage, episodeNumber, episodeName, episodeInfo, episodeImage, userId } = request.body
 
   // Call helper function and get token
   const token = getTokenFrom(request)
@@ -71,13 +71,10 @@ episodePostsRouter.post('/', async (request, response) => {
 
   // Create post object
   const post = new episodePost({
-    showId,
     showName,
     showImage,
-    seasonId,
     seasonNumber,
     seasonImage,
-    episodeId,
     episodeNumber,
     episodeName,
     episodeInfo,
