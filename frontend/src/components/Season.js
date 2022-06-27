@@ -1,20 +1,11 @@
 import axios from 'axios'
 
-const Season = ({
-  season,
-  showId,
-  setEpisodes,
-  setSeasonId,
-  setSeasonNumber,
-  setSeasonImage
-}) => {
+const Season = ({ showSelected, season, setSeasonSelected, setEpisodes }) => {
 
-  const handleOnClickSeason = async (season) => {
-    const seasonDetail = await axios.get(`https://api.themoviedb.org/3/tv/${showId}/season/${season.season_number}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
-    setEpisodes(seasonDetail.data.episodes)
-    setSeasonId(season.id)
-    setSeasonNumber(season.season_number)
-    setSeasonImage(season.poster_path)
+  const handleOnClickSeason = async season => {
+    const seasonResult = await axios.get(`https://api.themoviedb.org/3/tv/${showSelected.id}/season/${season.season_number}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+    setEpisodes(seasonResult.data.episodes)
+    setSeasonSelected(season)
   }
 
   return (

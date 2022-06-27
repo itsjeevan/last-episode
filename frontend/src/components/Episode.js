@@ -1,50 +1,37 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-const Episode = ({
-  episode,
-  showId,
-  showName,
-  showImage,
-  seasonId,
-  seasonNumber,
-  seasonImage
-}) => {
+const Episode = ({ showSelected, seasonSelected, episode }) => {
 
   const [commentInput, setCommentInput] = useState('')
-
-  const [episodeId, setEpisodeId] = useState('')
-  const [episodeNumber, setEpisodeNumber] = useState('')
-  const [episodeName, setEpisodeName] = useState('')
-  const [episodeInfo, setEpisodeInfo] = useState('')
-  const [episodeImage, setEpisodeImage] = useState('')
+  const [episodeSelected, setEpisodeSelected] = useState({})
 
   const handleOnChangeCommentInput = event => setCommentInput(event.target.value)
-
-  const handleOnClickEpisode = async (episode) => {
-    setEpisodeId(episode.id)
-    setEpisodeNumber(episode.episode_number)
-    setEpisodeName(episode.name)
-    setEpisodeInfo(episode.overview)
-    setEpisodeImage(episode.still_path)
-  }
+  const handleOnClickEpisode = async episode => setEpisodeSelected(episode)
 
   const handleOnSubmitFormEpisodePost = async (event) => {
     event.preventDefault()
     const episodePost = {
-      showId, showName, showImage,
-      seasonId, seasonNumber, seasonImage,
-      episodeId, episodeNumber, episodeName, episodeInfo, episodeImage,
+      showId: showSelected.id,
+      showName: showSelected.name,
+      showImage:showSelected.poster_path,
+      seasonId: seasonSelected.id,
+      seasonNumber: seasonSelected.season_number,
+      seasonImage: seasonSelected.poster_path,
+      episodeId: episodeSelected.id,
+      episodeNumber: episodeSelected.episode_number,
+      episodeName: episodeSelected.name,
+      episodeInfo: episodeSelected.overview,
+      episodeImage: episodeSelected.still_path,
       userId: "62b35a856e7a5a86e3652fc0"
     }
-    const responseEpisodePost = await axios.post('http://localhost:3001/api/episodeposts', episodePost)
+    const episodePostResponse = await axios.post('http://localhost:3001/api/episodeposts', episodePost)
     const episodeComment = {
       content: commentInput,
       userId: "62b35a856e7a5a86e3652fc0",
-      episodePostId: responseEpisodePost.data.id
+      episodePostId: episodePostResponse.data.id
     }
-    const responseComment = await axios.post('http://localhost:3001/api/episodecomments', episodeComment)
-    console.log('submitted episode post')
+    await axios.post('http://localhost:3001/api/episodecomments', episodeComment)
   }
 
   return (

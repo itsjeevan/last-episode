@@ -1,34 +1,17 @@
 import Episode from './Episode'
 
-const Episodes = ({
-  episodes,
-  showId,
-  showName,
-  showImage,
-  seasonId,
-  seasonNumber,
-  seasonImage
-}) => {
-
-  return (
-    <div>
-      <h1>Episodes</h1>
-      {episodes.map(episode => {
-        return (
-          <Episode
-            key={episode.id}
-            episode={episode}
-            showId={showId}
-            showName={showName}
-            showImage={showImage}
-            seasonId={seasonId}
-            seasonNumber={seasonNumber}
-            seasonImage={seasonImage}
-          />
-        )
-      })}
-    </div>
-  )
-}
+const Episodes = ({ showSelected, seasonSelected, episodes }) => (
+  <div>
+    <h1>Episodes</h1>
+    {episodes.map(episode => (
+      <Episode
+        key={episode.id}
+        showSelected={showSelected}
+        seasonSelected={seasonSelected}
+        episode={episode}
+      />
+    ))}
+  </div>
+)
 
 export default Episodes

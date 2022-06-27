@@ -11,21 +11,16 @@ const App = () => {
   const [shows, setShows] = useState([])
   const [seasons, setSeasons] = useState([])
   const [episodes, setEpisodes] = useState([])
-  
-  const [showId, setShowId] = useState('')
-  const [showName, setShowName] = useState('')
-  const [showImage, setShowImage] = useState('')
-
-  const [seasonId, setSeasonId] = useState('')
-  const [seasonNumber, setSeasonNumber] = useState('')
-  const [seasonImage, setSeasonImage] = useState('')
+    
+  const [showSelected, setShowSelected] = useState({})
+  const [seasonSelected, setSeasonSelected] = useState({})
 
   const handleOnChangeShowInput = event => setShowInput(event.target.value)
   
-  const handleOnSubmitFormShowSearch = async (event) => {
+  const handleOnSubmitFormShowSearch = async event => {
     event.preventDefault()
-    const searchResult = await axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${showInput}&include_adult=false`)
-    setShows(searchResult.data.results)
+    const showsResult = await axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${showInput}&include_adult=false`)
+    setShows(showsResult.data.results)
     setSeasons([])
     setEpisodes([])
   }
@@ -36,31 +31,22 @@ const App = () => {
         <div>show: <input value={showInput} onChange={handleOnChangeShowInput} /></div>
         <button type="submit">submit</button>
       </form>
-
       <Shows
         shows={shows}
-        setEpisodes={setEpisodes}
+        setShowSelected={setShowSelected}
         setSeasons={setSeasons}
-        setShowId={setShowId}
-        setShowName={setShowName}
-        setShowImage={setShowImage}
+        setEpisodes={setEpisodes}
       />
       <Seasons
+        showSelected={showSelected}
         seasons={seasons}
-        showId={showId}
         setEpisodes={setEpisodes}
-        setSeasonId={setSeasonId}
-        setSeasonNumber={setSeasonNumber}
-        setSeasonImage={setSeasonImage}
+        setSeasonSelected={setSeasonSelected}
       />
       <Episodes
+        showSelected={showSelected}
+        seasonSelected={seasonSelected}
         episodes={episodes}
-        showId={showId}
-        showName={showName}
-        showImage={showImage}
-        seasonId={seasonId}
-        seasonNumber={seasonNumber}
-        seasonImage={seasonImage}
       />
     </>
   )
