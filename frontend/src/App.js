@@ -1,8 +1,12 @@
+import EpisodePosts from './components/episodeposts/EpisodePosts'
 import CreateEpisodePost from './components/createepisodepost/CreateEpisodePost'
 
 const App = () => {
   return (
-    <CreateEpisodePost />
+    <>
+      <EpisodePosts />
+      <CreateEpisodePost />
+    </>
   )
 }
 
