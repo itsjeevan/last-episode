@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import axios from 'axios'
+import episodePostService from '../../services/episodeposts'
+import episodeCommentService from '../../services/episodecomments'
 
 const Episode = ({ showSelected, seasonSelected, episode }) => {
 
@@ -22,13 +23,13 @@ const Episode = ({ showSelected, seasonSelected, episode }) => {
       episodeImage: episodeSelected.still_path,
       userId: "62b35a856e7a5a86e3652fc0"
     }
-    const episodePostResponse = await axios.post('http://localhost:3001/api/episodeposts', episodePost)
+    const episodePostResponse = await episodePostService.create(episodePost)
     const episodeComment = {
       content: commentInput,
       userId: "62b35a856e7a5a86e3652fc0",
-      episodePostId: episodePostResponse.data.id
+      episodePostId: episodePostResponse.id
     }
-    await axios.post('http://localhost:3001/api/episodecomments', episodeComment)
+    await episodeCommentService.create(episodeComment)
   }
 
   return (
