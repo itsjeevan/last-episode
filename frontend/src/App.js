@@ -1,6 +1,8 @@
+// Imports
 import EpisodePosts from './components/episodeposts/EpisodePosts'
 import CreateEpisodePost from './components/createepisodepost/CreateEpisodePost'
 
+// App
 const App = () => {
   return (
     <>
@@ -10,4 +12,5 @@ const App = () => {
   )
 }
 
+// Export
 export default App

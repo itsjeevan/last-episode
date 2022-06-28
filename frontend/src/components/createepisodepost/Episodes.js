@@ -1,5 +1,7 @@
+// Import
 import Episode from './Episode'
 
+// List of episodes
 const Episodes = ({ showSelected, seasonSelected, episodes }) => (
   <div>
     <h1>Episodes</h1>
@@ -14,4 +16,5 @@ const Episodes = ({ showSelected, seasonSelected, episodes }) => (
   </div>
 )
 
+// Export
 export default Episodes

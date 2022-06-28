@@ -1,5 +1,7 @@
+// Import
 import Season from './Season'
 
+// List of seasons
 const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => (
   <div>
     <h1>Seasons</h1>
@@ -15,4 +17,5 @@ const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => (
   </div>
 )
 
+// Export
 export default Seasons

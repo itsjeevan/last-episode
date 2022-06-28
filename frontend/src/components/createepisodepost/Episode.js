@@ -1,17 +1,23 @@
+// Imports
 import { useState } from 'react'
 import episodePostService from '../../services/episodeposts'
 import episodeCommentService from '../../services/episodecomments'
 
+// Individual episode and submitting data to database
 const Episode = ({ showSelected, seasonSelected, episode }) => {
 
+  // Comment input (controlled component)
   const [commentInput, setCommentInput] = useState('')
-  const [episodeSelected, setEpisodeSelected] = useState({})
-
   const handleOnChangeCommentInput = event => setCommentInput(event.target.value)
+
+  // Store episode selected
+  const [episodeSelected, setEpisodeSelected] = useState({})
   const handleOnClickEpisode = async episode => setEpisodeSelected(episode)
 
+  // Form submission event handler
   const handleOnSubmitFormEpisodePost = async (event) => {
     event.preventDefault()
+    // Create episode post object
     const episodePost = {
       showName: showSelected.name,
       showImage: showSelected.poster_path,
@@ -23,12 +29,15 @@ const Episode = ({ showSelected, seasonSelected, episode }) => {
       episodeImage: episodeSelected.still_path,
       userId: "62b35a856e7a5a86e3652fc0"
     }
+    // Save episode post
     const episodePostResponse = await episodePostService.create(episodePost)
+    // Create episode comment object
     const episodeComment = {
       content: commentInput,
       userId: "62b35a856e7a5a86e3652fc0",
       episodePostId: episodePostResponse.id
     }
+    // Save episode comment
     await episodeCommentService.create(episodeComment)
   }
 
@@ -43,5 +52,6 @@ const Episode = ({ showSelected, seasonSelected, episode }) => {
     </div>
   )
 }
-  
+
+// Export
 export default Episode

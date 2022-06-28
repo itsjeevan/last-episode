@@ -1,7 +1,7 @@
-const EpisodePost = ({ episodePost }) => {
-  return (
-    <p>{episodePost.showName}. {episodePost.episodeName}</p>
-  )
-}
+// Individual episode post
+const EpisodePost = ({ episodePost }) => (
+  <p>{episodePost.showName}. {episodePost.episodeName}</p>
+)
 
+// Export
 export default EpisodePost

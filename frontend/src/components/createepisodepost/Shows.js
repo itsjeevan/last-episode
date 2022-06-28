@@ -1,5 +1,7 @@
+// Import
 import Show from './Show'
 
+// List of shows
 const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes }) => (
   <div>
     <h1>Shows</h1>
@@ -15,4 +17,5 @@ const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes }) => (
   </div>
 )
 
+// Export
 export default Shows

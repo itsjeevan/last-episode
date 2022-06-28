@@ -1,11 +1,14 @@
+// Imports
 import EpisodePost from './EpisodePost'
 import episodePostService from '../../services/episodeposts'
 import { useState, useEffect } from 'react'
 
+// List of episode posts
 const EpisodePosts = () => {
 
   const [episodePosts, setEpisodePosts] = useState([])
 
+  // Get episode posts from database on initial render
   useEffect(() => {
     episodePostService.getAll().then(episodePosts => setEpisodePosts(episodePosts))
   }, [])
@@ -20,4 +23,5 @@ const EpisodePosts = () => {
   )
 }
 
+// Export
 export default EpisodePosts

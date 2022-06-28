@@ -1,7 +1,10 @@
+// Import
 import axios from 'axios'
 
+// Individual show
 const Show = ({ show, setShowSelected, setSeasons, setEpisodes }) => {
 
+  // Get seasons of selected show
   const handleOnClickShow = async show => {
     const seasonsResult = await axios.get(`https://api.themoviedb.org/3/tv/${show.id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
     setSeasons(seasonsResult.data.seasons)
@@ -17,4 +20,5 @@ const Show = ({ show, setShowSelected, setSeasons, setEpisodes }) => {
   )
 }
 
+// Export
 export default Show
