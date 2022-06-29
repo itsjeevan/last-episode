@@ -20,7 +20,7 @@ const ShowSearch = ({ setShows, setSeasons, setEpisodes }) => {
     setSeasons([])
     setEpisodes([])
   }
-  
+
   return (
     <form onSubmit={handleOnSubmitFormShowSearch}>
       <div>show: <input value={showInput} onChange={handleOnChangeShowInput} /></div>

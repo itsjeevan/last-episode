@@ -12,7 +12,7 @@ const CreateEpisodePost = () => {
   const [shows, setShows] = useState([])
   const [seasons, setSeasons] = useState([])
   const [episodes, setEpisodes] = useState([])
-    
+
   // Store show and season clicked on
   const [showSelected, setShowSelected] = useState({})
   const [seasonSelected, setSeasonSelected] = useState({})

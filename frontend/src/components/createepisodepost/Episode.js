@@ -27,14 +27,14 @@ const Episode = ({ showSelected, seasonSelected, episode }) => {
       episodeName: episodeSelected.name,
       episodeInfo: episodeSelected.overview,
       episodeImage: episodeSelected.still_path,
-      userId: "62b35a856e7a5a86e3652fc0"
+      userId: '62b35a856e7a5a86e3652fc0'
     }
     // Save episode post
     const episodePostResponse = await episodePostService.create(episodePost)
     // Create episode comment object
     const episodeComment = {
       content: commentInput,
-      userId: "62b35a856e7a5a86e3652fc0",
+      userId: '62b35a856e7a5a86e3652fc0',
       episodePostId: episodePostResponse.id
     }
     // Save episode comment
