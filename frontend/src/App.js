@@ -1,4 +1,5 @@
 // Imports
+import Login from './components/login/Login'
 import EpisodePosts from './components/episodeposts/EpisodePosts'
 import CreateEpisodePost from './components/createepisodepost/CreateEpisodePost'
 
@@ -6,6 +7,7 @@ import CreateEpisodePost from './components/createepisodepost/CreateEpisodePost'
 const App = () => {
   return (
     <>
+      <Login />
       <EpisodePosts />
       <CreateEpisodePost />
     </>
