@@ -46,13 +46,13 @@ const getTokenFrom = request => {
 
 // POST new episode post
 episodePostsRouter.post('/', async (request, response) => {
-  const { showName, showImage, seasonNumber, seasonImage, episodeNumber, episodeName, episodeInfo, episodeImage, userId } = request.body
+  const { showName, showImage, seasonNumber, seasonImage, episodeNumber, episodeName, episodeInfo, episodeImage } = request.body
 
   // Call helper function and get token
   const token = getTokenFrom(request)
   // Verify validity of token
   try {
-    jwt.verify(token, process.env.JWT_SECRET)
+    var decodedToken = jwt.verify(token, process.env.JWT_SECRET)
   }
   catch {
     return response.status(401).json({ error: 'token missing or invalid' })
@@ -67,7 +67,7 @@ episodePostsRouter.post('/', async (request, response) => {
   }
 
   // Find user by id
-  const userFound = await User.findById(userId)
+  const userFound = await User.findById(decodedToken.id)
 
   // Create post object
   const post = new episodePost({
