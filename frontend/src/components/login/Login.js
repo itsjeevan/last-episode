@@ -33,7 +33,7 @@ const Login = () => {
       const user = await loginService.login({ username, password })
       // Save user info to local storage
       window.localStorage.setItem('user', JSON.stringify(user))
-      // Set token when submitting login
+      // Set token for creating episode posts
       episodePostService.setToken(user.token)
       // Set user state to response (token and username)
       setUser(user)
