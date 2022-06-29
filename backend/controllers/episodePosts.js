@@ -51,12 +51,12 @@ episodePostsRouter.post('/', async (request, response) => {
   // Call helper function and get token
   const token = getTokenFrom(request)
   // Verify validity of token
-  // try {
-  //   jwt.verify(token, process.env.JWT_SECRET)
-  // }
-  // catch {
-  //   return response.status(401).json({ error: 'token missing or invalid' })
-  // }
+  try {
+    jwt.verify(token, process.env.JWT_SECRET)
+  }
+  catch {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
 
   // Check if episode post already exists
   const episodePostFound = await episodePost.find({ showName, seasonNumber, episodeNumber })
