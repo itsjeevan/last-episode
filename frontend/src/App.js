@@ -3,6 +3,7 @@ import { Routes, Route, Link, useMatch } from 'react-router-dom'
 import Login from './components/login/Login'
 import EpisodePosts from './components/episodeposts/EpisodePosts'
 import EpisodePost from './components/episodeposts/EpisodePost'
+import Header from './components/header/Header'
 import CreateEpisodePost from './components/createepisodepost/CreateEpisodePost'
 import { useState, useEffect } from 'react'
 import episodePostService from './services/episodeposts'
@@ -10,6 +11,7 @@ import episodePostService from './services/episodeposts'
 // App
 const App = () => {
 
+  const [user, setUser] = useState(null)
   const [episodePosts, setEpisodePosts] = useState([])
 
   // Get episode posts from database on initial render
@@ -26,18 +28,22 @@ const App = () => {
 
   return (
     <>
+      <Header />
       {/* Create links that modify url */}
       <div>
         <Link to="/">Browse</Link>
         <Link to="/create">Create</Link>
-        <Link to="/login">Login</Link>
+        {user
+          ? <Link to="/login">{user.username}</Link>
+          : <Link to="/login">Login</Link>
+        }
       </div>
       {/* Render component based on url */}
       <Routes>
         <Route path="/" element={<EpisodePosts episodePosts={episodePosts} />} />
         <Route path="/:id" element={<EpisodePost episodePost={episodePost} />} />
         <Route path="/create" element={<CreateEpisodePost />} />
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<Login user={user} setUser={setUser} />} />
       </Routes>
     </>
   )
