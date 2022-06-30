@@ -3,6 +3,8 @@ const episodeCommentsRouter = require('express').Router()
 const episodeComment = require('../models/episodeComment')
 const User = require('../models/user')
 const episodePost = require('../models/episodePost')
+const jwt = require('jsonwebtoken')
+const helper = require('../utils/helper')
 
 // GET routes
 
@@ -35,10 +37,20 @@ episodeCommentsRouter.get('/:id', async (request, response) => {
 
 // POST new episode comment
 episodeCommentsRouter.post('/', async (request, response) => {
-  const { content, userId, episodePostId } = request.body
+  const { content, episodePostId } = request.body
+
+  // Call helper function and get token
+  const token = helper.getTokenFrom(request)
+  // Verify validity of token
+  try {
+    var decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+  }
+  catch {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
 
   // Find user by id
-  const userFound = await User.findById(userId)
+  const userFound = await User.findById(decodedToken.id)
 
   // Find episode post by id
   const episodePostFound = await episodePost.findById(episodePostId)

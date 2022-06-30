@@ -3,7 +3,7 @@ const episodePostsRouter = require('express').Router()
 const episodePost = require('../models/episodePost')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-
+const helper = require('../utils/helper')
 
 // GET routes
 
@@ -32,16 +32,6 @@ episodePostsRouter.get('/:id', async (request, response) => {
   }
 })
 
-
-// Helper function that isolates token from authorization header
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
-  }
-  return null
-}
-
 // POST routes
 
 // POST new episode post
@@ -49,7 +39,7 @@ episodePostsRouter.post('/', async (request, response) => {
   const { showName, showImage, seasonNumber, seasonImage, episodeNumber, episodeName, episodeInfo, episodeImage } = request.body
 
   // Call helper function and get token
-  const token = getTokenFrom(request)
+  const token = helper.getTokenFrom(request)
   // Verify validity of token
   try {
     var decodedToken = jwt.verify(token, process.env.JWT_SECRET)
