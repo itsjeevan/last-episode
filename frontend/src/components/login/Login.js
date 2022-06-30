@@ -1,18 +1,19 @@
 // Imports
 import { useState, useEffect } from 'react'
 import loginService from '../../services/login'
+import { useNavigate } from 'react-router-dom'
+
 
 // Login
-const Login = () => {
+const Login = ({ user, setUser }) => {
+
+  const navigate = useNavigate()
 
   // Username & password inputs (controlled components)
   const [username, setUsername] = useState('')
   const handleOnChangeUsername = event => setUsername(event.target.value)
   const [password, setPassword] = useState('')
   const handleOnChangePassword = event => setPassword(event.target.value)
-
-  // User details (token and username)
-  const [user, setUser] = useState(null)
 
   // Check on first load if user details found in local storage
   useEffect(() => {
@@ -35,6 +36,7 @@ const Login = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      navigate('/')
     }
     catch(exception) {
       // @To-do: Create error message on frontend
