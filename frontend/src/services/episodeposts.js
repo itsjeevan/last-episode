@@ -1,13 +1,8 @@
-// Import
+// Imports
 import axios from 'axios'
+import { parseToken } from '../utils/helper'
 
 const baseUrl = 'http://localhost:3001/api/episodeposts'
-
-// Prepend token with 'bearer'
-let token = null
-const setToken = newToken => {
-  token = `bearer ${newToken}`
-}
 
 // Get all episode posts
 const getAll = async () => {
@@ -17,6 +12,9 @@ const getAll = async () => {
 
 // Create an episode post
 const create = async episodePostData => {
+  // Get token
+  const token = parseToken()
+
   // Set token to authorization header
   const config = {
     headers: { Authorization: token }
@@ -27,5 +25,5 @@ const create = async episodePostData => {
 }
 
 // Exports
-const exports = { setToken, getAll, create }
+const exports = { getAll, create }
 export default exports

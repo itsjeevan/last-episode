@@ -1,11 +1,20 @@
 // Imports
 import axios from 'axios'
+import { parseToken } from '../utils/helper'
 
 const baseUrl = 'http://localhost:3001/api/episodecomments'
 
 // Create an episode comment
 const create = async episodeCommentData => {
-  const response = await axios.post(baseUrl, episodeCommentData)
+  // Get token
+  const token = parseToken()
+
+  // Set token to authorization header
+  const config = {
+    headers: { Authorization: token }
+  }
+
+  const response = await axios.post(baseUrl, episodeCommentData, config)
   return response.data
 }
 
