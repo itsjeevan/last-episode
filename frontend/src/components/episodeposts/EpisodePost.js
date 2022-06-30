@@ -51,7 +51,6 @@ const EpisodePost = ({ episodePost }) => {
         <button type="submit">post</button>
       </form>
       {episodeComments.map(comment => {
-        console.log(comment)
         return (
           <div key={comment.id} style={{ border: '1px solid lightgray' }}>
             <p>{comment.content}</p>
