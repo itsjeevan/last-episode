@@ -1,23 +1,20 @@
 // Imports
-import EpisodePost from './EpisodePost'
-import episodePostService from '../../services/episodeposts'
-import { useState, useEffect } from 'react'
+// import EpisodePost from './EpisodePost'
+// import EpisodePost from './EpisodePost'
+import { Link } from 'react-router-dom'
 
 // List of episode posts
-const EpisodePosts = () => {
-
-  const [episodePosts, setEpisodePosts] = useState([])
-
-  // Get episode posts from database on initial render
-  useEffect(() => {
-    episodePostService.getAll().then(episodePosts => setEpisodePosts(episodePosts))
-  }, [])
+const EpisodePosts = ({ episodePosts }) => {
 
   return (
     <>
       <h1>Episode Posts</h1>
       {episodePosts.map(episodePost => (
-        <EpisodePost key={episodePost.id} episodePost={episodePost} />
+        <div key={episodePost.id}>
+          <Link to={`/${episodePost.id}`}>
+            {episodePost.showName} - S{episodePost.seasonNumber}:E{episodePost.episodeNumber} - {episodePost.episodeName}
+          </Link>
+        </div>
       ))}
     </>
   )
