@@ -1,14 +1,39 @@
+// Imports
+import episodeCommentService from '../../services/episodecomments'
+import { useState } from 'react'
+
 // Individual episode post
 const EpisodePost = ({ episodePost }) => {
-
-  // Base url for images
-  const baseUrl = 'https://image.tmdb.org/t/p/w500'
 
   // If directly linking to episode post or on refresh
   if (!episodePost) {
     return (
       <h1>Loading</h1>
     )
+  }
+
+  // Base url for images
+  const baseUrl = 'https://image.tmdb.org/t/p/w500'
+
+  // Comment input (controlled component)
+  const [commentInput, setCommentInput] = useState('')
+  const handleOnChangeCommentInput = event => setCommentInput(event.target.value)
+
+  const [episodeComments, setEpisodeComments] = useState(episodePost.episodeComments)
+
+
+
+  const handleOnSubmitCommentForm = async event => {
+    event.preventDefault()
+    // Create episode comment object
+    const episodeComment = {
+      content: commentInput,
+      episodePostId: episodePost.id
+    }
+    // Save episode comment
+    const episodeCommentResponse = await episodeCommentService.create(episodeComment)
+    setCommentInput('')
+    setEpisodeComments(episodeComments.concat(episodeCommentResponse))
   }
 
   return (
@@ -21,9 +46,19 @@ const EpisodePost = ({ episodePost }) => {
       <img width="75" alt="" src={`${baseUrl}/${episodePost.episodeImage}`} />
       <h1>{episodePost.episodeName}</h1>
       <h2>Comments</h2>
-      {episodePost.episodeComments.map(comment => {
+      <form onSubmit={handleOnSubmitCommentForm}>
+        <input value={commentInput} onChange={handleOnChangeCommentInput} />
+        <button type="submit">post</button>
+      </form>
+      {episodeComments.map(comment => {
+        console.log(comment)
         return (
-          <p key={comment.id}>{comment.content}</p>
+          <div key={comment.id} style={{ border: '1px solid lightgray' }}>
+            <p>{comment.content}</p>
+            <p>{comment.date}</p>
+            <p>posted by {comment.user}</p>
+            {/* <p>{comment.</p> */}
+          </div>
         )
       })}
     </>
