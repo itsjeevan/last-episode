@@ -33,7 +33,6 @@ const Episode = ({ showSelected, seasonSelected, episode }) => {
     // Create episode comment object
     const episodeComment = {
       content: commentInput,
-      userId: '62b35a856e7a5a86e3652fc0',
       episodePostId: episodePostResponse.id
     }
     // Save episode comment
