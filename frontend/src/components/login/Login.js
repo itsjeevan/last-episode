@@ -1,7 +1,6 @@
 // Imports
 import { useState, useEffect } from 'react'
 import loginService from '../../services/login'
-import episodePostService from '../../services/episodeposts'
 
 // Login
 const Login = () => {
@@ -21,7 +20,6 @@ const Login = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      episodePostService.setToken(user.token)
     }
   }, [])
 
@@ -33,8 +31,6 @@ const Login = () => {
       const user = await loginService.login({ username, password })
       // Save user info to local storage
       window.localStorage.setItem('user', JSON.stringify(user))
-      // Set token for creating episode posts
-      episodePostService.setToken(user.token)
       // Set user state to response (token and username)
       setUser(user)
       setUsername('')
