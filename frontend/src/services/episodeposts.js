@@ -10,6 +10,12 @@ const getAll = async () => {
   return response.data
 }
 
+// Get episode post by id
+const getOne = async id => {
+  const response = await axios.get(`${baseUrl}/${id}`)
+  return response.data
+}
+
 // Create an episode post
 const create = async episodePostData => {
   // Get token
@@ -25,5 +31,5 @@ const create = async episodePostData => {
 }
 
 // Exports
-const exports = { getAll, create }
+const exports = { getAll, getOne, create }
 export default exports
