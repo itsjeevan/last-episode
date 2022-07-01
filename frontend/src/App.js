@@ -7,6 +7,20 @@ import Header from './components/header/Header'
 import CreateEpisodePost from './components/createepisodepost/CreateEpisodePost'
 import { useState, useEffect } from 'react'
 import episodePostService from './services/episodeposts'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+`
+const Navigation = styled.div`
+  margin-bottom: 20px;
+`
+
+const StyledLink = styled(Link)`
+  margin-right: 10px;
+`
 
 // App
 const App = () => {
@@ -34,17 +48,17 @@ const App = () => {
     : null
 
   return (
-    <>
+    <Container>
       <Header />
       {/* Create links that modify url */}
-      <div>
-        <Link to="/">Browse</Link>
-        <Link to="/create">Create</Link>
+      <Navigation>
+        <StyledLink to="/">Browse</StyledLink>
+        <StyledLink to="/create">Create</StyledLink>
         {user
-          ? <Link to="/login">{user.username}</Link>
-          : <Link to="/login">Login</Link>
+          ? <StyledLink to="/login">{user.username}</StyledLink>
+          : <StyledLink to="/login">Login</StyledLink>
         }
-      </div>
+      </Navigation>
       {/* Render component based on url */}
       <Routes>
         <Route path="/" element={<EpisodePosts episodePosts={episodePosts} />} />
@@ -52,7 +66,7 @@ const App = () => {
         <Route path="/create" element={<CreateEpisodePost episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} />} />
         <Route path="login" element={<Login user={user} setUser={setUser} />} />
       </Routes>
-    </>
+    </Container>
   )
 }
 
