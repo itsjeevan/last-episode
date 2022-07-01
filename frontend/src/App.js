@@ -14,9 +14,16 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [episodePosts, setEpisodePosts] = useState([])
 
-  // Get episode posts from database on initial render
+  // On initial render
   useEffect(() => {
+    // Get episode posts from database
     episodePostService.getAll().then(episodePosts => setEpisodePosts(episodePosts))
+    // Check if user details found in local storage
+    const loggedUserJSON = window.localStorage.getItem('user')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+    }
   }, [])
 
   // Everytime browser url changes, check for match
@@ -42,7 +49,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<EpisodePosts episodePosts={episodePosts} />} />
         <Route path="/:id" element={<EpisodePost episodePost={episodePost} />} />
-        <Route path="/create" element={<CreateEpisodePost />} />
+        <Route path="/create" element={<CreateEpisodePost episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} />} />
         <Route path="login" element={<Login user={user} setUser={setUser} />} />
       </Routes>
     </>
