@@ -1,6 +1,7 @@
 // Imports
 import { useState, useEffect } from 'react'
 import loginService from '../../services/login'
+import userService from '../../services/users'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -25,7 +26,8 @@ const Login = ({ user, setUser }) => {
   }, [])
 
   // Login form event handler
-  const handleOnSubmitLogin = async event => {
+  const handleOnClickLogin = async event => {
+    console.log('tried logging')
     event.preventDefault()
     // Try to login user
     try {
@@ -40,21 +42,37 @@ const Login = ({ user, setUser }) => {
     }
     catch(exception) {
       // @To-do: Create error message on frontend
-      console.log('login failed')
+      console.log(exception.response.data)
+    }
+  }
+
+  // Regsiter form event handler
+  const handleOnClickRegister = async event => {
+    event.preventDefault()
+    // Try to login user
+    try {
+      await userService.create({ username, password })
+      handleOnClickLogin(event)
+    }
+    catch(exception) {
+      // @To-do: Create error message on frontend
+      console.log(exception.response.data)
     }
   }
 
   // Login form to be rendered
   const loginForm = () => (
-    <form onSubmit={handleOnSubmitLogin}>
+    <form>
       <div>
         username:
         <input type="text" value={username} onChange={handleOnChangeUsername} />
       </div>
       <div>
+        password:
         <input type="password" value={password} onChange={handleOnChangePassword} />
       </div>
-      <button type="submit">login</button>
+      <button onClick={handleOnClickLogin}>login</button>
+      <button onClick={handleOnClickRegister}>register</button>
     </form>
   )
 
