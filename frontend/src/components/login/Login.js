@@ -1,5 +1,5 @@
 // Imports
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import loginService from '../../services/login'
 import userService from '../../services/users'
 import { useNavigate } from 'react-router-dom'
@@ -16,14 +16,7 @@ const Login = ({ user, setUser }) => {
   const [password, setPassword] = useState('')
   const handleOnChangePassword = event => setPassword(event.target.value)
 
-  // Check on first load if user details found in local storage
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('user')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-    }
-  }, [])
+
 
   // Login form event handler
   const handleOnClickLogin = async event => {
