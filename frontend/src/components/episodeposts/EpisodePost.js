@@ -45,6 +45,7 @@ const EpisodePost = ({ episodePost }) => {
       <h3>Episode: {episodePost.episodeNumber}</h3>
       <img width="75" alt="" src={`${baseUrl}/${episodePost.episodeImage}`} />
       <h1>{episodePost.episodeName}</h1>
+      <p>{episodePost.episodeInfo}</p>
       <h2>Comments</h2>
       <form onSubmit={handleOnSubmitCommentForm}>
         <input value={commentInput} onChange={handleOnChangeCommentInput} />
@@ -56,7 +57,6 @@ const EpisodePost = ({ episodePost }) => {
             <p>{comment.content}</p>
             <p>{comment.date}</p>
             <p>posted by {comment.user}</p>
-            {/* <p>{comment.</p> */}
           </div>
         )
       })}

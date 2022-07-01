@@ -20,7 +20,6 @@ const Login = ({ user, setUser }) => {
 
   // Login form event handler
   const handleOnClickLogin = async event => {
-    console.log('tried logging')
     event.preventDefault()
     // Try to login user
     try {
