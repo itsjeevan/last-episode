@@ -2,9 +2,12 @@
 import { useState } from 'react'
 import episodePostService from '../../services/episodeposts'
 import episodeCommentService from '../../services/episodecomments'
+import { useNavigate } from 'react-router-dom'
 
 // Individual episode and submitting data to database
-const Episode = ({ showSelected, seasonSelected, episode }) => {
+const Episode = ({ showSelected, seasonSelected, episode, episodePosts, setEpisodePosts }) => {
+
+  const navigate = useNavigate()
 
   // Comment input (controlled component)
   const [commentInput, setCommentInput] = useState('')
@@ -37,6 +40,9 @@ const Episode = ({ showSelected, seasonSelected, episode }) => {
     }
     // Save episode comment
     await episodeCommentService.create(episodeComment)
+    const episodePostResponseFinal = await episodePostService.getOne(episodePostResponse.id)
+    setEpisodePosts(episodePosts.concat(episodePostResponseFinal))
+    navigate('/')
   }
 
   return (
