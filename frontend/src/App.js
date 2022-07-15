@@ -1,5 +1,5 @@
 // Imports
-import { Routes, Route, Link, useMatch } from 'react-router-dom'
+import { Routes, Route, useMatch } from 'react-router-dom'
 import Login from './components/login/Login'
 import EpisodePosts from './components/episodeposts/EpisodePosts'
 import EpisodePost from './components/episodeposts/EpisodePost'
@@ -9,18 +9,14 @@ import { useState, useEffect } from 'react'
 import episodePostService from './services/episodeposts'
 import styled from 'styled-components'
 
+// Styles
 const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-`
-const Navigation = styled.div`
-  margin-bottom: 20px;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 ${props => props.theme.spaceLarge};
 `
 
-const StyledLink = styled(Link)`
-  margin-right: 10px;
-`
 
 // App
 const App = () => {
@@ -49,16 +45,7 @@ const App = () => {
 
   return (
     <Container>
-      <Header />
-      {/* Create links that modify url */}
-      <Navigation>
-        <StyledLink to="/">Browse</StyledLink>
-        <StyledLink to="/create">Create</StyledLink>
-        {user
-          ? <StyledLink to="/login">{user.username}</StyledLink>
-          : <StyledLink to="/login">Login</StyledLink>
-        }
-      </Navigation>
+      <Header user={user} />
       {/* Render component based on url */}
       <Routes>
         <Route path="/" element={<EpisodePosts episodePosts={episodePosts} />} />
