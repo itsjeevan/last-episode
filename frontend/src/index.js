@@ -10,15 +10,21 @@ import { createGlobalStyle } from 'styled-components'
 // Styles
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color: white;
+    background-color: #282D40;
+    color: white;
     font-family: 'Roboto Condensed', sans-serif; 
   }
 `
-
 const theme = {
-  spaceLarge: '40px',
-  spaceMedium: '20px',
-  spaceSmall: '10px'
+  color: {
+    secondary: '#474C5E',
+    tertiary: '#00D1FF'
+  },
+  space: {
+    small: '10px',
+    medium: '20px',
+    large: '40px'
+  }
 }
 
 // Render
