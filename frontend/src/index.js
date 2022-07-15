@@ -9,10 +9,20 @@ import { createGlobalStyle } from 'styled-components'
 
 // Styles
 const GlobalStyle = createGlobalStyle`
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
   body {
     background-color: #282D40;
     color: white;
     font-family: 'Roboto Condensed', sans-serif; 
+  }
+  h1 {
+    font-size: 75px;
+    margin: 0;
   }
 `
 const theme = {
@@ -24,7 +34,8 @@ const theme = {
     small: '10px',
     medium: '20px',
     large: '40px'
-  }
+  },
+  radius: '25px'
 }
 
 // Render
