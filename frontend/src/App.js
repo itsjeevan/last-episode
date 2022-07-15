@@ -44,7 +44,7 @@ const App = () => {
 
   return (
     <Container>
-      <Header user={user} />
+      <Header user={user} setUser={setUser} />
       {/* Render component based on url */}
       <Routes>
         <Route path="/" element={<EpisodePosts episodePosts={episodePosts} />} />

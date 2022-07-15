@@ -3,10 +3,29 @@ import { useState } from 'react'
 import loginService from '../../services/login'
 import userService from '../../services/users'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
+// Styles
+const LoginContainer = styled.div`
+  margin: 0 auto;
+  width: fit-content;
+`
+const LoginHeading = styled.h1`
+  text-align: center;
+  margin-bottom: ${props => props.theme.space.large};
+`
+const LoginInput = styled.input`
+  width: 500px;
+  height: 50px;
+  border-radius: ${props => props.theme.radius};
+  margin-bottom: ${props => props.theme.space.medium};
+`
+const LoginButton = styled.button`
+  margin-top: 40px;
+`
 
 // Login
-const Login = ({ user, setUser }) => {
+const Login = ({ setUser }) => {
 
   const navigate = useNavigate()
 
@@ -15,8 +34,6 @@ const Login = ({ user, setUser }) => {
   const handleOnChangeUsername = event => setUsername(event.target.value)
   const [password, setPassword] = useState('')
   const handleOnChangePassword = event => setPassword(event.target.value)
-
-
 
   // Login form event handler
   const handleOnClickLogin = async event => {
@@ -52,40 +69,20 @@ const Login = ({ user, setUser }) => {
     }
   }
 
-  // Login form to be rendered
-  const loginForm = () => (
-    <form>
-      <div>
-        username:
-        <input type="text" value={username} onChange={handleOnChangeUsername} />
-      </div>
-      <div>
-        password:
-        <input type="password" value={password} onChange={handleOnChangePassword} />
-      </div>
-      <button onClick={handleOnClickLogin}>login</button>
-      <button onClick={handleOnClickRegister}>register</button>
-    </form>
-  )
-
-  // Logout button event handler
-  const handleOnClickLogout = () => {
-    localStorage.removeItem('user')
-    setUser(null)
-  }
-
   return (
-    <div>
-      <h1>Login</h1>
-      {/* Render login form if no user */}
-      {user === null ?
-        loginForm() :
+    <LoginContainer>
+      <LoginHeading>Login</LoginHeading>
+      <form>
         <div>
-          <p>{user.username} logged in</p>
-          <button onClick={handleOnClickLogout}>logout</button>
+          <LoginInput type="text" value={username} onChange={handleOnChangeUsername} />
         </div>
-      }
-    </div>
+        <div>
+          <LoginInput type="password" value={password} onChange={handleOnChangePassword} />
+        </div>
+        <LoginButton onClick={handleOnClickLogin}>login</LoginButton>
+        <LoginButton onClick={handleOnClickRegister}>register</LoginButton>
+      </form>
+    </LoginContainer>
   )
 }
 
