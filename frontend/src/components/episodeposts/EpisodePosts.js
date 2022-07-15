@@ -1,6 +1,4 @@
 // Imports
-// import EpisodePost from './EpisodePost'
-// import EpisodePost from './EpisodePost'
 import { Link } from 'react-router-dom'
 
 // List of episode posts
