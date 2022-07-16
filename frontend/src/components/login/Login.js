@@ -76,6 +76,9 @@ const Login = ({ setUser }) => {
   // Regsiter form event handler
   const handleOnClickSignUp = async event => {
     event.preventDefault()
+    if (password !== passwordConfirm) {
+      return
+    }
     // Try to login user
     try {
       await userService.create({ username, password })
@@ -130,6 +133,7 @@ const Login = ({ setUser }) => {
               type="text"
               value={username}
               onChange={handleOnChangeUsername}
+              placeholder="Username"
             />
           </div>
           <div>
@@ -137,6 +141,7 @@ const Login = ({ setUser }) => {
               type="password"
               value={password}
               onChange={handleOnChangePassword}
+              placeholder="Password"
             />
           </div>
           <div>
@@ -144,6 +149,7 @@ const Login = ({ setUser }) => {
               type="password"
               value={passwordConfirm}
               onChange={handleOnChangePasswordConfirm}
+              placeholder="Confirm Password"
             />
           </div>
           <LoginButton onClick={handleOnClickSignUp}>Sign Up</LoginButton>
