@@ -3,12 +3,14 @@ import { useState } from 'react'
 import loginService from '../../services/login'
 import userService from '../../services/users'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 // Styles
-const LoginContainer = styled.div`
-  margin: 0 auto;
+const LoginContainer = styled.form`
+  margin: 0 auto ${props => props.theme.space.large} auto;
   width: fit-content;
+  padding-bottom: ${props => props.theme.space.large};
+  border-bottom: 2px solid ${props => props.theme.color.secondary};
 `
 const LoginHeading = styled.h1`
   text-align: center;
@@ -17,11 +19,22 @@ const LoginHeading = styled.h1`
 const LoginInput = styled.input`
   width: 500px;
   height: 50px;
-  border-radius: ${props => props.theme.radius};
   margin-bottom: ${props => props.theme.space.medium};
 `
 const LoginButton = styled.button`
-  margin-top: 40px;
+  margin-top: calc(${props => props.theme.space.large} - ${props => props.theme.space.medium});
+`
+const VisibilityText = styled.p`
+  font-weight: 300;
+  text-align: center;
+`
+const VisibilityLink = styled.a`
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: ${props => props.theme.color.tertiary};
+  }
 `
 
 // Login
@@ -29,11 +42,16 @@ const Login = ({ setUser }) => {
 
   const navigate = useNavigate()
 
+  // Set Login / Sign Up visibility
+  const [loginVisibility, setLoginVisibility] = useState(true)
+
   // Username & password inputs (controlled components)
   const [username, setUsername] = useState('')
   const handleOnChangeUsername = event => setUsername(event.target.value)
   const [password, setPassword] = useState('')
   const handleOnChangePassword = event => setPassword(event.target.value)
+  const [passwordConfirm, setPasswordConfirm] = useState('')
+  const handleOnChangePasswordConfirm = event => setPasswordConfirm(event.target.value)
 
   // Login form event handler
   const handleOnClickLogin = async event => {
@@ -56,7 +74,7 @@ const Login = ({ setUser }) => {
   }
 
   // Regsiter form event handler
-  const handleOnClickRegister = async event => {
+  const handleOnClickSignUp = async event => {
     event.preventDefault()
     // Try to login user
     try {
@@ -69,20 +87,79 @@ const Login = ({ setUser }) => {
     }
   }
 
+  const handleOnClickVisibility = (event) => {
+    event.preventDefault()
+    setLoginVisibility(!loginVisibility)
+  }
+
+  const loginForm = () => {
+    return (
+      <>
+        <LoginContainer>
+          <LoginHeading>Login</LoginHeading>
+          <div>
+            <LoginInput
+              type="text"
+              value={username}
+              onChange={handleOnChangeUsername}
+              placeholder="Username"
+            />
+          </div>
+          <div>
+            <LoginInput
+              type="password"
+              value={password}
+              onChange={handleOnChangePassword}
+              placeholder="Password"
+            />
+          </div>
+          <LoginButton onClick={handleOnClickLogin}>Login</LoginButton>
+        </LoginContainer>
+        <VisibilityText>Don&apos;t have an account? <VisibilityLink href="" onClick={handleOnClickVisibility}>Sign Up</VisibilityLink></VisibilityText>
+      </>
+    )
+  }
+
+  const registerForm = () => {
+    return (
+      <>
+        <LoginContainer>
+          <LoginHeading>Sign Up</LoginHeading>
+          <div>
+            <LoginInput
+              type="text"
+              value={username}
+              onChange={handleOnChangeUsername}
+            />
+          </div>
+          <div>
+            <LoginInput
+              type="password"
+              value={password}
+              onChange={handleOnChangePassword}
+            />
+          </div>
+          <div>
+            <LoginInput
+              type="password"
+              value={passwordConfirm}
+              onChange={handleOnChangePasswordConfirm}
+            />
+          </div>
+          <LoginButton onClick={handleOnClickSignUp}>Sign Up</LoginButton>
+        </LoginContainer>
+        <VisibilityText>Have an account? <VisibilityLink href="" onClick={handleOnClickVisibility}>Login</VisibilityLink></VisibilityText>
+      </>
+    )
+  }
+
   return (
-    <LoginContainer>
-      <LoginHeading>Login</LoginHeading>
-      <form>
-        <div>
-          <LoginInput type="text" value={username} onChange={handleOnChangeUsername} />
-        </div>
-        <div>
-          <LoginInput type="password" value={password} onChange={handleOnChangePassword} />
-        </div>
-        <LoginButton onClick={handleOnClickLogin}>login</LoginButton>
-        <LoginButton onClick={handleOnClickRegister}>register</LoginButton>
-      </form>
-    </LoginContainer>
+    <>
+      {loginVisibility
+        ? loginForm()
+        : registerForm()
+      }
+    </>
   )
 }
 
