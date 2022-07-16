@@ -7,9 +7,60 @@ import Header from './components/header/Header'
 import CreateEpisodePost from './components/createepisodepost/CreateEpisodePost'
 import { useState, useEffect } from 'react'
 import episodePostService from './services/episodeposts'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components/macro'
+import { Normalize } from 'styled-normalize'
 
 // Styles
+const GlobalStyle = createGlobalStyle`
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  body {
+    background-color: #282D40;
+    color: white;
+    font-family: 'Roboto Condensed', sans-serif; 
+  }
+  h1 {
+    font-size: 75px;
+    margin: 0;
+  }
+  p {
+    font-size: 20px;
+    margin: 0;
+  }
+  input {
+    border: none;
+    font-size: 20px;
+    border-radius: ${props => props.theme.radius};
+    padding-left: ${props => props.theme.space.large};
+    border: 4px solid transparent;
+    &:focus {
+      outline: none;
+      border: 4px solid ${props => props.theme.color.tertiary};
+    }
+  }
+  button {
+    display: block;
+    background-color: ${props => props.theme.color.secondary};
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: ${props => props.theme.space.medium} ${props => props.theme.space.large};
+    border-radius ${props => props.theme.radius};
+    cursor: pointer;
+    margin: 0 auto;
+    &:hover {
+      background: ${props => props.theme.color.tertiary};
+    }
+    &:focus {
+      background: ${props => props.theme.color.tertiary};
+      outline: none;
+    }
+  }
+`
 const Container = styled.div`
   max-width: 1140px;
   margin-left: auto;
@@ -44,6 +95,8 @@ const App = () => {
 
   return (
     <Container>
+      <Normalize />
+      <GlobalStyle />
       <Header user={user} setUser={setUser} />
       {/* Render component based on url */}
       <Routes>

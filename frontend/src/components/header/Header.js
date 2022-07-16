@@ -1,8 +1,7 @@
 // Imports
 import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import logo from './logo.svg'
-
 
 // Styles
 const Nav = styled.nav`

@@ -3,28 +3,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
-import { Normalize } from 'styled-normalize'
-import { ThemeProvider } from 'styled-components'
-import { createGlobalStyle } from 'styled-components'
+import { ThemeProvider } from 'styled-components/macro'
 
 // Styles
-const GlobalStyle = createGlobalStyle`
-  html {
-    box-sizing: border-box;
-  }
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-  body {
-    background-color: #282D40;
-    color: white;
-    font-family: 'Roboto Condensed', sans-serif; 
-  }
-  h1 {
-    font-size: 75px;
-    margin: 0;
-  }
-`
 const theme = {
   color: {
     secondary: '#474C5E',
@@ -42,8 +23,6 @@ const theme = {
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <BrowserRouter>
-    <Normalize />
-    <GlobalStyle />
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
