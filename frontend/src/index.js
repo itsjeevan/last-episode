@@ -8,8 +8,10 @@ import { ThemeProvider } from 'styled-components/macro'
 // Styles
 const theme = {
   color: {
+    primary: '#282D40',
     secondary: '#474C5E',
-    tertiary: '#00D1FF'
+    tertiary: '#00D1FF',
+    quaternary: '#0C4350'
   },
   space: {
     small: '10px',

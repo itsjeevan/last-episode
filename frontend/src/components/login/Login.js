@@ -5,38 +5,6 @@ import userService from '../../services/users'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-// Styles
-const LoginContainer = styled.form`
-  margin: 0 auto ${props => props.theme.space.large} auto;
-  width: fit-content;
-  padding-bottom: ${props => props.theme.space.large};
-  border-bottom: 2px solid ${props => props.theme.color.secondary};
-`
-const LoginHeading = styled.h1`
-  text-align: center;
-  margin-bottom: ${props => props.theme.space.large};
-`
-const LoginInput = styled.input`
-  width: 500px;
-  height: 50px;
-  margin-bottom: ${props => props.theme.space.medium};
-`
-const LoginButton = styled.button`
-  margin-top: calc(${props => props.theme.space.large} - ${props => props.theme.space.medium});
-`
-const VisibilityText = styled.p`
-  font-weight: 300;
-  text-align: center;
-`
-const VisibilityLink = styled.a`
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  &:hover {
-    color: ${props => props.theme.color.tertiary};
-  }
-`
-
 // Login
 const Login = ({ setUser }) => {
 
@@ -73,7 +41,7 @@ const Login = ({ setUser }) => {
     }
   }
 
-  // Regsiter form event handler
+  // Sign up form event handler
   const handleOnClickSignUp = async event => {
     event.preventDefault()
     if (password !== passwordConfirm) {
@@ -90,6 +58,7 @@ const Login = ({ setUser }) => {
     }
   }
 
+  // Form visibility event handler
   const handleOnClickVisibility = (event) => {
     event.preventDefault()
     setLoginVisibility(!loginVisibility)
@@ -98,10 +67,10 @@ const Login = ({ setUser }) => {
   const loginForm = () => {
     return (
       <>
-        <LoginContainer>
-          <LoginHeading>Login</LoginHeading>
+        <Container>
+          <Heading>Login</Heading>
           <div>
-            <LoginInput
+            <Input
               type="text"
               value={username}
               onChange={handleOnChangeUsername}
@@ -109,16 +78,16 @@ const Login = ({ setUser }) => {
             />
           </div>
           <div>
-            <LoginInput
+            <Input
               type="password"
               value={password}
               onChange={handleOnChangePassword}
               placeholder="Password"
             />
           </div>
-          <LoginButton onClick={handleOnClickLogin}>Login</LoginButton>
-        </LoginContainer>
-        <VisibilityText>Don&apos;t have an account? <VisibilityLink href="" onClick={handleOnClickVisibility}>Sign Up</VisibilityLink></VisibilityText>
+          <Button onClick={handleOnClickLogin}>Login</Button>
+        </Container>
+        <Text>Don&apos;t have an account? <Link href="" onClick={handleOnClickVisibility}>Sign Up</Link></Text>
       </>
     )
   }
@@ -126,10 +95,10 @@ const Login = ({ setUser }) => {
   const registerForm = () => {
     return (
       <>
-        <LoginContainer>
-          <LoginHeading>Sign Up</LoginHeading>
+        <Container>
+          <Heading>Sign Up</Heading>
           <div>
-            <LoginInput
+            <Input
               type="text"
               value={username}
               onChange={handleOnChangeUsername}
@@ -137,7 +106,7 @@ const Login = ({ setUser }) => {
             />
           </div>
           <div>
-            <LoginInput
+            <Input
               type="password"
               value={password}
               onChange={handleOnChangePassword}
@@ -145,16 +114,16 @@ const Login = ({ setUser }) => {
             />
           </div>
           <div>
-            <LoginInput
+            <Input
               type="password"
               value={passwordConfirm}
               onChange={handleOnChangePasswordConfirm}
               placeholder="Confirm Password"
             />
           </div>
-          <LoginButton onClick={handleOnClickSignUp}>Sign Up</LoginButton>
-        </LoginContainer>
-        <VisibilityText>Have an account? <VisibilityLink href="" onClick={handleOnClickVisibility}>Login</VisibilityLink></VisibilityText>
+          <Button onClick={handleOnClickSignUp}>Sign Up</Button>
+        </Container>
+        <Text>Have an account? <Link href="" onClick={handleOnClickVisibility}>Login</Link></Text>
       </>
     )
   }
@@ -168,6 +137,39 @@ const Login = ({ setUser }) => {
     </>
   )
 }
+
+// Styles
+const Container = styled.form`
+  margin: 0 auto ${props => props.theme.space.large} auto;
+  width: fit-content;
+  padding-bottom: ${props => props.theme.space.large};
+  border-bottom: 2px solid ${props => props.theme.color.secondary};
+`
+const Heading = styled.h1`
+  text-align: center;
+  margin-bottom: ${props => props.theme.space.large};
+`
+const Input = styled.input`
+  width: 500px;
+  height: 50px;
+  margin-bottom: ${props => props.theme.space.medium};
+`
+const Button = styled.button`
+  margin: 0 auto;
+  margin-top: calc(${props => props.theme.space.large} - ${props => props.theme.space.medium});
+`
+const Text = styled.p`
+  font-weight: 300;
+  text-align: center;
+`
+const Link = styled.a`
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: ${props => props.theme.color.tertiary};
+  }
+`
 
 // Export
 export default Login

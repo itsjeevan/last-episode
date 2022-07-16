@@ -3,8 +3,40 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import logo from './logo.svg'
 
+// Header
+const Header = ({ user, setUser }) => {
+
+  // Logout button event handler
+  const handleOnClickLogout = () => {
+    localStorage.removeItem('user')
+    setUser(null)
+  }
+
+  return (
+    <Container>
+      <SubContainer>
+        <Logo src={logo} alt="Logo" />
+        <Title>Last Episode</Title>
+        {/* Create links that modify url */}
+        <Link to="/">Browse</Link>
+        <Link to="/create">Create</Link>
+      </SubContainer>
+      <SubContainer>
+        {user
+          ?
+          <>
+            <Username>{user.username}</Username>
+            <Logout href=""  onClick={handleOnClickLogout}>Logout</Logout>
+          </>
+          : <Link to="/login">Login</Link>
+        }
+      </SubContainer>
+    </Container>
+  )
+}
+
 // Styles
-const Nav = styled.nav`
+const Container = styled.nav`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -13,7 +45,7 @@ const Nav = styled.nav`
   border-bottom: 1px solid ${props => props.theme.color.secondary};
   margin-bottom: ${props => props.theme.space.large};
 `
-const NavContainer = styled.div`
+const SubContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -23,12 +55,12 @@ const Logo = styled.img`
   margin-left: ${props => props.theme.space.medium};
   margin-right: ${props => props.theme.space.medium};
 `
-const LogoTitle = styled.p`
+const Title = styled.p`
   font-weight: bold;
   text-transform: uppercase;
   margin-right: calc(${props => props.theme.space.large} - ${props => props.theme.space.small})
 `
-const NavItem = styled(NavLink)`
+const Link = styled(NavLink)`
   font-size: 20px;
   text-decoration: none;
   color: white;
@@ -40,49 +72,13 @@ const NavItem = styled(NavLink)`
     background-color: ${props => props.theme.color.tertiary};
   }
 `
-const LogoutLink = styled.a`
-  font-size: 20px;
-  text-decoration: none;
-  color: white;
+const Logout = styled.button`
   padding: ${props => props.theme.space.small} ${props => props.theme.space.medium};
-  border-radius: ${props => props.theme.radius};
   margin-left: ${props => props.theme.space.small};
 `
-const UsernameText = styled.p`
+const Username = styled.p`
   font-weight: 300;
 `
-
-// Header
-const Header = ({ user, setUser }) => {
-
-  // Logout button event handler
-  const handleOnClickLogout = () => {
-    localStorage.removeItem('user')
-    setUser(null)
-  }
-
-  return (
-    <Nav>
-      <NavContainer>
-        <Logo src={logo} alt="Logo" />
-        <LogoTitle>Last Episode</LogoTitle>
-        {/* Create links that modify url */}
-        <NavItem to="/">Browse</NavItem>
-        <NavItem to="/create">Create</NavItem>
-      </NavContainer>
-      <NavContainer>
-        {user
-          ?
-          <>
-            <UsernameText>{user.username}</UsernameText>
-            <LogoutLink href=""  onClick={handleOnClickLogout}>Logout</LogoutLink>
-          </>
-          : <NavItem to="/login">Login</NavItem>
-        }
-      </NavContainer>
-    </Nav>
-  )
-}
 
 // Export
 export default Header
