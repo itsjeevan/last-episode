@@ -29,6 +29,7 @@ const LogoTitle = styled.p`
   margin-right: calc(${props => props.theme.space.large} - ${props => props.theme.space.small})
 `
 const NavItem = styled(NavLink)`
+  font-size: 20px;
   text-decoration: none;
   color: white;
   padding: ${props => props.theme.space.small} ${props => props.theme.space.medium};
@@ -38,6 +39,17 @@ const NavItem = styled(NavLink)`
   &[class*="active"] {
     background-color: ${props => props.theme.color.tertiary};
   }
+`
+const LogoutLink = styled.a`
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  padding: ${props => props.theme.space.small} ${props => props.theme.space.medium};
+  border-radius: ${props => props.theme.radius};
+  margin-left: ${props => props.theme.space.small};
+`
+const UsernameText = styled.p`
+  font-weight: 300;
 `
 
 // Header
@@ -62,8 +74,8 @@ const Header = ({ user, setUser }) => {
         {user
           ?
           <>
-            <p>{user.username}</p>
-            <button onClick={handleOnClickLogout}>logout</button>
+            <UsernameText>{user.username}</UsernameText>
+            <LogoutLink href=""  onClick={handleOnClickLogout}>Logout</LogoutLink>
           </>
           : <NavItem to="/login">Login</NavItem>
         }
