@@ -1,6 +1,7 @@
 // Import
 import { useState } from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
 
 // Search for shows
 const ShowSearch = ({ setShows, setSeasons, setEpisodes }) => {
@@ -22,12 +23,25 @@ const ShowSearch = ({ setShows, setSeasons, setEpisodes }) => {
   }
 
   return (
-    <form onSubmit={handleOnSubmitFormShowSearch}>
-      <div>show: <input value={showInput} onChange={handleOnChangeShowInput} /></div>
-      <button type="submit">submit</button>
-    </form>
+    <Form onSubmit={handleOnSubmitFormShowSearch}>
+      <input
+        value={showInput}
+        onChange={handleOnChangeShowInput}
+        placeholder="Search for a show..."
+      />
+      <Button type="submit">Search</Button>
+    </Form>
   )
 }
+
+// Styles
+const Form = styled.form`
+  display: flex;
+  flex-direction: row;
+`
+const Button = styled.button`
+  margin-left: ${props => props.theme.space.large};
+`
 
 // Export
 export default ShowSearch
