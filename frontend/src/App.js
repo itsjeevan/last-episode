@@ -7,7 +7,7 @@ import Header from './components/header/Header'
 import CreateEpisodePost from './components/createepisodepost/CreateEpisodePost'
 import { useState, useEffect } from 'react'
 import episodePostService from './services/episodeposts'
-import styled, { createGlobalStyle } from 'styled-components/macro'
+import styled, { createGlobalStyle } from 'styled-components'
 import { Normalize } from 'styled-normalize'
 
 // App
@@ -62,7 +62,6 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     background: linear-gradient(${props => props.theme.color.primary}, ${props => props.theme.color.quaternary});
-    // background: linear-gradient(#e66465, #9198e5);
     color: white;
     font-family: 'Roboto Condensed', sans-serif; 
   }
@@ -81,10 +80,8 @@ const GlobalStyle = createGlobalStyle`
     font-size: 20px;
     border-radius: ${props => props.theme.radius};
     padding: 0 ${props => props.theme.space.large};
-    border: 4px solid transparent;
     &:focus {
-      outline: none;
-      border: 4px solid ${props => props.theme.color.tertiary};
+      outline-color: ${props => props.theme.color.tertiary};
     }
   }
   button {
