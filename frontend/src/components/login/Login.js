@@ -150,8 +150,6 @@ const Heading = styled.h1`
   margin-bottom: ${props => props.theme.space.large};
 `
 const Input = styled.input`
-  width: 500px;
-  height: 50px;
   margin-bottom: ${props => props.theme.space.medium};
 `
 const Button = styled.button`

@@ -52,7 +52,6 @@ const SubContainer = styled.div`
 `
 const Logo = styled.img`
   width: 75px;
-  margin-left: ${props => props.theme.space.medium};
   margin-right: ${props => props.theme.space.medium};
 `
 const Title = styled.p`
@@ -73,6 +72,7 @@ const Link = styled(NavLink)`
   }
 `
 const Logout = styled.button`
+  height: auto;
   padding: ${props => props.theme.space.small} ${props => props.theme.space.medium};
   margin-left: ${props => props.theme.space.small};
 `
