@@ -26,27 +26,39 @@ const CreateEpisodePost = ({ episodePosts, setEpisodePosts }) => {
         setEpisodes={setEpisodes}
       />
       {/* List of shows from search result */}
-      <Shows
-        shows={shows}
-        setShowSelected={setShowSelected}
-        setSeasons={setSeasons}
-        setEpisodes={setEpisodes}
-      />
+      {shows.length
+        ?
+        <Shows
+          shows={shows}
+          setShowSelected={setShowSelected}
+          setSeasons={setSeasons}
+          setEpisodes={setEpisodes}
+        />
+        : null
+      }
       {/* List of seasons from selected show */}
-      <Seasons
-        showSelected={showSelected}
-        seasons={seasons}
-        setEpisodes={setEpisodes}
-        setSeasonSelected={setSeasonSelected}
-      />
+      {seasons.length
+        ?
+        <Seasons
+          showSelected={showSelected}
+          seasons={seasons}
+          setEpisodes={setEpisodes}
+          setSeasonSelected={setSeasonSelected}
+        />
+        : null
+      }
       {/* List of episodes from selected season */}
-      <Episodes
-        showSelected={showSelected}
-        seasonSelected={seasonSelected}
-        episodes={episodes}
-        episodePosts={episodePosts}
-        setEpisodePosts={setEpisodePosts}
-      />
+      {episodes.length
+        ?
+        <Episodes
+          showSelected={showSelected}
+          seasonSelected={seasonSelected}
+          episodes={episodes}
+          episodePosts={episodePosts}
+          setEpisodePosts={setEpisodePosts}
+        />
+        : null
+      }
     </>
   )
 }
