@@ -75,6 +75,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   input {
+    width: 500px;
+    height: 50px;
     border: none;
     font-size: 20px;
     border-radius: ${props => props.theme.radius};
@@ -86,12 +88,13 @@ const GlobalStyle = createGlobalStyle`
     }
   }
   button {
+    height: 50px;
     display: block;
     background-color: ${props => props.theme.color.secondary};
     border: none;
     color: white;
     font-size: 20px;
-    padding: ${props => props.theme.space.medium} ${props => props.theme.space.large};
+    padding: 0 ${props => props.theme.space.large};
     border-radius ${props => props.theme.radius};
     cursor: pointer;
     &:hover {
