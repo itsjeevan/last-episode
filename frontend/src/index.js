@@ -10,8 +10,7 @@ const theme = {
   color: {
     primary: '#282D40',
     secondary: '#474C5E',
-    tertiary: '#00D1FF',
-    quaternary: '#0C4350'
+    tertiary: '#00D1FF'
   },
   space: {
     small: '10px',
