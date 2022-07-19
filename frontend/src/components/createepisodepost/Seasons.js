@@ -1,6 +1,7 @@
 // Import
 import Season from './Season'
 import { useRef, useEffect } from 'react'
+import styled from 'styled-components'
 
 // List of seasons
 const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
@@ -17,23 +18,36 @@ const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
   }, [seasons])
 
   return (
-    <div>
-      <h1 ref={seasonsRef}>Seasons</h1>
-      {seasons.map(season => (
-        <Season
-          key={season.id}
-          showSelected={showSelected}
-          season={season}
-          setSeasonSelected={setSeasonSelected}
-          setEpisodes={setEpisodes}
-          imageLoadCount={imageLoadCount}
-          seasons={seasons}
-          scrollToSeasons={scrollToSeasons}
-        />
-      ))}
-    </div>
+    <>
+      <Heading ref={seasonsRef}>Seasons</Heading>
+      <Container>
+        {seasons.map(season => (
+          <Season
+            key={season.id}
+            showSelected={showSelected}
+            season={season}
+            setSeasonSelected={setSeasonSelected}
+            setEpisodes={setEpisodes}
+            imageLoadCount={imageLoadCount}
+            seasons={seasons}
+            scrollToSeasons={scrollToSeasons}
+          />
+        ))}
+      </Container>
+    </>
   )
 }
+
+// Styles
+const Heading = styled.h1`
+  margin: ${props => props.theme.space.large} 0;
+`
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
+`
 
 // Export
 export default Seasons

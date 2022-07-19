@@ -1,6 +1,7 @@
 // Import
 import Episode from './Episode'
 import { useRef, useEffect } from 'react'
+import styled from 'styled-components'
 
 // List of episodes
 const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpisodePosts }) => {
@@ -18,23 +19,36 @@ const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpi
 
   return (
     <div>
-      <h1 ref={episodesRef}>Episodes</h1>
-      {episodes.map(episode => (
-        <Episode
-          key={episode.id}
-          showSelected={showSelected}
-          seasonSelected={seasonSelected}
-          episode={episode}
-          episodePosts={episodePosts}
-          setEpisodePosts={setEpisodePosts}
-          imageLoadCount={imageLoadCount}
-          episodes={episodes}
-          scrollToEpisodes={scrollToEpisodes}
-        />
-      ))}
+      <Heading ref={episodesRef}>Episodes</Heading>
+      <Container>
+        {episodes.map(episode => (
+          <Episode
+            key={episode.id}
+            showSelected={showSelected}
+            seasonSelected={seasonSelected}
+            episode={episode}
+            episodePosts={episodePosts}
+            setEpisodePosts={setEpisodePosts}
+            imageLoadCount={imageLoadCount}
+            episodes={episodes}
+            scrollToEpisodes={scrollToEpisodes}
+          />
+        ))}
+      </Container>
     </div>
   )
 }
+
+// Styles
+const Heading = styled.h1`
+  margin: ${props => props.theme.space.large} 0;
+`
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
+`
 
 // Export
 export default Episodes
