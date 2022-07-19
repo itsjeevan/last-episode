@@ -14,15 +14,15 @@ const Show = ({ show, setShowSelected, setSeasons, setEpisodes }) => {
   }
 
   return (
-    <Card to='/create' hash='#seasonheading' onClick={() => handleOnClickShow(show)}>
+    <Container to='/create' hash='#seasonheading' onClick={() => handleOnClickShow(show)}>
       <Image alt="" src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`} />
       <Text>{show.name}</Text>
-    </Card>
+    </Container>
   )
 }
 
 // Styles
-const Card = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(25% - 30px);
@@ -32,7 +32,7 @@ const Card = styled.div`
 const Image = styled.img`
   border-radius: ${props => props.theme.radius};
   width: 100%;
-  ${Card}:hover & {
+  ${Container}:hover & {
     box-shadow: 0px 0px 10px 5px ${props => props.theme.color.tertiary};
   }
 `
