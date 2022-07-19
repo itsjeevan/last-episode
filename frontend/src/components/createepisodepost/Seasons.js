@@ -1,7 +1,8 @@
 // Import
 import Season from './Season'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
 
 // List of seasons
 const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
@@ -17,6 +18,17 @@ const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
     imageLoadCount.current = 0
   }, [seasons])
 
+  // Set active
+  const [activeSeason, setActiveSeason] = useState('')
+
+  // Get episodes of selected season
+  const handleOnClickSeason = async season => {
+    const seasonResult = await axios.get(`https://api.themoviedb.org/3/tv/${showSelected.id}/season/${season.season_number}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+    setEpisodes(seasonResult.data.episodes)
+    setSeasonSelected(season)
+    setActiveSeason(season.id)
+  }
+
   return (
     <>
       <Heading ref={seasonsRef}>Seasons</Heading>
@@ -31,6 +43,8 @@ const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
             imageLoadCount={imageLoadCount}
             seasons={seasons}
             scrollToSeasons={scrollToSeasons}
+            handleOnClickSeason={handleOnClickSeason}
+            activeSeason={activeSeason}
           />
         ))}
       </Container>

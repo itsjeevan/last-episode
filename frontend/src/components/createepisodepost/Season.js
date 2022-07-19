@@ -1,24 +1,18 @@
 // Import
-import axios from 'axios'
 import notfound from './404.jpg'
 import { onLoad } from '../../utils/helper'
 import styled from 'styled-components'
 
 // Individual season
 const Season = ({
+  handleOnClickSeason, activeSeason,
   scrollToSeasons, seasons, imageLoadCount,
-  showSelected, season, setSeasonSelected, setEpisodes }) => {
-
-  // Get episodes of selected season
-  const handleOnClickSeason = async season => {
-    const seasonResult = await axios.get(`https://api.themoviedb.org/3/tv/${showSelected.id}/season/${season.season_number}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
-    setEpisodes(seasonResult.data.episodes)
-    setSeasonSelected(season)
-  }
+  season }) => {
 
   return (
     <Container onClick={() => handleOnClickSeason(season)}>
       <Image
+        className={activeSeason === season.id ? 'highlight' : ''}
         // Increment imageLoadCount, if final image loaded, scroll
         onLoad={() => onLoad(imageLoadCount, seasons.length, scrollToSeasons)}
         alt=""
