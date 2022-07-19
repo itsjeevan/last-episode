@@ -1,21 +1,15 @@
 // Import
-import axios from 'axios'
+
 import styled from 'styled-components'
 
 // Individual show
-const Show = ({ show, setShowSelected, setSeasons, setEpisodes }) => {
-
-  // Get seasons of selected show
-  const handleOnClickShow = async show => {
-    const seasonsResult = await axios.get(`https://api.themoviedb.org/3/tv/${show.id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
-    setSeasons(seasonsResult.data.seasons)
-    setShowSelected(show)
-    setEpisodes([])
-  }
+const Show = ({
+  handleOnClickShow, activeShow,
+  show }) => {
 
   return (
-    <Container to='/create' hash='#seasonheading' onClick={() => handleOnClickShow(show)}>
-      <Image alt="" src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`} />
+    <Container to='/create' onClick={() => handleOnClickShow(show)}>
+      <Image className={activeShow === show.id ? 'highlight' : ''} alt="" src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`} />
       <Text>{show.name}</Text>
     </Container>
   )
