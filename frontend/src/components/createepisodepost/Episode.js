@@ -9,6 +9,7 @@ import styled from 'styled-components'
 
 // Individual episode and submitting data to database
 const Episode = ({
+  episodeSelected, handleOnClickEpisode, activeEpisode,
   scrollToEpisodes, episodes, imageLoadCount,
   showSelected, seasonSelected, episode, episodePosts, setEpisodePosts }) => {
 
@@ -17,13 +18,6 @@ const Episode = ({
   // Comment input (controlled component)
   const [commentInput, setCommentInput] = useState('')
   const handleOnChangeCommentInput = event => setCommentInput(event.target.value)
-
-  // Store episode selected
-  const [episodeSelected, setEpisodeSelected] = useState({})
-  const handleOnClickEpisode = async episode => {
-    setEpisodeSelected(episode)
-    setVisibility(!visibility)
-  }
 
   // Form submission event handler
   const handleOnSubmitFormEpisodePost = async (event) => {
@@ -53,14 +47,12 @@ const Episode = ({
     navigate('/')
   }
 
-  // Toggle visibility of form
-  const [visibility, setVisibility] = useState(false)
-
   return (
     <>
       <Container>
         <SubContainer onClick={() => handleOnClickEpisode(episode)}>
           <Image
+            className={activeEpisode === episode.id ? 'highlight' : ''}
             onLoad={() => onLoad(imageLoadCount, episodes.length, scrollToEpisodes)}
             alt=""
             src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`}
@@ -73,7 +65,7 @@ const Episode = ({
           <Text>{episode.overview}</Text>
         </SubContainer>
         <Form onSubmit={handleOnSubmitFormEpisodePost}>
-          {visibility
+          {activeEpisode === episode.id
             ? <>
               <Textbox
                 value={commentInput}
@@ -96,14 +88,13 @@ const Container = styled.div`
   flex-direction: column;
   width: calc(50% - 30px);
   cursor: pointer;
-  // gap: 20px;
 `
 const SubContainer = styled.div``
 const Image = styled.img`
   border-radius: ${props => props.theme.radius} ${props => props.theme.radius} 0 0;
   width: 100%;
   ${SubContainer}:hover & {
-    box-shadow: 0px 0px 10px 5px ${props => props.theme.color.tertiary};
+    ${props => props.theme.highlight}
   }
 `
 const Form = styled.form`

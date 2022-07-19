@@ -1,6 +1,6 @@
 // Import
 import Episode from './Episode'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 // List of episodes
@@ -17,6 +17,16 @@ const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpi
     imageLoadCount.current = 0
   }, [episodes])
 
+  // Set active
+  const [activeEpisode, setActiveEpisode] = useState('')
+
+  // Store episode selected
+  const [episodeSelected, setEpisodeSelected] = useState({})
+  const handleOnClickEpisode = async episode => {
+    setEpisodeSelected(episode)
+    setActiveEpisode(episode.id)
+  }
+
   return (
     <div>
       <Heading ref={episodesRef}>Episodes</Heading>
@@ -32,6 +42,9 @@ const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpi
             imageLoadCount={imageLoadCount}
             episodes={episodes}
             scrollToEpisodes={scrollToEpisodes}
+            episodeSelected={episodeSelected}
+            handleOnClickEpisode={handleOnClickEpisode}
+            activeEpisode={activeEpisode}
           />
         ))}
       </Container>
