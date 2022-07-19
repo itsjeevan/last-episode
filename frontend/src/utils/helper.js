@@ -9,4 +9,12 @@ const parseToken = () => {
   return token
 }
 
-export { parseToken }
+// Increment image load count, if final image loaded, scroll
+const onLoad = (ref, finalCount, scrollTo) => {
+  ref.current += 1
+  if (ref.current === finalCount) {
+    scrollTo()
+  }
+}
+
+export { parseToken, onLoad }

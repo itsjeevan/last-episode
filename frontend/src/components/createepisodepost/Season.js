@@ -1,9 +1,12 @@
 // Import
 import axios from 'axios'
 import notfound from './404.jpg'
+import { onLoad } from '../../utils/helper'
 
 // Individual season
-const Season = ({ scrollToSeasons, seasons, imageLoadCount, showSelected, season, setSeasonSelected, setEpisodes }) => {
+const Season = ({
+  scrollToSeasons, seasons, imageLoadCount,
+  showSelected, season, setSeasonSelected, setEpisodes }) => {
 
   // Get episodes of selected season
   const handleOnClickSeason = async season => {
@@ -12,19 +15,12 @@ const Season = ({ scrollToSeasons, seasons, imageLoadCount, showSelected, season
     setSeasonSelected(season)
   }
 
-  // Increment imageLoadCount, if final image loaded, scroll
-  const onLoad = () => {
-    imageLoadCount.current += 1
-    if (imageLoadCount.current === seasons.length) {
-      scrollToSeasons()
-    }
-  }
-
   return (
     <div onClick={() => handleOnClickSeason(season)}>
       Season {season.season_number}
       <img
-        onLoad={onLoad}
+        // Increment imageLoadCount, if final image loaded, scroll
+        onLoad={() => onLoad(imageLoadCount, seasons.length, scrollToSeasons)}
         width="75"
         alt=""
         src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`}

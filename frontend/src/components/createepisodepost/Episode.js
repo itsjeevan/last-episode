@@ -3,9 +3,13 @@ import { useState } from 'react'
 import episodePostService from '../../services/episodeposts'
 import episodeCommentService from '../../services/episodecomments'
 import { useNavigate } from 'react-router-dom'
+import notfound from './404.jpg'
+import { onLoad } from '../../utils/helper'
 
 // Individual episode and submitting data to database
-const Episode = ({ showSelected, seasonSelected, episode, episodePosts, setEpisodePosts }) => {
+const Episode = ({
+  scrollToEpisodes, episodes, imageLoadCount,
+  showSelected, seasonSelected, episode, episodePosts, setEpisodePosts }) => {
 
   const navigate = useNavigate()
 
@@ -48,7 +52,16 @@ const Episode = ({ showSelected, seasonSelected, episode, episodePosts, setEpiso
   return (
     <div onClick={() => handleOnClickEpisode(episode)}>
       {episode.episode_number}. {episode.name}
-      <img width="75" alt="" src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`} />
+      <img
+        onLoad={() => onLoad(imageLoadCount, episodes.length, scrollToEpisodes)}
+        width="75"
+        alt=""
+        src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null
+          currentTarget.src = notfound
+        }}
+      />
       <p>{episode.overview}</p>
       <form onSubmit={handleOnSubmitFormEpisodePost}>
         <input value={commentInput} onChange={handleOnChangeCommentInput} />
