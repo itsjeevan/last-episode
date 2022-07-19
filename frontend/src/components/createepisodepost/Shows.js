@@ -22,14 +22,13 @@ const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes }) => (
 
 // Styles
 const Heading = styled.h1`
-  margin-top: ${props => props.theme.space.large};
+  margin: ${props => props.theme.space.large} 0;
 `
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: start;
-  
+  gap: 40px;
 `
 
 // Export
