@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
   body {
-    background: linear-gradient(${props => props.theme.color.primary}, ${props => props.theme.color.quaternary});
+    background: ${props => props.theme.color.primary};
     color: white;
     font-family: 'Roboto Condensed', sans-serif; 
   }
