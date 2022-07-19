@@ -5,6 +5,7 @@ import episodeCommentService from '../../services/episodecomments'
 import { useNavigate } from 'react-router-dom'
 import notfound from './404.jpg'
 import { onLoad } from '../../utils/helper'
+import styled from 'styled-components'
 
 // Individual episode and submitting data to database
 const Episode = ({
@@ -19,7 +20,10 @@ const Episode = ({
 
   // Store episode selected
   const [episodeSelected, setEpisodeSelected] = useState({})
-  const handleOnClickEpisode = async episode => setEpisodeSelected(episode)
+  const handleOnClickEpisode = async episode => {
+    setEpisodeSelected(episode)
+    setVisibility(!visibility)
+  }
 
   // Form submission event handler
   const handleOnSubmitFormEpisodePost = async (event) => {
@@ -49,26 +53,72 @@ const Episode = ({
     navigate('/')
   }
 
+  // Toggle visibility of form
+  const [visibility, setVisibility] = useState(false)
+
   return (
-    <div onClick={() => handleOnClickEpisode(episode)}>
-      {episode.episode_number}. {episode.name}
-      <img
-        onLoad={() => onLoad(imageLoadCount, episodes.length, scrollToEpisodes)}
-        width="75"
-        alt=""
-        src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`}
-        onError={({ currentTarget }) => {
-          currentTarget.onerror = null
-          currentTarget.src = notfound
-        }}
-      />
-      <p>{episode.overview}</p>
-      <form onSubmit={handleOnSubmitFormEpisodePost}>
-        <input value={commentInput} onChange={handleOnChangeCommentInput} />
-      </form>
-    </div>
+    <>
+      <Container>
+        <div onClick={() => handleOnClickEpisode(episode)}>
+          <Image
+            onLoad={() => onLoad(imageLoadCount, episodes.length, scrollToEpisodes)}
+            alt=""
+            src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`}
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null
+              currentTarget.src = notfound
+            }}
+          />
+          {episode.episode_number}. {episode.name}
+          <Text>{episode.overview}</Text>
+        </div>
+        <Form onSubmit={handleOnSubmitFormEpisodePost}>
+          {visibility
+            ? <>
+              <Textbox
+                value={commentInput}
+                onChange={handleOnChangeCommentInput}
+                placeholder="Write a comment..."
+              />
+              <button type="submit">Post</button>
+            </>
+            : null
+          }
+        </Form>
+      </Container>
+    </>
   )
 }
+
+// Styles
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 30px);
+  cursor: pointer;
+  gap: 20px;
+`
+const Image = styled.img`
+  border-radius: ${props => props.theme.radius};
+  width: 100%;
+  ${Container}:hover & {
+    box-shadow: 0px 0px 10px 5px ${props => props.theme.color.tertiary};
+  }
+`
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`
+const Text = styled.p`
+  // text-align: center;
+`
+const Textbox = styled.textarea`
+  width: 100%;
+  height: 100px;
+  padding: 20px;
+  margin-bottom: 20px;
+`
 
 // Export
 export default Episode
