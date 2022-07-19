@@ -29,6 +29,7 @@ const Season = ({ scrollToSeasons, seasons, imageLoadCount, showSelected, season
         alt=""
         src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`}
         onError={({ currentTarget }) => {
+          currentTarget.onerror = null
           currentTarget.src = notfound
         }}
       />
