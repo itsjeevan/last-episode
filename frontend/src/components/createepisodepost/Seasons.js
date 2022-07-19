@@ -1,4 +1,4 @@
-// Import
+// Imports
 import Season from './Season'
 import { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -43,7 +43,7 @@ const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
             imageLoadCount={imageLoadCount}
             seasons={seasons}
             scrollToSeasons={scrollToSeasons}
-            handleOnClickSeason={handleOnClickSeason}
+            onClickSeason={handleOnClickSeason}
             activeSeason={activeSeason}
           />
         ))}

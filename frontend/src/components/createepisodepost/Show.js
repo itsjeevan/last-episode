@@ -1,19 +1,16 @@
-// Import
-
+// Imports
 import styled from 'styled-components'
 
 // Individual show
-const Show = ({
-  handleOnClickShow, activeShow,
-  show }) => {
-
-  return (
-    <Container to='/create' onClick={() => handleOnClickShow(show)}>
-      <Image className={activeShow === show.id ? 'highlight' : ''} alt="" src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`} />
-      <Text>{show.name}</Text>
-    </Container>
-  )
-}
+const Show = ({ onClickShow, activeShow, show }) => (
+  <Container to='/create' onClick={() => onClickShow(show)}>
+    <Image
+      className={activeShow === show.id ? 'highlight' : ''}
+      alt={show.name}
+      src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`} />
+    <Text>{show.name}</Text>
+  </Container>
+)
 
 // Styles
 const Container = styled.div`

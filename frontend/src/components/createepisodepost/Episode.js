@@ -9,7 +9,7 @@ import styled from 'styled-components'
 
 // Individual episode and submitting data to database
 const Episode = ({
-  episodeSelected, handleOnClickEpisode, activeEpisode,
+  episodeSelected, onClickEpisode, activeEpisode,
   scrollToEpisodes, episodes, imageLoadCount,
   showSelected, seasonSelected, episode, episodePosts, setEpisodePosts }) => {
 
@@ -48,37 +48,35 @@ const Episode = ({
   }
 
   return (
-    <>
-      <Container>
-        <SubContainer onClick={() => handleOnClickEpisode(episode)}>
-          <Image
-            className={activeEpisode === episode.id ? 'highlight' : ''}
-            onLoad={() => onLoad(imageLoadCount, episodes.length, scrollToEpisodes)}
-            alt=""
-            src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`}
-            onError={({ currentTarget }) => {
-              currentTarget.onerror = null
-              currentTarget.src = notfound
-            }}
-          />
-          <EpisodeNumber>{episode.episode_number}. {episode.name}</EpisodeNumber>
-          <Text>{episode.overview}</Text>
-        </SubContainer>
-        <Form onSubmit={handleOnSubmitFormEpisodePost}>
-          {activeEpisode === episode.id
-            ? <>
-              <Textbox
-                value={commentInput}
-                onChange={handleOnChangeCommentInput}
-                placeholder="Write a comment..."
-              />
-              <button type="submit">Post</button>
-            </>
-            : null
-          }
-        </Form>
-      </Container>
-    </>
+    <Container>
+      <SubContainer onClick={() => onClickEpisode(episode)}>
+        <Image
+          className={activeEpisode === episode.id ? 'highlight' : ''}
+          onLoad={() => onLoad(imageLoadCount, episodes.length, scrollToEpisodes)}
+          alt={`Episode ${episode.episode_number}`}
+          src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null
+            currentTarget.src = notfound
+          }}
+        />
+        <EpisodeNumber>{episode.episode_number}. {episode.name}</EpisodeNumber>
+        <Text>{episode.overview}</Text>
+      </SubContainer>
+      <Form onSubmit={handleOnSubmitFormEpisodePost}>
+        {activeEpisode === episode.id
+          ? <>
+            <Textbox
+              value={commentInput}
+              onChange={handleOnChangeCommentInput}
+              placeholder="Write a comment..."
+            />
+            <button type="submit">Post</button>
+          </>
+          : null
+        }
+      </Form>
+    </Container>
   )
 }
 

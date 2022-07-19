@@ -5,27 +5,25 @@ import styled from 'styled-components'
 
 // Individual season
 const Season = ({
-  handleOnClickSeason, activeSeason,
+  onClickSeason, activeSeason,
   scrollToSeasons, seasons, imageLoadCount,
-  season }) => {
+  season }) => (
+  <Container onClick={() => onClickSeason(season)}>
+    <Image
+      className={activeSeason === season.id ? 'highlight' : ''}
+      // Increment imageLoadCount, if final image loaded, scroll
+      onLoad={() => onLoad(imageLoadCount, seasons.length, scrollToSeasons)}
+      alt={`Season" ${season.season_number}`}
+      src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`}
+      onError={({ currentTarget }) => {
+        currentTarget.onerror = null
+        currentTarget.src = notfound
+      }}
+    />
+    <Text>Season {season.season_number}</Text>
+  </Container>
+)
 
-  return (
-    <Container onClick={() => handleOnClickSeason(season)}>
-      <Image
-        className={activeSeason === season.id ? 'highlight' : ''}
-        // Increment imageLoadCount, if final image loaded, scroll
-        onLoad={() => onLoad(imageLoadCount, seasons.length, scrollToSeasons)}
-        alt=""
-        src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`}
-        onError={({ currentTarget }) => {
-          currentTarget.onerror = null
-          currentTarget.src = notfound
-        }}
-      />
-      <Text>Season {season.season_number}</Text>
-    </Container>
-  )
-}
 
 // Styles
 const Container = styled.div`

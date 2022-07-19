@@ -26,7 +26,7 @@ const Header = ({ user, setUser }) => {
           ?
           <>
             <Username>{user.username}</Username>
-            <Logout href=""  onClick={handleOnClickLogout}>Logout</Logout>
+            <Logout href="" onClick={handleOnClickLogout}>Logout</Logout>
           </>
           : <Link to="/login">Login</Link>
         }

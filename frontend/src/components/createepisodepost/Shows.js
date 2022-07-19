@@ -1,4 +1,4 @@
-// Import
+// Imports
 import Show from './Show'
 import styled from 'styled-components'
 import axios from 'axios'
@@ -7,7 +7,7 @@ import { useState } from 'react'
 // List of shows
 const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes }) => {
 
-  // Set active
+  // Set active show
   const [activeShow, setActiveShow] = useState('')
 
   // Get seasons of selected show
@@ -30,8 +30,7 @@ const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes }) => {
             setShowSelected={setShowSelected}
             setSeasons={setSeasons}
             setEpisodes={setEpisodes}
-
-            handleOnClickShow={handleOnClickShow}
+            onClickShow={handleOnClickShow}
             activeShow={activeShow}
           />
         ))}

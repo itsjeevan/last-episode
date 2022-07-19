@@ -43,7 +43,7 @@ const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpi
             episodes={episodes}
             scrollToEpisodes={scrollToEpisodes}
             episodeSelected={episodeSelected}
-            handleOnClickEpisode={handleOnClickEpisode}
+            onClickEpisode={handleOnClickEpisode}
             activeEpisode={activeEpisode}
           />
         ))}
