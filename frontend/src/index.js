@@ -17,7 +17,8 @@ const theme = {
     medium: '20px',
     large: '40px'
   },
-  radius: '25px'
+  radius: '25px',
+  highlight: 'box-shadow: 0px 0px 10px 5px #00D1FF;'
 }
 
 // Render

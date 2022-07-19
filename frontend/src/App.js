@@ -102,6 +102,9 @@ const GlobalStyle = createGlobalStyle`
       outline: none;
     }
   }
+  .highlight {
+    ${props => props.theme.highlight}
+  }
 `
 const Container = styled.div`
   max-width: 1140px;
