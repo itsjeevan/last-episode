@@ -59,7 +59,7 @@ const Episode = ({
   return (
     <>
       <Container>
-        <div onClick={() => handleOnClickEpisode(episode)}>
+        <SubContainer onClick={() => handleOnClickEpisode(episode)}>
           <Image
             onLoad={() => onLoad(imageLoadCount, episodes.length, scrollToEpisodes)}
             alt=""
@@ -69,9 +69,9 @@ const Episode = ({
               currentTarget.src = notfound
             }}
           />
-          {episode.episode_number}. {episode.name}
+          <EpisodeNumber>{episode.episode_number}. {episode.name}</EpisodeNumber>
           <Text>{episode.overview}</Text>
-        </div>
+        </SubContainer>
         <Form onSubmit={handleOnSubmitFormEpisodePost}>
           {visibility
             ? <>
@@ -96,12 +96,13 @@ const Container = styled.div`
   flex-direction: column;
   width: calc(50% - 30px);
   cursor: pointer;
-  gap: 20px;
+  // gap: 20px;
 `
+const SubContainer = styled.div``
 const Image = styled.img`
-  border-radius: ${props => props.theme.radius};
+  border-radius: ${props => props.theme.radius} ${props => props.theme.radius} 0 0;
   width: 100%;
-  ${Container}:hover & {
+  ${SubContainer}:hover & {
     box-shadow: 0px 0px 10px 5px ${props => props.theme.color.tertiary};
   }
 `
@@ -110,14 +111,24 @@ const Form = styled.form`
   flex-direction: column;
   align-items: flex-end;
 `
-const Text = styled.p`
-  // text-align: center;
+const EpisodeNumber = styled.p`
+  font-size: 40px;
+  margin: ${props => props.theme.space.medium} 0 ${props => props.theme.space.medium} 0;
 `
+const Text = styled.p`
+  font-weight: 300;
+  `
 const Textbox = styled.textarea`
+  border-radius: 0 0 ${props => props.theme.radius} ${props => props.theme.radius};
   width: 100%;
   height: 100px;
-  padding: 20px;
-  margin-bottom: 20px;
+  font-size: 20px;
+  resize: none;
+  padding: ${props => props.theme.space.medium};
+  margin: ${props => props.theme.space.medium} 0 ${props => props.theme.space.medium} 0;
+  &:focus {
+    outline-color: ${props => props.theme.color.tertiary};
+  }
 `
 
 // Export
