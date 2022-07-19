@@ -7,7 +7,7 @@ const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
 
   // Scroll to seasons section
   const seasonsRef = useRef()
-  const scrollToSeasons = () => seasonsRef.current.scrollIntoView()
+  const scrollToSeasons = () => seasonsRef.current.scrollIntoView({ behavior: 'smooth' })
 
   // Number of images loaded
   const imageLoadCount = useRef(0)
