@@ -110,7 +110,7 @@ const Container = styled.div`
   max-width: 1140px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 ${props => props.theme.space.large};
+  padding: 0 ${props => props.theme.space.large} ${props => props.theme.space.large} ${props => props.theme.space.large};
 `
 
 // Export
