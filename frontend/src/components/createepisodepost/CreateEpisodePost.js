@@ -9,7 +9,7 @@ import { useState } from 'react'
 const CreateEpisodePost = ({ episodePosts, setEpisodePosts }) => {
 
   // Store all shows, seasons, and episodes
-  const [shows, setShows] = useState([])
+  const [shows, setShows] = useState(null)
   const [seasons, setSeasons] = useState([])
   const [episodes, setEpisodes] = useState([])
 
@@ -26,7 +26,7 @@ const CreateEpisodePost = ({ episodePosts, setEpisodePosts }) => {
         setEpisodes={setEpisodes}
       />
       {/* List of shows from search result */}
-      {shows.length
+      {shows
         ?
         <Shows
           shows={shows}

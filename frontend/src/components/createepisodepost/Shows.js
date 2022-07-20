@@ -21,20 +21,26 @@ const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes }) => {
 
   return (
     <>
-      <Heading>Shows</Heading>
-      <Container>
-        {shows.map(show => (
-          <Show
-            key={show.id}
-            show={show}
-            setShowSelected={setShowSelected}
-            setSeasons={setSeasons}
-            setEpisodes={setEpisodes}
-            onClickShow={handleOnClickShow}
-            activeShow={activeShow}
-          />
-        ))}
-      </Container>
+      {shows.length
+        ?
+        <>
+          <Heading>Shows</Heading>
+          <Container>
+            {shows.map(show => (
+              <Show
+                key={show.id}
+                show={show}
+                setShowSelected={setShowSelected}
+                setSeasons={setSeasons}
+                setEpisodes={setEpisodes}
+                onClickShow={handleOnClickShow}
+                activeShow={activeShow}
+              />
+            ))}
+          </Container>
+        </>
+        : <Text>No results</Text>
+      }
     </>
   )
 }
@@ -48,6 +54,10 @@ const Container = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   gap: 40px;
+`
+const Text = styled.p`
+  margin-top: ${props => props.theme.space.large};
+  text-align: center;
 `
 
 // Export
