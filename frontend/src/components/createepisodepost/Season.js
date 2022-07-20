@@ -37,7 +37,7 @@ const Image = styled.img`
   border-radius: ${props => props.theme.radius};
   width: 100%;
   ${Container}:hover & {
-    box-shadow: 0px 0px 10px 5px ${props => props.theme.color.tertiary};
+    ${props => props.theme.highlight}
   }
 `
 const Text = styled.p`

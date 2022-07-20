@@ -7,7 +7,8 @@ const Show = ({ onClickShow, activeShow, show }) => (
     <Image
       className={activeShow === show.id ? 'highlight' : ''}
       alt={show.name}
-      src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`} />
+      src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
+    />
     <Text>{show.name}</Text>
   </Container>
 )
@@ -24,7 +25,7 @@ const Image = styled.img`
   border-radius: ${props => props.theme.radius};
   width: 100%;
   ${Container}:hover & {
-    box-shadow: 0px 0px 10px 5px ${props => props.theme.color.tertiary};
+    ${props => props.theme.highlight}
   }
 `
 const Text = styled.p`
