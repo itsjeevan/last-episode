@@ -105,6 +105,9 @@ const GlobalStyle = createGlobalStyle`
   .highlight {
     ${props => props.theme.highlight}
   }
+  .remove-radius {
+    border-radius: 0;
+  }
 `
 const Container = styled.div`
   max-width: 1140px;
