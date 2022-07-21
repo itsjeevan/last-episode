@@ -17,7 +17,8 @@ const EpisodePosts = ({ episodePosts }) => {
             />
             <TextContainer>
               <ShowName>{episodePost.showName}</ShowName>
-              <p>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}: {episodePost.episodeName}</p>
+              <ShowSeason>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}: {episodePost.episodeName}</ShowSeason>
+              <ShowInfo>{episodePost.episodeInfo}</ShowInfo>
             </TextContainer>
           </SubContainer>
         ))}
@@ -54,13 +55,18 @@ const Image = styled.img`
   width: 100%;
 `
 const TextContainer = styled.div`
-  padding: 20px;
+  padding: ${props => props.theme.space.large};
   background: ${props => props.theme.color.secondary};
   border-radius: 0 0 ${props => props.theme.radius} ${props => props.theme.radius};
 `
 const ShowName = styled.p`
   font-size: 40px;
-  margin-bottom: ${props => props.theme.space.small};
+`
+const ShowSeason = styled.p`
+  margin: ${props => props.theme.space.medium} 0;
+`
+const ShowInfo = styled.p`
+  font-weight: 300;
 `
 
 // Export
