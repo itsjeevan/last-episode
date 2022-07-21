@@ -63,7 +63,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: ${props => props.theme.color.primary};
     color: white;
-    font-family: 'Roboto Condensed', sans-serif; 
+    font-family: 'Roboto Condensed', sans-serif;
   }
   h1 {
     font-size: 75px;
