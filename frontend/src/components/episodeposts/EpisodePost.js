@@ -1,6 +1,7 @@
 // Imports
 import episodeCommentService from '../../services/episodecomments'
 import { useState } from 'react'
+import styled from 'styled-components/macro'
 
 // Individual episode post
 const EpisodePost = ({ episodePost }) => {
@@ -11,9 +12,6 @@ const EpisodePost = ({ episodePost }) => {
       <h1>Loading</h1>
     )
   }
-
-  // Base url for images
-  const baseUrl = 'https://image.tmdb.org/t/p/w500'
 
   // Comment input (controlled component)
   const [commentInput, setCommentInput] = useState('')
@@ -38,33 +36,97 @@ const EpisodePost = ({ episodePost }) => {
 
   return (
     <>
-      <h1>Show: {episodePost.showName}</h1>
-      <img width="75" alt="" src={`${baseUrl}/${episodePost.showImage}`} />
-      <h2>Season: {episodePost.seasonNumber}</h2>
-      <img width="75" alt="" src={`${baseUrl}/${episodePost.seasonImage}`} />
-      <h3>Episode: {episodePost.episodeNumber}</h3>
-      <img width="75" alt="" src={`${baseUrl}/${episodePost.episodeImage}`} />
-      <h1>{episodePost.episodeName}</h1>
-      <p>{episodePost.episodeInfo}</p>
-      <h2>Comments</h2>
-      <form onSubmit={handleOnSubmitCommentForm}>
-        <input value={commentInput} onChange={handleOnChangeCommentInput} />
-        <button type="submit">post</button>
-      </form>
-      {episodeComments.map(comment => {
-        return (
-          <div key={comment.id} style={{ border: '1px solid lightgray' }}>
-            <p>{comment.content}</p>
-            <p>{comment.date}</p>
-            <p>posted by {comment.user}</p>
-          </div>
-        )
-      })}
+      <MainImageContainer>
+        <MainImage
+          alt=""
+          src={`https://image.tmdb.org/t/p/original/${episodePost.episodeImage}`}
+        />
+        <MainImageOverlay />
+      </MainImageContainer>
+      <Container>
+        <EpisodeName>{episodePost.episodeName}</EpisodeName>
+        <SubContainer>
+          <FlexContainer>
+            <ShowName>{episodePost.showName}</ShowName>
+            <EpisodeDetails>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}</EpisodeDetails>
+            <EpisodeInfo>{episodePost.episodeInfo}</EpisodeInfo>
+            <ImageContainer>
+              <Image alt="" src={`https://image.tmdb.org/t/p/w500/${episodePost.showImage}`} />
+              <Image alt="" src={`https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`} />
+            </ImageContainer>
+          </FlexContainer>
+          <FlexContainer>
+            <h2>Comments</h2>
+            <form onSubmit={handleOnSubmitCommentForm}>
+              <input value={commentInput} onChange={handleOnChangeCommentInput} />
+              <button type="submit">Post Comment</button>
+            </form>
+            {episodeComments.map(comment => {
+              return (
+                <div key={comment.id} style={{ border: '1px solid lightgray' }}>
+                  <p>{comment.content}</p>
+                  <p>{comment.date}</p>
+                  <p>posted by {comment.user}</p>
+                </div>
+              )
+            })}
+          </FlexContainer>
+        </SubContainer>
+      </Container>
     </>
   )
 
-
 }
+
+// Styles
+const MainImageContainer = styled.div`
+  position: relative;
+`
+const MainImageOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  background: linear-gradient(rgba(0, 0, 0, 0), #282D40);
+`
+const MainImage = styled.img`
+  display: block;
+  width: 100%;
+`
+const Container = styled.div``
+const SubContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+`
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 20px);
+`
+const EpisodeName = styled.h1``
+const ShowName = styled.p`
+  margin: ${props => props.theme.space.medium} 0;
+  font-size: 40px;
+`
+const EpisodeDetails = styled.p`
+  margin-bottom: ${props => props.theme.space.medium};
+`
+const EpisodeInfo = styled.p`
+  font-weight: 300;
+  margin-bottom: ${props => props.theme.space.medium};
+`
+const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+`
+const Image = styled.img`
+  width: calc(50% - 20px);
+  border-radius: ${props => props.theme.radius};
+`
 
 // Export
 export default EpisodePost
