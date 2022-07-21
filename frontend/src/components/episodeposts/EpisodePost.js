@@ -56,20 +56,25 @@ const EpisodePost = ({ episodePost }) => {
             </ImageContainer>
           </FlexContainer>
           <FlexContainer>
-            <h2>Comments</h2>
+            <CommentHeading>Comments</CommentHeading>
             <form onSubmit={handleOnSubmitCommentForm}>
-              <input value={commentInput} onChange={handleOnChangeCommentInput} />
-              <button type="submit">Post Comment</button>
+              <Textarea
+                value={commentInput}
+                onChange={handleOnChangeCommentInput}
+                placeholder="Write a comment..."
+              />
+              <Button type="submit">Post Comment</Button>
             </form>
-            {episodeComments.map(comment => {
-              return (
-                <div key={comment.id} style={{ border: '1px solid lightgray' }}>
-                  <p>{comment.content}</p>
-                  <p>{comment.date}</p>
-                  <p>posted by {comment.user}</p>
-                </div>
-              )
-            })}
+            <Comments>
+              {episodeComments.map(comment => {
+                return (
+                  <Comment key={comment.id}>
+                    <CommentContent>{comment.content}</CommentContent>
+                    <p>{comment.user} {comment.date}</p>
+                  </Comment>
+                )
+              })}
+            </Comments>
           </FlexContainer>
         </SubContainer>
       </Container>
@@ -126,6 +131,40 @@ const ImageContainer = styled.div`
 const Image = styled.img`
   width: calc(50% - 20px);
   border-radius: ${props => props.theme.radius};
+`
+const CommentHeading = styled.p`
+  font-size: 40px;
+  margin: 20px 0;
+`
+const Textarea = styled.textarea`
+  border-radius: ${props => props.theme.radius};
+  width: 100%;
+  height: 100px;
+  resize: none;
+  font-size: 20px;
+  padding: ${props => props.theme.space.medium};
+  margin-bottom: ${props => props.theme.space.medium};
+  &:focus {
+    outline-color: ${props => props.theme.color.tertiary};
+  }
+`
+const Button = styled.button`
+  margin-left: auto;
+`
+const Comments = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${props => props.theme.space.medium};
+  margin-top: ${props => props.theme.space.large};
+`
+const Comment = styled.div`
+  background: ${props => props.theme.color.secondary};
+  padding: ${props => props.theme.space.large};
+  border-radius: ${props => props.theme.radius};
+`
+const CommentContent = styled.p`
+  font-weight: 300;
+  margin-bottom: ${props => props.theme.space.medium};
 `
 
 // Export
