@@ -56,10 +56,16 @@ const EpisodePost = ({ episodePost }) => {
             <ShowName>{episodePost.showName}</ShowName>
             <EpisodeDetails>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}</EpisodeDetails>
             <EpisodeInfo>{episodePost.episodeInfo}</EpisodeInfo>
-            <ImageContainer>
-              <Image alt="" src={`https://image.tmdb.org/t/p/w500/${episodePost.showImage}`} />
-              <Image alt="" src={`https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`} />
-            </ImageContainer>
+            <ImageContainers>
+              <ImageContainer>
+                <Image alt="" src={`https://image.tmdb.org/t/p/w500/${episodePost.showImage}`} />
+                <ImageText>{episodePost.showName}</ImageText>
+              </ImageContainer>
+              <ImageContainer>
+                <Image alt="" src={`https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`} />
+                <ImageText>Season {episodePost.seasonNumber}</ImageText>
+              </ImageContainer>
+            </ImageContainers>
           </FlexContainer>
           <FlexContainer>
             <CommentHeading>Comments</CommentHeading>
@@ -132,14 +138,22 @@ const EpisodeInfo = styled.p`
   font-weight: 300;
   margin-bottom: ${props => props.theme.space.medium};
 `
-const ImageContainer = styled.div`
+const ImageContainers = styled.div`
   display: flex;
   flex-direction: row;
   gap: 40px;
 `
-const Image = styled.img`
+const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: calc(50% - 20px);
+  gap: ${props => props.theme.space.medium};
+`
+const Image = styled.img`
   border-radius: ${props => props.theme.radius};
+`
+const ImageText = styled.p`
+  text-align: center;
 `
 const CommentHeading = styled.p`
   font-size: 40px;
@@ -178,14 +192,15 @@ const CommentContent = styled.p`
 const CommentInfo = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
 `
 const DatePosted = styled.p`
   font-size: 16px;
   font-weight: 300;
 `
 const User = styled.p`
+  font-size: 16px;
   font-weight: bold;
+  margin-right: ${props => props.theme.space.small};
 `
 
 // Export
