@@ -77,7 +77,7 @@ const EpisodePost = ({ episodePost }) => {
                   <Comment key={comment.id}>
                     <CommentContent>{comment.content}</CommentContent>
                     <CommentInfo>
-                      <User>{comment.user}</User>
+                      <User>{comment.user.username}</User>
                       <DatePosted>{parseDate(comment.date)}</DatePosted>
                     </CommentInfo>
                   </Comment>

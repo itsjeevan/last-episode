@@ -12,7 +12,13 @@ episodePostsRouter.get('/', async (request, response) => {
   // Return all posts
   const posts = await episodePost.find({})
     .populate('user')
-    .populate('episodeComments')
+    .populate({
+      path: 'episodeComments',
+      populate: {
+        path: 'user',
+        select: 'username'
+      }
+    })
   response.json(posts)
 })
 
@@ -21,7 +27,13 @@ episodePostsRouter.get('/:id', async (request, response) => {
   // Find post
   const post = await episodePost.findById(request.params.id)
     .populate('user')
-    .populate('episodeComments')
+    .populate({
+      path: 'episodeComments',
+      populate: {
+        path: 'user',
+        select: 'username'
+      }
+    })
   // If post found
   if (post) {
     response.json(post)

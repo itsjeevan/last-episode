@@ -26,7 +26,8 @@ const episodeCommentSchema = new mongoose.Schema({
 // Format object returned by MongoDB
 episodeCommentSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
+    // returnedObject.id = returnedObject._id.toString()
+    returnedObject.id = returnedObject._id
     delete returnedObject._id
     delete returnedObject.__v
   }

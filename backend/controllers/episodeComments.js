@@ -69,7 +69,10 @@ episodeCommentsRouter.post('/', async (request, response) => {
   episodePostFound.episodeComments = episodePostFound.episodeComments.concat(savedEpisodeComment._id)
   await userFound.save()
   await episodePostFound.save()
-  response.json(savedEpisodeComment)
+  response.json(await savedEpisodeComment.populate({
+    path: 'user',
+    select: 'username'
+  }))
 })
 
 // Exports

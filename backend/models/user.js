@@ -28,7 +28,8 @@ const userSchema = new mongoose.Schema({
 // Format object returned by MongoDB
 userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
+    // returnedObject.id = returnedObject._id.toString()
+    returnedObject.id = returnedObject._id
     delete returnedObject._id
     delete returnedObject.__v
     delete returnedObject.passwordHash
