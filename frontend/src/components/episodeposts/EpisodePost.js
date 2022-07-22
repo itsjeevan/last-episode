@@ -34,6 +34,12 @@ const EpisodePost = ({ episodePost }) => {
     setEpisodeComments(episodeComments.concat(episodeCommentResponse))
   }
 
+  // Parse date object
+  const parseDate = dateObject => {
+    const date = new Date(dateObject)
+    return `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`
+  }
+
   return (
     <>
       <MainImageContainer>
@@ -70,7 +76,10 @@ const EpisodePost = ({ episodePost }) => {
                 return (
                   <Comment key={comment.id}>
                     <CommentContent>{comment.content}</CommentContent>
-                    <p>{comment.user} {comment.date}</p>
+                    <CommentInfo>
+                      <User>{comment.user}</User>
+                      <DatePosted>{parseDate(comment.date)}</DatePosted>
+                    </CommentInfo>
                   </Comment>
                 )
               })}
@@ -143,7 +152,7 @@ const Textarea = styled.textarea`
   resize: none;
   font-size: 20px;
   padding: ${props => props.theme.space.medium};
-  margin-bottom: ${props => props.theme.space.medium};
+  margin-bottom: ${props => props.theme.space.small};
   &:focus {
     outline-color: ${props => props.theme.color.tertiary};
   }
@@ -165,6 +174,18 @@ const Comment = styled.div`
 const CommentContent = styled.p`
   font-weight: 300;
   margin-bottom: ${props => props.theme.space.medium};
+`
+const CommentInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+const DatePosted = styled.p`
+  font-size: 16px;
+  font-weight: 300;
+`
+const User = styled.p`
+  font-weight: bold;
 `
 
 // Export
