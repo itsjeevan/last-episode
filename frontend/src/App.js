@@ -94,12 +94,9 @@ const GlobalStyle = createGlobalStyle`
     padding: 0 ${props => props.theme.space.large};
     border-radius ${props => props.theme.radius};
     cursor: pointer;
-    &:hover {
+    &:hover,
+    &:active {
       background: ${props => props.theme.color.tertiary};
-    }
-    &:focus {
-      background: ${props => props.theme.color.tertiary};
-      outline: none;
     }
   }
   .highlight {
