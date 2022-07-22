@@ -19,7 +19,7 @@ const Container = styled.div`
   flex-direction: column;
   width: calc(25% - 30px);
   cursor: pointer;
-  gap: 20px;
+  gap: ${props => props.theme.space.medium};
 `
 const Image = styled.img`
   border-radius: ${props => props.theme.radius};
