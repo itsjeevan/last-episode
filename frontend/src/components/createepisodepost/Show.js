@@ -1,5 +1,6 @@
 // Imports
 import styled from 'styled-components'
+import notfound from './404.jpg'
 
 // Individual show
 const Show = ({ onClickShow, activeShow, show }) => (
@@ -8,6 +9,10 @@ const Show = ({ onClickShow, activeShow, show }) => (
       className={activeShow === show.id ? 'highlight' : ''}
       alt={show.name}
       src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
+      onError={({ currentTarget }) => {
+        currentTarget.onerror = null
+        currentTarget.src = notfound
+      }}
     />
     <Text>{show.name}</Text>
   </Container>
