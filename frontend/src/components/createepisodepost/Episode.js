@@ -44,7 +44,7 @@ const Episode = ({
     await episodeCommentService.create(episodeComment)
     const episodePostResponseFinal = await episodePostService.getOne(episodePostResponse.id)
     setEpisodePosts(episodePosts.concat(episodePostResponseFinal))
-    navigate('/')
+    navigate(`/${episodePostResponseFinal.id}`)
   }
 
   return (
