@@ -3,9 +3,12 @@ import episodeCommentService from '../../services/episodecomments'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 import notfound from '../../assets/404.jpg'
+import { useNavigate } from 'react-router-dom'
 
 // Individual episode post
-const EpisodePost = ({ episodePost }) => {
+const EpisodePost = ({ episodePost, user }) => {
+
+  const navigate = useNavigate()
 
   // If directly linking to episode post or on refresh
   if (!episodePost) {
@@ -24,6 +27,10 @@ const EpisodePost = ({ episodePost }) => {
 
   const handleOnSubmitCommentForm = async event => {
     event.preventDefault()
+    // Redirect if not logged in
+    if (!user) {
+      navigate('/login')
+    }
     // Create episode comment object
     const episodeComment = {
       content: commentInput,
