@@ -2,6 +2,7 @@
 import episodeCommentService from '../../services/episodecomments'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
+import notfound from '../../assets/404.jpg'
 
 // Individual episode post
 const EpisodePost = ({ episodePost }) => {
@@ -46,6 +47,10 @@ const EpisodePost = ({ episodePost }) => {
         <MainImage
           alt=""
           src={`https://image.tmdb.org/t/p/original/${episodePost.episodeImage}`}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null
+            currentTarget.src = notfound
+          }}
         />
         <MainImageOverlay />
       </MainImageContainer>
@@ -55,14 +60,33 @@ const EpisodePost = ({ episodePost }) => {
           <FlexContainer>
             <ShowName>{episodePost.showName}</ShowName>
             <EpisodeDetails>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}</EpisodeDetails>
-            <EpisodeInfo>{episodePost.episodeInfo}</EpisodeInfo>
+            <EpisodeInfo>
+              {episodePost.episodeInfo
+                ? episodePost.episodeInfo
+                : 'No episode info found.'
+              }
+            </EpisodeInfo>
             <ImageContainers>
               <ImageContainer>
-                <Image alt="" src={`https://image.tmdb.org/t/p/w500/${episodePost.showImage}`} />
+                <Image
+                  alt=""
+                  src={`https://image.tmdb.org/t/p/w500/${episodePost.showImage}`}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null
+                    currentTarget.src = notfound
+                  }}
+                />
                 <ImageText>{episodePost.showName}</ImageText>
               </ImageContainer>
               <ImageContainer>
-                <Image alt="" src={`https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`} />
+                <Image
+                  alt=""
+                  src={`https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null
+                    currentTarget.src = notfound
+                  }}
+                />
                 <ImageText>Season {episodePost.seasonNumber}</ImageText>
               </ImageContainer>
             </ImageContainers>

@@ -1,5 +1,5 @@
 // Import
-import notfound from './404.jpg'
+import notfound from '../../assets/404.jpg'
 import { onLoad } from '../../utils/helper'
 import styled from 'styled-components'
 

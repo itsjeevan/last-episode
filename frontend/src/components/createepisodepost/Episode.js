@@ -3,7 +3,7 @@ import { useState } from 'react'
 import episodePostService from '../../services/episodeposts'
 import episodeCommentService from '../../services/episodecomments'
 import { useNavigate } from 'react-router-dom'
-import notfound from './404.jpg'
+import notfound from '../../assets/404.jpg'
 import { onLoad } from '../../utils/helper'
 import styled from 'styled-components/macro'
 
@@ -61,7 +61,12 @@ const Episode = ({
         />
         <TextContainer className={activeEpisode === episode.id ? 'remove-radius' : ''}>
           <EpisodeNumber>{episode.episode_number}. {episode.name}</EpisodeNumber>
-          <Text>{episode.overview}</Text>
+          <Text>
+            {episode.overview === ''
+              ? 'No episode info found.'
+              : episode.overview
+            }
+          </Text>
         </TextContainer>
         <Form >
           {activeEpisode === episode.id

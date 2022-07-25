@@ -1,6 +1,6 @@
 // Imports
 import styled from 'styled-components'
-import notfound from './404.jpg'
+import notfound from '../../assets/404.jpg'
 
 // Individual show
 const Show = ({ onClickShow, activeShow, show }) => (

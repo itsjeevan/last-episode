@@ -1,7 +1,7 @@
 // Imports
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import logo from './logo.svg'
+import logo from '../../assets/logo.svg'
 
 // Header
 const Header = ({ user, setUser }) => {

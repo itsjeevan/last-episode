@@ -1,6 +1,7 @@
 // Imports
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import notfound from '../../assets/404.jpg'
 
 // List of episode posts
 const EpisodePosts = ({ episodePosts }) => {
@@ -14,11 +15,18 @@ const EpisodePosts = ({ episodePosts }) => {
             <Image
               alt={episodePost.showName}
               src={`https://image.tmdb.org/t/p/w500/${episodePost.episodeImage}`}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null
+                currentTarget.src = notfound
+              }}
             />
             <TextContainer>
               <ShowName>{episodePost.showName}</ShowName>
               <ShowSeason>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}: {episodePost.episodeName}</ShowSeason>
-              <ShowInfo>{episodePost.episodeInfo}</ShowInfo>
+              <ShowInfo>{episodePost.episodeInfo
+                ? episodePost.episodeInfo
+                : 'No episode info found.'
+              }</ShowInfo>
             </TextContainer>
           </SubContainer>
         ))}
