@@ -8,32 +8,26 @@ const episodePostSchema = new mongoose.Schema({
     required: true
   },
   showImage: {
-    type: String,
-    required: true
+    type: String
   },
   seasonNumber: {
     type: Number,
     required: true
   },
   seasonImage: {
-    type: String,
-    required: true
+    type: String
   },
   episodeNumber: {
-    type: Number,
-    required: true
+    type: Number
   },
   episodeName: {
-    type: String,
-    required: true
+    type: String
   },
   episodeInfo: {
-    type: String,
-    required: true
+    type: String
   },
   episodeImage: {
-    type: String,
-    required: true
+    type: String
   },
   date: {
     type: Date,
@@ -55,7 +49,6 @@ const episodePostSchema = new mongoose.Schema({
 // Format object returned by MongoDB
 episodePostSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    // returnedObject.id = returnedObject._id.toString()
     returnedObject.id = returnedObject._id
     delete returnedObject._id
     delete returnedObject.__v
