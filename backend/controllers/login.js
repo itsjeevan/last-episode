@@ -34,8 +34,7 @@ loginRouter.post('/', async (request, response) => {
   // Create token digitally signed using environment variable
   const token = jwt.sign(
     userForToken,
-    process.env.JWT_SECRET,
-    { expiresIn: 60 * 60 }
+    process.env.JWT_SECRET
   )
 
   // Return token and username
