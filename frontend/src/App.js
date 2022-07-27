@@ -43,7 +43,7 @@ const App = () => {
       {/* Render component based on url */}
       <Routes>
         <Route path="/" element={<EpisodePosts episodePosts={episodePosts} />} />
-        <Route path="/:id" element={<EpisodePost episodePost={episodePost} user={user} />} />
+        <Route path="/:id" element={<EpisodePost episodePost={episodePost} episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user}/>} />
         <Route path="/create" element={<CreateEpisodePost episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} />} />
         <Route path="login" element={<Login user={user} setUser={setUser} />} />
       </Routes>

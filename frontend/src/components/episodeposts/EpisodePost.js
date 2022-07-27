@@ -6,25 +6,15 @@ import notfound from '../../assets/404.jpg'
 import { useNavigate } from 'react-router-dom'
 
 // Individual episode post
-const EpisodePost = ({ episodePost, user }) => {
+const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user }) => {
 
   const navigate = useNavigate()
-
-  // If directly linking to episode post or on refresh
-  if (!episodePost) {
-    return (
-      <h1>Loading</h1>
-    )
-  }
 
   // Comment input (controlled component)
   const [commentInput, setCommentInput] = useState('')
   const handleOnChangeCommentInput = event => setCommentInput(event.target.value)
 
-  const [episodeComments, setEpisodeComments] = useState(episodePost.episodeComments)
-
-
-
+  // Comment form event handler
   const handleOnSubmitCommentForm = async event => {
     event.preventDefault()
     // Redirect if not logged in
@@ -38,14 +28,27 @@ const EpisodePost = ({ episodePost, user }) => {
     }
     // Save episode comment
     const episodeCommentResponse = await episodeCommentService.create(episodeComment)
+    // Create new episode post with new comment
+    const newEpisodePost = {
+      ...episodePost,
+      episodeComments: episodePost.episodeComments.concat(episodeCommentResponse)
+    }
+    // Update episode posts
+    setEpisodePosts(episodePosts.map(post => post.id !== episodePost.id ? post : newEpisodePost))
     setCommentInput('')
-    setEpisodeComments(episodeComments.concat(episodeCommentResponse))
   }
 
   // Parse date object
   const parseDate = dateObject => {
     const date = new Date(dateObject)
     return `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`
+  }
+
+  // If directly linking to episode post or on refresh
+  if (!episodePost) {
+    return (
+      <h1>Loading</h1>
+    )
   }
 
   return (
@@ -109,7 +112,7 @@ const EpisodePost = ({ episodePost, user }) => {
               <Button type="submit">Post Comment</Button>
             </form>
             <Comments>
-              {episodeComments.map(comment => {
+              {episodePost.episodeComments.map(comment => {
                 return (
                   <Comment key={comment.id}>
                     <CommentContent>{comment.content}</CommentContent>
@@ -119,7 +122,7 @@ const EpisodePost = ({ episodePost, user }) => {
                     </CommentInfo>
                   </Comment>
                 )
-              })}
+              }).reverse()}
             </Comments>
           </FlexContainer>
         </SubContainer>
