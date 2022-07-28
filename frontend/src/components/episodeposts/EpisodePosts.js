@@ -29,7 +29,7 @@ const EpisodePosts = ({ episodePosts }) => {
               }</ShowInfo>
             </TextContainer>
           </SubContainer>
-        ))}
+        )).reverse()}
       </Container>
     </>
   )
