@@ -11,7 +11,7 @@ const EpisodePosts = ({ episodePosts }) => {
       <Heading>Episodes</Heading>
       <Container>
         {episodePosts.map(episodePost => (
-          <SubContainer to={`/${episodePost.id}`} key={episodePost.id}>
+          <SubContainer to={`/episodepost/${episodePost.id}`} key={episodePost.id}>
             <Image
               alt={episodePost.showName}
               src={`https://image.tmdb.org/t/p/w500/${episodePost.episodeImage}`}

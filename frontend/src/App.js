@@ -5,6 +5,7 @@ import EpisodePosts from './components/episodeposts/EpisodePosts'
 import EpisodePost from './components/episodeposts/EpisodePost'
 import Header from './components/header/Header'
 import CreateEpisodePost from './components/createepisodepost/CreateEpisodePost'
+import NotFound from './components/notfound/NotFound'
 import { useState, useEffect } from 'react'
 import episodePostService from './services/episodeposts'
 import styled, { createGlobalStyle } from 'styled-components'
@@ -29,7 +30,7 @@ const App = () => {
   }, [])
 
   // Everytime browser url changes, check for match
-  const match = useMatch('/:id')
+  const match = useMatch('/episodepost/:id')
   // If match found, find individual episode post
   const episodePost = match
     ? episodePosts.find(episodePost => episodePost.id === match.params.id)
@@ -43,9 +44,10 @@ const App = () => {
       {/* Render component based on url */}
       <Routes>
         <Route path="/" element={<EpisodePosts episodePosts={episodePosts} />} />
-        <Route path="/:id" element={<EpisodePost episodePost={episodePost} episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user}/>} />
+        <Route path="/episodepost/:id" element={<EpisodePost episodePost={episodePost} episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user}/>} exact/>
         <Route path="/create" element={<CreateEpisodePost episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} />} />
         <Route path="login" element={<Login user={user} setUser={setUser} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Container>
   )
@@ -97,10 +99,6 @@ const GlobalStyle = createGlobalStyle`
     &:hover,
     &:active {
       background: ${props => props.theme.color.tertiary};
-    }
-    &:disabled {
-      cursor: not-allowed;
-      background: ${props => props.theme.color.secondary};
     }
   }
   .highlight {
