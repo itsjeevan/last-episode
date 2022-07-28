@@ -47,7 +47,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user }) => {
   // If directly linking to episode post or on refresh
   if (!episodePost) {
     return (
-      <h1>Loading</h1>
+      <h1>Loading...</h1>
     )
   }
 
