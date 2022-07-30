@@ -40,7 +40,7 @@ usersRouter.post('/', async (request, response) => {
   const userFound = await User.findOne({ username })
   if (userFound) {
     return response.status(400).json({
-      error: 'username taken'
+      error: 'Error: Username taken'
     })
   }
 
@@ -55,8 +55,15 @@ usersRouter.post('/', async (request, response) => {
   })
 
   // Save user
-  const savedUser = await user.save()
-  response.json(savedUser)
+  try {
+    const savedUser = await user.save()
+    response.json(savedUser)
+  }
+  catch(exception) {
+    return response.status(422).json({
+      error: 'Error: Could not sign up'
+    })
+  }
 })
 
 // Exports

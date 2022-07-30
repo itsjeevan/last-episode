@@ -51,7 +51,15 @@ const Login = ({ setUser, setMessage }) => {
   // Sign up form event handler
   const handleOnClickSignUp = async event => {
     event.preventDefault()
+    // Validation: Frontend
+    if (!username || !password || !passwordConfirm) {
+      setMessage('Error: Missing username or passwords')
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
     if (password !== passwordConfirm) {
+      setMessage('Error: Passwords do not match')
+      setTimeout(() => setMessage(null), 2000)
       return
     }
     // Try to login user
@@ -59,9 +67,10 @@ const Login = ({ setUser, setMessage }) => {
       await userService.create({ username, password })
       handleOnClickLogin(event)
     }
+    // Validation: Backend
     catch(exception) {
-      // @To-do: Create error message on frontend
-      console.log(exception.response.data)
+      setMessage(exception.response.data.error)
+      setTimeout(() => setMessage(null), 2000)
     }
   }
 
