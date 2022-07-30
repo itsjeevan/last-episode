@@ -76,7 +76,6 @@ episodeCommentsRouter.post('/', async (request, response) => {
     }))
   }
   catch(exception) {
-    console.log('bad stuff happened')
     return response.status(422).json({
       error: 'Error: Could not create comment'
     })
