@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 // Login
-const Login = ({ setUser }) => {
+const Login = ({ setUser, setMessage }) => {
 
   const navigate = useNavigate()
 
@@ -24,6 +24,12 @@ const Login = ({ setUser }) => {
   // Login form event handler
   const handleOnClickLogin = async event => {
     event.preventDefault()
+    // Validation: Frontend
+    if (!username || !password) {
+      setMessage('Error: Missing username or password')
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
     // Try to login user
     try {
       const user = await loginService.login({ username, password })
@@ -35,9 +41,10 @@ const Login = ({ setUser }) => {
       setPassword('')
       navigate('/')
     }
+    // Validation: Backend
     catch(exception) {
-      // @To-do: Create error message on frontend
-      console.log(exception.response.data)
+      setMessage(exception.response.data.error)
+      setTimeout(() => setMessage(null), 2000)
     }
   }
 

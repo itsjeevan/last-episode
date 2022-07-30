@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react'
 import episodePostService from './services/episodeposts'
 import styled, { createGlobalStyle } from 'styled-components'
 import { Normalize } from 'styled-normalize'
+import Message from './components/notification/Message'
 
 // App
 const App = () => {
@@ -36,17 +37,20 @@ const App = () => {
     ? episodePosts.find(episodePost => episodePost.id === match.params.id)
     : null
 
+  const [message, setMessage] = useState(null)
+
   return (
     <Container>
       <Normalize />
       <GlobalStyle />
+      <Message message={message} />
       <Header user={user} setUser={setUser} />
       {/* Render component based on url */}
       <Routes>
         <Route path="/" element={<EpisodePosts episodePosts={episodePosts} />} />
         <Route path="/episodepost/:id" element={<EpisodePost episodePost={episodePost} episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user}/>} exact/>
         <Route path="/create" element={<CreateEpisodePost episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} />} />
-        <Route path="login" element={<Login user={user} setUser={setUser} />} />
+        <Route path="login" element={<Login setUser={setUser} setMessage={setMessage} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Container>
