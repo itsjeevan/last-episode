@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
 // Search for shows
-const ShowSearch = ({ setShows, setSeasons, setEpisodes, user }) => {
+const ShowSearch = ({ setShows, setSeasons, setEpisodes, user, setMessage }) => {
 
   const navigate = useNavigate()
 
@@ -19,14 +19,28 @@ const ShowSearch = ({ setShows, setSeasons, setEpisodes, user }) => {
     // Redirect if not logged in
     if (!user) {
       navigate('/login')
+      return
+    }
+    // Validation: Frontend
+    if (!showInput) {
+      setMessage('Error: No input provided')
+      setTimeout(() => setMessage(null), 2000)
+      return
     }
     // Search for shows via API
-    const showsResult = await axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${showInput}&include_adult=false`)
-    // Store results
-    setShows(showsResult.data.results)
-    // Reset seasons & episodes
-    setSeasons([])
-    setEpisodes([])
+    try {
+      const showsResult = await axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${showInput}&include_adult=false`)
+      // Store results
+      setShows(showsResult.data.results)
+      // Reset seasons & episodes
+      setSeasons([])
+      setEpisodes([])
+    }
+    // Validation: Backend
+    catch(exception) {
+      setMessage('Error: No input provided')
+      setTimeout(() => setMessage(null), 2000)
+    }
   }
 
   return (

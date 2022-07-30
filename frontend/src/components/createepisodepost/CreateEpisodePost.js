@@ -6,7 +6,7 @@ import ShowSearch from './ShowSearch'
 import { useState } from 'react'
 
 // Create an episode post
-const CreateEpisodePost = ({ episodePosts, setEpisodePosts, user }) => {
+const CreateEpisodePost = ({ episodePosts, setEpisodePosts, user, setMessage }) => {
 
   // Store all shows, seasons, and episodes
   const [shows, setShows] = useState(null)
@@ -25,6 +25,7 @@ const CreateEpisodePost = ({ episodePosts, setEpisodePosts, user }) => {
         setSeasons={setSeasons}
         setEpisodes={setEpisodes}
         user={user}
+        setMessage={setMessage}
       />
       {/* List of shows from search result */}
       {shows

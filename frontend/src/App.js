@@ -49,7 +49,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<EpisodePosts episodePosts={episodePosts} />} />
         <Route path="/episodepost/:id" element={<EpisodePost episodePost={episodePost} episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user}/>} exact/>
-        <Route path="/create" element={<CreateEpisodePost episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} />} />
+        <Route path="/create" element={<CreateEpisodePost episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} setMessage={setMessage} />} />
         <Route path="login" element={<Login setUser={setUser} setMessage={setMessage} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
