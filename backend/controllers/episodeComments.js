@@ -64,15 +64,23 @@ episodeCommentsRouter.post('/', async (request, response) => {
   })
 
   // Save episode comment
-  const savedEpisodeComment = await comment.save()
-  userFound.episodeComments = userFound.episodeComments.concat(savedEpisodeComment._id)
-  episodePostFound.episodeComments = episodePostFound.episodeComments.concat(savedEpisodeComment._id)
-  await userFound.save()
-  await episodePostFound.save()
-  response.json(await savedEpisodeComment.populate({
-    path: 'user',
-    select: 'username'
-  }))
+  try {
+    const savedEpisodeComment = await comment.save()
+    userFound.episodeComments = userFound.episodeComments.concat(savedEpisodeComment._id)
+    episodePostFound.episodeComments = episodePostFound.episodeComments.concat(savedEpisodeComment._id)
+    await userFound.save()
+    await episodePostFound.save()
+    response.json(await savedEpisodeComment.populate({
+      path: 'user',
+      select: 'username'
+    }))
+  }
+  catch(exception) {
+    console.log('bad stuff happened')
+    return response.status(422).json({
+      error: 'Error: Could not create comment'
+    })
+  }
 })
 
 // Exports

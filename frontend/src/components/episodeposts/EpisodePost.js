@@ -6,7 +6,7 @@ import notfound from '../../assets/404.jpg'
 import { useNavigate } from 'react-router-dom'
 
 // Individual episode post
-const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user }) => {
+const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMessage }) => {
 
   const navigate = useNavigate()
 
@@ -20,6 +20,13 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user }) => {
     // Redirect if not logged in
     if (!user) {
       navigate('/login')
+      return
+    }
+    // Validation: Frontend
+    if (!commentInput) {
+      setMessage('Error: Comment field empty')
+      setTimeout(() => setMessage(null), 2000)
+      return
     }
     // Create episode comment object
     const episodeComment = {
@@ -27,7 +34,15 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user }) => {
       episodePostId: episodePost.id
     }
     // Save episode comment
-    const episodeCommentResponse = await episodeCommentService.create(episodeComment)
+    try {
+      var episodeCommentResponse = await episodeCommentService.create(episodeComment)
+    }
+    // Validation: Backend
+    catch(exception) {
+      setMessage(exception.response.data.error)
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
     // Create new episode post with new comment
     const newEpisodePost = {
       ...episodePost,
