@@ -58,6 +58,7 @@ const CreateEpisodePost = ({ episodePosts, setEpisodePosts, user, setMessage }) 
           episodes={episodes}
           episodePosts={episodePosts}
           setEpisodePosts={setEpisodePosts}
+          setMessage={setMessage}
         />
         : null
       }

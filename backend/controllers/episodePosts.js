@@ -64,7 +64,7 @@ episodePostsRouter.post('/', async (request, response) => {
   const episodePostFound = await episodePost.find({ showName, seasonNumber, episodeNumber })
   if (episodePostFound.length !== 0) {
     return response.status(400).json({
-      error: 'a post about this episode already exists'
+      error: 'Error: Episode post already exists'
     })
   }
 
@@ -86,7 +86,14 @@ episodePostsRouter.post('/', async (request, response) => {
   })
 
   // Save episode post
-  const savedEpisodePost = await post.save()
+  try {
+    var savedEpisodePost = await post.save()
+  }
+  catch(exception) {
+    return response.status(422).json({
+      error: 'Error: Could not create episode post'
+    })
+  }
   // Update and save user's episode posts
   userFound.episodePosts = userFound.episodePosts.concat(savedEpisodePost._id)
   await userFound.save()

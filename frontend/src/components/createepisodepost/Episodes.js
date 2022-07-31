@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 // List of episodes
-const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpisodePosts }) => {
+const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpisodePosts, setMessage }) => {
 
   // Scroll to seasons section
   const episodesRef = useRef()
@@ -45,6 +45,7 @@ const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpi
             episodeSelected={episodeSelected}
             onClickEpisode={handleOnClickEpisode}
             activeEpisode={activeEpisode}
+            setMessage={setMessage}
           />
         ))}
       </Container>

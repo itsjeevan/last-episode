@@ -11,7 +11,8 @@ import styled from 'styled-components/macro'
 const Episode = ({
   episodeSelected, onClickEpisode, activeEpisode,
   scrollToEpisodes, episodes, imageLoadCount,
-  showSelected, seasonSelected, episode, episodePosts, setEpisodePosts }) => {
+  showSelected, seasonSelected, episode, episodePosts, setEpisodePosts,
+  setMessage }) => {
 
   const navigate = useNavigate()
 
@@ -34,15 +35,30 @@ const Episode = ({
       episodeImage: episodeSelected.still_path
     }
     // Save episode post
-    const episodePostResponse = await episodePostService.create(episodePost)
+    try {
+      var episodePostResponse = await episodePostService.create(episodePost)
+    }
+    // Validation: Backend
+    catch(exception) {
+      setMessage(exception.response.data.error)
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
     // Create episode comment object
     const episodeComment = {
       content: commentInput,
       episodePostId: episodePostResponse.id
     }
     // Save episode comment
-    await episodeCommentService.create(episodeComment)
-    const episodePostResponseFinal = await episodePostService.getOne(episodePostResponse.id)
+    try {
+      await episodeCommentService.create(episodeComment)
+      var episodePostResponseFinal = await episodePostService.getOne(episodePostResponse.id)
+    }
+    catch(exception) {
+      setMessage(exception.response.data.error)
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
     setEpisodePosts(episodePosts.concat(episodePostResponseFinal))
     navigate(`/${episodePostResponseFinal.id}`)
   }
