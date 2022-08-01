@@ -13,7 +13,7 @@ const Season = ({
       className={activeSeason === season.id ? 'highlight' : ''}
       // Increment imageLoadCount, if final image loaded, scroll
       onLoad={() => onLoad(imageLoadCount, seasons.length, scrollToSeasons)}
-      alt={`Season" ${season.season_number}`}
+      alt={`Season ${season.season_number}`}
       src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`}
       onError={({ currentTarget }) => {
         currentTarget.onerror = null

@@ -70,7 +70,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
     <>
       <MainImageContainer>
         <MainImage
-          alt=""
+          alt={`Episode ${episodePost.episodeNumber}`}
           src={`https://image.tmdb.org/t/p/original/${episodePost.episodeImage}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null
@@ -94,7 +94,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
             <ImageContainers>
               <ImageContainer>
                 <Image
-                  alt=""
+                  alt={episodePost.showName}
                   src={`https://image.tmdb.org/t/p/w500/${episodePost.showImage}`}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null
@@ -105,7 +105,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
               </ImageContainer>
               <ImageContainer>
                 <Image
-                  alt=""
+                  alt={`Season ${episodePost.seasonNumber}`}
                   src={`https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null
