@@ -18,10 +18,12 @@ const episodePostSchema = new mongoose.Schema({
     type: String
   },
   episodeNumber: {
-    type: Number
+    type: Number,
+    required: true
   },
   episodeName: {
-    type: String
+    type: String,
+    required: true
   },
   episodeInfo: {
     type: String

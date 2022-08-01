@@ -34,6 +34,20 @@ const Episode = ({
       episodeInfo: episodeSelected.overview,
       episodeImage: episodeSelected.still_path
     }
+    // Validation: Frontend
+    if (!episodePost.showName ||
+      !episodePost.seasonNumber ||
+      !episodePost.episodeNumber ||
+      !episodePost.episodeName) {
+      setMessage('Error: Could not create episode post')
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
+    if (!commentInput) {
+      setMessage('Error: Comment required')
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
     // Save episode post
     try {
       var episodePostResponse = await episodePostService.create(episodePost)
@@ -54,13 +68,14 @@ const Episode = ({
       await episodeCommentService.create(episodeComment)
       var episodePostResponseFinal = await episodePostService.getOne(episodePostResponse.id)
     }
+    // Validation: Backend
     catch(exception) {
       setMessage(exception.response.data.error)
       setTimeout(() => setMessage(null), 2000)
       return
     }
     setEpisodePosts(episodePosts.concat(episodePostResponseFinal))
-    navigate(`/${episodePostResponseFinal.id}`)
+    navigate(`/episodepost/${episodePostResponseFinal.id}`)
   }
 
   return (
