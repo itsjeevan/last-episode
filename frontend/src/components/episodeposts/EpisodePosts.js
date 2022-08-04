@@ -10,12 +10,13 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
   const [showInput, setShowInput] = useState('')
   const handleOnChangeShowInput = event => setShowInput(event.target.value)
 
-  const handleOnClickShowFilter = () => {
+  const handleOnSubmitShowFilter = event => {
+    event.preventDefault()
     if (showInput === '') {
       setFilteredEpisodePosts(episodePosts)
     }
     else {
-      setFilteredEpisodePosts(filteredEpisodePosts.filter(episodePost => {
+      setFilteredEpisodePosts(episodePosts.filter(episodePost => {
         return episodePost.showName.toLowerCase().includes(showInput.toLowerCase())
       }))
     }
@@ -29,31 +30,37 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
   return (
     <>
       <Filter>
-        <input value={showInput} onChange={handleOnChangeShowInput} type="text" placeholder="Filter by show name..." />
-        <button onClick={handleOnClickShowFilter} type="submit">Filter</button>
+        <FilterForm onSubmit={handleOnSubmitShowFilter}>
+          <input value={showInput} onChange={handleOnChangeShowInput} type="text" placeholder="Filter by show name..." />
+          <button type="submit">Filter</button>
+        </FilterForm>
         <button onClick={handleOnClickClear}>Clear</button>
       </Filter>
       <Container>
-        {filteredEpisodePosts.map(episodePost => (
-          <SubContainer to={`/episodepost/${episodePost.id}`} key={episodePost.id}>
-            <Image
-              alt={episodePost.showName}
-              src={`https://image.tmdb.org/t/p/w500/${episodePost.episodeImage}`}
-              onError={({ currentTarget }) => {
-                currentTarget.onerror = null
-                currentTarget.src = notfound
-              }}
-            />
-            <TextContainer>
-              <ShowName>{episodePost.showName}</ShowName>
-              <ShowSeason>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}: {episodePost.episodeName}</ShowSeason>
-              <ShowInfo>{episodePost.episodeInfo
-                ? episodePost.episodeInfo
-                : 'No episode info found.'
-              }</ShowInfo>
-            </TextContainer>
-          </SubContainer>
-        )).reverse()}
+        {
+          filteredEpisodePosts.length !== 0
+            ? filteredEpisodePosts.map(episodePost => (
+              <SubContainer to={`/episodepost/${episodePost.id}`} key={episodePost.id}>
+                <Image
+                  alt={episodePost.showName}
+                  src={`https://image.tmdb.org/t/p/w500/${episodePost.episodeImage}`}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null
+                    currentTarget.src = notfound
+                  }}
+                />
+                <TextContainer>
+                  <ShowName>{episodePost.showName}</ShowName>
+                  <ShowSeason>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}: {episodePost.episodeName}</ShowSeason>
+                  <ShowInfo>{episodePost.episodeInfo
+                    ? episodePost.episodeInfo
+                    : 'No episode info found.'
+                  }</ShowInfo>
+                </TextContainer>
+              </SubContainer>
+            )).reverse()
+            : <Text>No results</Text>
+        }
       </Container>
     </>
   )
@@ -102,7 +109,17 @@ const Filter = styled.div`
   flex-direction: row;
   align-items: center;
   margin-bottom: ${props => props.theme.space.large};
+`
+const FilterForm = styled.form`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: ${props => props.theme.space.medium};
+  margin-right: ${props => props.theme.space.medium};
+`
+const Text = styled.p`
+  text-align: center;
+  width: 100%;
 `
 
 // Export
