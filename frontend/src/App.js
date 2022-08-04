@@ -17,11 +17,15 @@ const App = () => {
 
   const [user, setUser] = useState(null)
   const [episodePosts, setEpisodePosts] = useState([])
+  const [filteredEpisodePosts, setFilteredEpisodePosts] = useState(episodePosts)
 
   // On initial render
   useEffect(() => {
     // Get episode posts from database
-    episodePostService.getAll().then(episodePosts => setEpisodePosts(episodePosts))
+    episodePostService.getAll().then(episodePosts => {
+      setEpisodePosts(episodePosts)
+      setFilteredEpisodePosts(episodePosts)
+    })
     // Check if user details found in local storage
     const loggedUserJSON = window.localStorage.getItem('user')
     if (loggedUserJSON) {
@@ -47,7 +51,7 @@ const App = () => {
       <Header user={user} setUser={setUser} />
       {/* Render component based on url */}
       <Routes>
-        <Route path="/" element={<EpisodePosts episodePosts={episodePosts} />} />
+        <Route path="/" element={<EpisodePosts episodePosts={episodePosts} filteredEpisodePosts={filteredEpisodePosts} setFilteredEpisodePosts={setFilteredEpisodePosts} />} />
         <Route path="/episodepost/:id" element={<EpisodePost episodePost={episodePost} episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} setMessage={setMessage} />} />
         <Route path="/create" element={<CreateEpisodePost episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} setMessage={setMessage} />} />
         <Route path="login" element={<Login setUser={setUser} setMessage={setMessage} />} />

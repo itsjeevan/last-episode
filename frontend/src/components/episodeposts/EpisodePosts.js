@@ -2,15 +2,39 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import notfound from '../../assets/404.jpg'
+import { useState } from 'react'
 
 // List of episode posts
-const EpisodePosts = ({ episodePosts }) => {
+const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePosts }) => {
+
+  const [showInput, setShowInput] = useState('')
+  const handleOnChangeShowInput = event => setShowInput(event.target.value)
+
+  const handleOnClickShowFilter = () => {
+    if (showInput === '') {
+      setFilteredEpisodePosts(episodePosts)
+    }
+    else {
+      setFilteredEpisodePosts(filteredEpisodePosts.filter(episodePost => {
+        return episodePost.showName.toLowerCase().includes(showInput.toLowerCase())
+      }))
+    }
+  }
+
+  const handleOnClickClear = () => {
+    setFilteredEpisodePosts(episodePosts)
+    setShowInput('')
+  }
 
   return (
     <>
-      <Heading>Episodes</Heading>
+      <Filter>
+        <input value={showInput} onChange={handleOnChangeShowInput} type="text" placeholder="Filter by show name..." />
+        <button onClick={handleOnClickShowFilter} type="submit">Filter</button>
+        <button onClick={handleOnClickClear}>Clear</button>
+      </Filter>
       <Container>
-        {episodePosts.map(episodePost => (
+        {filteredEpisodePosts.map(episodePost => (
           <SubContainer to={`/episodepost/${episodePost.id}`} key={episodePost.id}>
             <Image
               alt={episodePost.showName}
@@ -36,9 +60,6 @@ const EpisodePosts = ({ episodePosts }) => {
 }
 
 // Styles
-const Heading = styled.h1`
-  margin-bottom: ${props => props.theme.space.large};
-`
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -75,6 +96,13 @@ const ShowSeason = styled.p`
 `
 const ShowInfo = styled.p`
   font-weight: 300;
+`
+const Filter = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: ${props => props.theme.space.large};
+  gap: ${props => props.theme.space.medium};
 `
 
 // Export
