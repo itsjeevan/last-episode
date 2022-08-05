@@ -11,6 +11,7 @@ import episodePostService from './services/episodeposts'
 import styled, { createGlobalStyle } from 'styled-components'
 import { Normalize } from 'styled-normalize'
 import Message from './components/notification/Message'
+import User from './components/user/User'
 
 // App
 const App = () => {
@@ -54,7 +55,8 @@ const App = () => {
         <Route path="/" element={<EpisodePosts episodePosts={episodePosts} filteredEpisodePosts={filteredEpisodePosts} setFilteredEpisodePosts={setFilteredEpisodePosts} />} />
         <Route path="/episodepost/:id" element={<EpisodePost episodePost={episodePost} episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} setMessage={setMessage} />} />
         <Route path="/create" element={<CreateEpisodePost episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} setMessage={setMessage} />} />
-        <Route path="login" element={<Login setUser={setUser} setMessage={setMessage} />} />
+        <Route path="/login" element={<Login setUser={setUser} setMessage={setMessage} />} />
+        <Route path="/user" element={<User />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Container>

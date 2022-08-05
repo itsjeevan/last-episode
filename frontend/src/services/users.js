@@ -9,6 +9,12 @@ const create = async userData => {
   return response.data
 }
 
+// Get episode posts commented on by user id
+const getEpisodePostsCommented = async id => {
+  const response = await axios.get(`${baseUrl}/${id}/comments/episodeposts`)
+  return response.data
+}
+
 // Exports
-const exports = { create }
+const exports = { create, getEpisodePostsCommented }
 export default exports

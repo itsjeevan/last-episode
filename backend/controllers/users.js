@@ -29,6 +29,38 @@ usersRouter.get('/:id', async (request, response) => {
   }
 })
 
+// GET episode posts that user commented on
+usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
+  // Get episode posts user commented on
+  const episodeComments = await User.findById(request.params.id)
+    .select({ 'username': 0, 'episodePosts': 0 })
+    .populate({
+      path: 'episodeComments',
+      select: 'episodePost',
+      populate: {
+        path: 'episodePost'
+      }
+    })
+  const finalEpisodePosts = []
+  // For each of the episode posts
+  episodeComments.episodeComments.forEach(episodePost => {
+    // If the episode post is not null
+    if (episodePost.episodePost) {
+      // Check if episode post exists to avoid duplicates
+      const foundEpisodePost = finalEpisodePosts.find(finalEpisodePost => finalEpisodePost.id === episodePost.episodePost.id)
+      if (!foundEpisodePost) {
+        finalEpisodePosts.push(episodePost.episodePost)
+      }
+    }
+  })
+  // If user found
+  if (episodeComments) {
+    response.json(finalEpisodePosts)
+  }
+  else {
+    response.status(404).end()
+  }
+})
 
 // POST routes
 
