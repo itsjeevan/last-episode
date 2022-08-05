@@ -2,14 +2,18 @@
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import logo from '../../assets/logo.svg'
+import { useNavigate } from 'react-router-dom'
 
 // Header
 const Header = ({ user, setUser }) => {
+
+  const navigate = useNavigate()
 
   // Logout button event handler
   const handleOnClickLogout = () => {
     localStorage.removeItem('user')
     setUser(null)
+    navigate('/')
   }
 
   return (
@@ -25,7 +29,7 @@ const Header = ({ user, setUser }) => {
         {user
           ?
           <>
-            <Username>{user.username}</Username>
+            <Link to="/user">{user.username}</Link>
             <Logout href="" onClick={handleOnClickLogout}>Logout</Logout>
           </>
           : <Link to="/login">Login</Link>
@@ -75,9 +79,6 @@ const Logout = styled.button`
   height: auto;
   padding: ${props => props.theme.space.small} ${props => props.theme.space.medium};
   margin-left: ${props => props.theme.space.small};
-`
-const Username = styled.p`
-  font-weight: 300;
 `
 
 // Export
