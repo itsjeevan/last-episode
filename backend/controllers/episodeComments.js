@@ -8,7 +8,7 @@ const helper = require('../utils/helper')
 
 // GET routes
 
-// GET all episode comments
+// GET all episode comments (Unused endpoint)
 episodeCommentsRouter.get('/', async (request, response) => {
   // Return all comments
   const comments = await episodeComment.find({})
@@ -17,7 +17,7 @@ episodeCommentsRouter.get('/', async (request, response) => {
   response.json(comments)
 })
 
-// GET episode comment by id
+// GET episode comment by id (Unused endpoint)
 episodeCommentsRouter.get('/:id', async (request, response) => {
   // Find comment
   const comment = await episodeComment.findById(request.params.id)

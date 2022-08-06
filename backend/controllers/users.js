@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt')
 
 // GET routes
 
-// GET all users
+// GET all users (Unused endpoint)
 usersRouter.get('/', async (request, response) => {
   // Return all users
   const users = await User.find({})
@@ -15,7 +15,7 @@ usersRouter.get('/', async (request, response) => {
   return response.json(users)
 })
 
-// GET user by id
+// GET user by id (Unused endpoint)
 usersRouter.get('/:id', async (request, response) => {
   const user = await User.findById(request.params.id)
     .populate('episodePosts')
