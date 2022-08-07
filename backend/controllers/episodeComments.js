@@ -46,7 +46,7 @@ episodeCommentsRouter.post('/', async (request, response) => {
     var decodedToken = jwt.verify(token, process.env.JWT_SECRET)
   }
   catch {
-    return response.status(401).json({ error: 'token missing or invalid' })
+    return response.status(401).json({ error: 'Token missing or invalid' })
   }
 
   // Find user by id

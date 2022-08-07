@@ -11,7 +11,6 @@ const helper = require('../utils/helper')
 episodePostsRouter.get('/', async (request, response) => {
   // Return all posts
   const posts = await episodePost.find({})
-    .populate('user')
     .populate({
       path: 'episodeComments',
       populate: {
@@ -26,7 +25,6 @@ episodePostsRouter.get('/', async (request, response) => {
 episodePostsRouter.get('/:id', async (request, response) => {
   // Find post
   const post = await episodePost.findById(request.params.id)
-    .populate('user')
     .populate({
       path: 'episodeComments',
       populate: {
