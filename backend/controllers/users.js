@@ -24,6 +24,7 @@ usersRouter.get('/:id', async (request, response) => {
   if (user) {
     response.json(user)
   }
+  // 404 if not found
   else {
     response.status(404).end()
   }
@@ -53,13 +54,7 @@ usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
       }
     }
   })
-  // If user found
-  if (episodeComments) {
-    response.json(finalEpisodePosts)
-  }
-  else {
-    response.status(404).end()
-  }
+  response.json(finalEpisodePosts)
 })
 
 // POST routes

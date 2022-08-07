@@ -36,7 +36,7 @@ episodePostsRouter.get('/:id', async (request, response) => {
   if (post) {
     response.json(post)
   }
-  // 404 if post not found
+  // 404 if not found
   else {
     response.status(404).end()
   }

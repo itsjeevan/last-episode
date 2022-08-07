@@ -27,7 +27,7 @@ episodeCommentsRouter.get('/:id', async (request, response) => {
   if (comment) {
     response.json(comment)
   }
-  // 404 if comment not found
+  // 404 if not found
   else {
     response.status(404).end()
   }
