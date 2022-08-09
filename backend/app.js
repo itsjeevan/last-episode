@@ -11,7 +11,10 @@ const mongoose = require('mongoose')
 
 // Connect to MongoDB
 console.log('connecting to MongoDB')
-mongoose.connect(process.env.MONGODB_URI)
+const options = {
+  autoIndex: true
+}
+mongoose.connect(process.env.MONGODB_URI, options)
   .then(console.log('connected to MongoDB'))
   .catch(error => {
     console.log('error connecting to MongoDB', error.message)
