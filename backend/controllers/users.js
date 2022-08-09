@@ -42,6 +42,10 @@ usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
         path: 'episodePost'
       }
     })
+  // 404 if not found
+  if (!episodeComments) {
+    response.status(404).end()
+  }
   const finalEpisodePosts = []
   // For each of the episode posts
   episodeComments.episodeComments.forEach(episodePost => {
