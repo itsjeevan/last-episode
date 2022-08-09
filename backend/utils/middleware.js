@@ -11,7 +11,7 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).send({ error: 'duplicate entry in db' })
   }
   // If accessing an incorrect 'id'
-  if (error.name === 'CastError') {
+  else if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   }
   // If data entered into MongoDB doesn't pass validation
