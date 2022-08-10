@@ -26,6 +26,10 @@ const errorHandler = (error, request, response, next) => {
   else if (error.name === 'TokenExpiredError') {
     return response.status(401).json({ error: 'token expired' })
   }
+  // If accessing property of null (user._id from a user)
+  // else if (error.name === 'TypeError') {
+  //   return response.status(400).json({ error: 'type error' })
+  // }
   next(error)
 }
 

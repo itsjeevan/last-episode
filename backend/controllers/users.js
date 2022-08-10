@@ -85,8 +85,9 @@ usersRouter.post('/', async (request, response) => {
     passwordHash
   })
 
-  // Save user
+  // Error handle ValidationError & MongoServerError
   try {
+    // Save user
     const savedUser = await user.save()
     response.json(savedUser)
   }

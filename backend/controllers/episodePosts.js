@@ -50,12 +50,13 @@ episodePostsRouter.post('/', async (request, response) => {
 
   // Call helper function and get token
   const token = helper.getTokenFrom(request)
-  // Verify validity of token
+  // Error handle JsonWebTokenError
   try {
+    // Verify validity of token
     var decodedToken = jwt.verify(token, process.env.JWT_SECRET)
   }
   catch {
-    return response.status(401).json({ error: 'token missing or invalid' })
+    return response.status(401).json({ error: 'Error: Invalid token' })
   }
 
   // Check if episode post already exists
@@ -66,8 +67,18 @@ episodePostsRouter.post('/', async (request, response) => {
     })
   }
 
-  // Find user by id
-  const userFound = await User.findById(decodedToken.id)
+  // Error handle malformatted id
+  try {
+    // Find user by id
+    var userFound = await User.findById(decodedToken.id)
+  }
+  catch(exception) {
+    return response.status(401).json({ error: 'MEOW' })
+  }
+  // Error handle TypeError
+  if (!userFound) {
+    return response.status(401).json({ error: 'no user found' })
+  }
 
   // Create post object
   const post = new episodePost({
@@ -83,18 +94,19 @@ episodePostsRouter.post('/', async (request, response) => {
     user: userFound._id
   })
 
-  // Save episode post
+  // Error handle ValidationError
   try {
+    // Save episode post
     var savedEpisodePost = await post.save()
+    // Update and save user's episode posts
+    userFound.episodePosts = userFound.episodePosts.concat(savedEpisodePost._id)
+    await userFound.save()
   }
   catch(exception) {
     return response.status(422).json({
       error: 'Error: Could not create episode post'
     })
   }
-  // Update and save user's episode posts
-  userFound.episodePosts = userFound.episodePosts.concat(savedEpisodePost._id)
-  await userFound.save()
 
   response.json(savedEpisodePost)
 })
