@@ -41,19 +41,32 @@ episodeCommentsRouter.post('/', async (request, response) => {
 
   // Call helper function and get token
   const token = helper.getTokenFrom(request)
-  // Verify validity of token
+  // Error handle JsonWebTokenError
   try {
+    // Verify validity of token
     var decodedToken = jwt.verify(token, process.env.JWT_SECRET)
   }
   catch {
-    return response.status(401).json({ error: 'Token missing or invalid' })
+    return response.status(401).json({ error: 'Error: Invalid token' })
   }
 
-  // Find user by id
-  const userFound = await User.findById(decodedToken.id)
-
-  // Find episode post by id
-  const episodePostFound = await episodePost.findById(episodePostId)
+  // Error handle CastError
+  try {
+    // Find user by id
+    var userFound = await User.findById(decodedToken.id)
+    // Find episode post by id
+    var episodePostFound = await episodePost.findById(episodePostId)
+  }
+  catch(exception) {
+    return response.status(400).json({ error: 'Error: Malformatted id' })
+  }
+  // Error handle TypeError
+  if (!userFound) {
+    return response.status(400).json({ error: 'Error: No user found' })
+  }
+  if (!episodePostFound) {
+    return response.status(400).json({ error: 'Error: No episode post found' })
+  }
 
   // Create comment object
   const comment = new episodeComment({
@@ -63,23 +76,24 @@ episodeCommentsRouter.post('/', async (request, response) => {
     episodePost: episodePostFound._id
   })
 
-  // Save episode comment
+  // Error handle ValidationError
   try {
-    const savedEpisodeComment = await comment.save()
+    // Save episode comment
+    var savedEpisodeComment = await comment.save()
     userFound.episodeComments = userFound.episodeComments.concat(savedEpisodeComment._id)
     episodePostFound.episodeComments = episodePostFound.episodeComments.concat(savedEpisodeComment._id)
     await userFound.save()
     await episodePostFound.save()
-    response.json(await savedEpisodeComment.populate({
-      path: 'user',
-      select: 'username'
-    }))
   }
   catch(exception) {
     return response.status(422).json({
       error: 'Error: Could not create comment'
     })
   }
+  response.json(await savedEpisodeComment.populate({
+    path: 'user',
+    select: 'username'
+  }))
 })
 
 // Exports

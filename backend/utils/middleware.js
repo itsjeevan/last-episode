@@ -8,28 +8,28 @@ const errorHandler = (error, request, response, next) => {
   console.log(error.message)
   // If unique entry exists in MongoDB already
   if (error.name === 'MongoServerError') {
-    return response.status(400).send({ error: 'duplicate entry in db' })
+    return response.status(400).send({ error: 'Error: Only one entry allowed' })
   }
   // If accessing an incorrect 'id'
   else if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' })
+    return response.status(400).send({ error: 'Error: Malformatted id' })
   }
   // If data entered into MongoDB doesn't pass validation
   else if (error.name === 'ValidationError') {
-    return response.status(400).json({ error: 'data not valid for mongodb' })
+    return response.status(400).json({ error: 'Error: Data not valid' })
   }
   // If JWT error
   else if (error.name === 'JsonWebTokenError') {
-    return response.status(401).json({ error: 'invalid token' })
+    return response.status(401).json({ error: 'Error: Invalid token' })
   }
   // If JWT expired
   else if (error.name === 'TokenExpiredError') {
-    return response.status(401).json({ error: 'token expired' })
+    return response.status(401).json({ error: 'Error: Token expired' })
   }
-  // If accessing property of null (user._id from a user)
-  // else if (error.name === 'TypeError') {
-  //   return response.status(400).json({ error: 'type error' })
-  // }
+  // If accessing property of null (user._id from a user that is not found)
+  else if (error.name === 'TypeError') {
+    return response.status(400).json({ error: 'Error: Type error' })
+  }
   next(error)
 }
 

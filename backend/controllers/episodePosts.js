@@ -67,17 +67,17 @@ episodePostsRouter.post('/', async (request, response) => {
     })
   }
 
-  // Error handle malformatted id
+  // Error handle CastError
   try {
     // Find user by id
     var userFound = await User.findById(decodedToken.id)
   }
   catch(exception) {
-    return response.status(401).json({ error: 'MEOW' })
+    return response.status(400).json({ error: 'Error: Malformatted id' })
   }
   // Error handle TypeError
   if (!userFound) {
-    return response.status(401).json({ error: 'no user found' })
+    return response.status(400).json({ error: 'Error: No user found' })
   }
 
   // Create post object
