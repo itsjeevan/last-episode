@@ -3,7 +3,7 @@ import { useState } from 'react'
 import episodePostService from '../../services/episodeposts'
 import episodeCommentService from '../../services/episodecomments'
 import { useNavigate } from 'react-router-dom'
-import notfound from '../../assets/404.jpg'
+import notFoundEpisodeSmall from '../../assets/404-episode-small.jpg'
 import { onLoad } from '../../utils/helper'
 import styled from 'styled-components/macro'
 
@@ -87,7 +87,7 @@ const Episode = ({
           src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null
-            currentTarget.src = notfound
+            currentTarget.src = notFoundEpisodeSmall
           }}
         />
         <TextContainer className={activeEpisode === episode.id ? 'remove-radius' : ''}>

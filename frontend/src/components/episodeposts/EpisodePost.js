@@ -2,7 +2,8 @@
 import episodeCommentService from '../../services/episodecomments'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
-import notfound from '../../assets/404.jpg'
+import notFoundEpisodeLarge from '../../assets/404-episode-large.jpg'
+import notFoundShowAndSeason from '../../assets/404-show-and-season.jpg'
 import { useNavigate } from 'react-router-dom'
 
 // Individual episode post
@@ -74,7 +75,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
           src={`https://image.tmdb.org/t/p/original/${episodePost.episodeImage}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null
-            currentTarget.src = notfound
+            currentTarget.src = notFoundEpisodeLarge
           }}
         />
         <MainImageOverlay />
@@ -98,7 +99,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
                   src={`https://image.tmdb.org/t/p/w500/${episodePost.showImage}`}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null
-                    currentTarget.src = notfound
+                    currentTarget.src = notFoundShowAndSeason
                   }}
                 />
                 <ImageText>{episodePost.showName}</ImageText>
@@ -109,7 +110,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
                   src={`https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null
-                    currentTarget.src = notfound
+                    currentTarget.src = notFoundShowAndSeason
                   }}
                 />
                 <ImageText>Season {episodePost.seasonNumber}</ImageText>

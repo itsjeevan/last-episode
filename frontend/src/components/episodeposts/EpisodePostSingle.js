@@ -1,7 +1,7 @@
 // Imports
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import notfound from '../../assets/404.jpg'
+import notFoundEpisodeSmall from '../../assets/404-episode-small.jpg'
 
 const EpisodePostSingle = ({ episodePost }) => (
   <SubContainer to={`/episodepost/${episodePost.id}`} key={episodePost.id}>
@@ -10,7 +10,7 @@ const EpisodePostSingle = ({ episodePost }) => (
       src={`https://image.tmdb.org/t/p/w500/${episodePost.episodeImage}`}
       onError={({ currentTarget }) => {
         currentTarget.onerror = null
-        currentTarget.src = notfound
+        currentTarget.src = notFoundEpisodeSmall
       }}
     />
     <TextContainer>

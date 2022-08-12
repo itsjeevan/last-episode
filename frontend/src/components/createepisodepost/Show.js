@@ -1,6 +1,6 @@
 // Imports
 import styled from 'styled-components'
-import notfound from '../../assets/404.jpg'
+import notFoundShowAndSeason from '../../assets/404-show-and-season.jpg'
 
 // Individual show
 const Show = ({ onClickShow, activeShow, show }) => (
@@ -11,7 +11,7 @@ const Show = ({ onClickShow, activeShow, show }) => (
       src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
       onError={({ currentTarget }) => {
         currentTarget.onerror = null
-        currentTarget.src = notfound
+        currentTarget.src = notFoundShowAndSeason
       }}
     />
     <Text>{show.name}</Text>

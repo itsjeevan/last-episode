@@ -1,5 +1,5 @@
 // Import
-import notfound from '../../assets/404.jpg'
+import notFoundShowAndSeason from '../../assets/404-show-and-season.jpg'
 import { onLoad } from '../../utils/helper'
 import styled from 'styled-components'
 
@@ -17,7 +17,7 @@ const Season = ({
       src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`}
       onError={({ currentTarget }) => {
         currentTarget.onerror = null
-        currentTarget.src = notfound
+        currentTarget.src = notFoundShowAndSeason
       }}
     />
     <Text>Season {season.season_number}</Text>
