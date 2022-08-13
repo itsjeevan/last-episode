@@ -80,69 +80,67 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
         />
         <MainImageOverlay />
       </MainImageContainer>
-      <Container>
-        <EpisodeName>{episodePost.episodeName}</EpisodeName>
-        <SubContainer>
-          <FlexContainer>
-            <ShowName>{episodePost.showName}</ShowName>
-            <EpisodeDetails>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}</EpisodeDetails>
-            <EpisodeInfo>
-              {episodePost.episodeInfo
-                ? episodePost.episodeInfo
-                : 'No episode info found.'
-              }
-            </EpisodeInfo>
-            <ImageContainers>
-              <ImageContainer>
-                <Image
-                  alt={episodePost.showName}
-                  src={`https://image.tmdb.org/t/p/w500/${episodePost.showImage}`}
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null
-                    currentTarget.src = notFoundShowAndSeason
-                  }}
-                />
-                <ImageText>{episodePost.showName}</ImageText>
-              </ImageContainer>
-              <ImageContainer>
-                <Image
-                  alt={`Season ${episodePost.seasonNumber}`}
-                  src={`https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`}
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null
-                    currentTarget.src = notFoundShowAndSeason
-                  }}
-                />
-                <ImageText>Season {episodePost.seasonNumber}</ImageText>
-              </ImageContainer>
-            </ImageContainers>
-          </FlexContainer>
-          <FlexContainer>
-            <CommentHeading>Comments</CommentHeading>
-            <form onSubmit={handleOnSubmitCommentForm}>
-              <Textarea
-                value={commentInput}
-                onChange={handleOnChangeCommentInput}
-                placeholder="Write a comment..."
+      <h1>{episodePost.episodeName}</h1>
+      <SubContainer>
+        <FlexContainer>
+          <ShowName>{episodePost.showName}</ShowName>
+          <p>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}</p>
+          <EpisodeInfo>
+            {episodePost.episodeInfo
+              ? episodePost.episodeInfo
+              : 'No episode info found.'
+            }
+          </EpisodeInfo>
+          <ImageContainers>
+            <ImageContainer>
+              <Image
+                alt={episodePost.showName}
+                src={`https://image.tmdb.org/t/p/w500/${episodePost.showImage}`}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null
+                  currentTarget.src = notFoundShowAndSeason
+                }}
               />
-              <Button type="submit">Post Comment</Button>
-            </form>
-            <Comments>
-              {episodePost.episodeComments.map(comment => {
-                return (
-                  <Comment key={comment.id}>
-                    <CommentContent>{comment.content}</CommentContent>
-                    <CommentInfo>
-                      <User>{comment.user.username}</User>
-                      <DatePosted>{parseDate(comment.date)}</DatePosted>
-                    </CommentInfo>
-                  </Comment>
-                )
-              }).reverse()}
-            </Comments>
-          </FlexContainer>
-        </SubContainer>
-      </Container>
+              <ImageText>{episodePost.showName}</ImageText>
+            </ImageContainer>
+            <ImageContainer>
+              <Image
+                alt={`Season ${episodePost.seasonNumber}`}
+                src={`https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null
+                  currentTarget.src = notFoundShowAndSeason
+                }}
+              />
+              <ImageText>Season {episodePost.seasonNumber}</ImageText>
+            </ImageContainer>
+          </ImageContainers>
+        </FlexContainer>
+        <FlexContainer>
+          <CommentHeading>Comments</CommentHeading>
+          <form onSubmit={handleOnSubmitCommentForm}>
+            <Textarea
+              value={commentInput}
+              onChange={handleOnChangeCommentInput}
+              placeholder="Write a comment..."
+            />
+            <Button type="submit">Post Comment</Button>
+          </form>
+          <Comments>
+            {episodePost.episodeComments.map(comment => {
+              return (
+                <Comment key={comment.id}>
+                  <CommentContent>{comment.content}</CommentContent>
+                  <CommentInfo>
+                    <User>{comment.user.username}</User>
+                    <DatePosted>{parseDate(comment.date)}</DatePosted>
+                  </CommentInfo>
+                </Comment>
+              )
+            }).reverse()}
+          </Comments>
+        </FlexContainer>
+      </SubContainer>
     </>
   )
 
@@ -165,42 +163,37 @@ const MainImage = styled.img`
   display: block;
   width: 100%;
 `
-const Container = styled.div``
 const SubContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: ${props => props.theme.space.large};
   flex-wrap: wrap;
+  margin-top: ${props => props.theme.space.large};
 `
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(50% - 20px);
+  gap: ${props => props.theme.space.large};
   @media screen and (max-width: 767px) {
     width: 100%;
   }
 `
-const EpisodeName = styled.h1``
 const ShowName = styled.p`
-  margin: ${props => props.theme.space.medium} 0;
   font-size: 40px;
-`
-const EpisodeDetails = styled.p`
-  margin-bottom: ${props => props.theme.space.medium};
 `
 const EpisodeInfo = styled.p`
   font-weight: 300;
-  margin-bottom: ${props => props.theme.space.medium};
 `
 const ImageContainers = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: ${props => props.theme.space.medium};
 `
 const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(50% - 20px);
+  width: calc(50% - 10px);
   gap: ${props => props.theme.space.medium};
 `
 const Image = styled.img`
@@ -211,7 +204,6 @@ const ImageText = styled.p`
 `
 const CommentHeading = styled.p`
   font-size: 40px;
-  margin: 20px 0;
 `
 const Textarea = styled.textarea`
   border-radius: ${props => props.theme.radius};
@@ -220,7 +212,7 @@ const Textarea = styled.textarea`
   resize: none;
   font-size: 20px;
   padding: ${props => props.theme.space.medium};
-  margin-bottom: ${props => props.theme.space.small};
+  margin-bottom: ${props => props.theme.space.medium};
   &:focus {
     outline-color: ${props => props.theme.color.tertiary};
   }
@@ -232,7 +224,6 @@ const Comments = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${props => props.theme.space.medium};
-  margin-top: ${props => props.theme.space.large};
 `
 const Comment = styled.div`
   background: ${props => props.theme.color.secondary};
