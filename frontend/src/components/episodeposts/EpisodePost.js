@@ -170,11 +170,15 @@ const SubContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 40px;
+  flex-wrap: wrap;
 `
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(50% - 20px);
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `
 const EpisodeName = styled.h1``
 const ShowName = styled.p`
