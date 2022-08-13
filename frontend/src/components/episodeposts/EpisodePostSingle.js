@@ -37,6 +37,9 @@ const SubContainer = styled(Link)`
   &:hover {
     ${props => props.theme.highlight}
   }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `
 const Image = styled.img`
   border-radius: ${props => props.theme.radius} ${props => props.theme.radius} 0 0;

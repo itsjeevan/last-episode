@@ -123,6 +123,9 @@ const Container = styled.div`
   flex-direction: column;
   width: calc(50% - 30px);
   cursor: pointer;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `
 const SubContainer = styled.div`
   border-radius: ${props => props.theme.radius};
