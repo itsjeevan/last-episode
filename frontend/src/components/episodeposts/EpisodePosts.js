@@ -28,13 +28,13 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
 
   return (
     <>
-      <Filter>
-        <FilterForm onSubmit={handleOnSubmitShowFilter}>
-          <input value={showInput} onChange={handleOnChangeShowInput} type="text" placeholder="Filter by show name..." />
+      <FilterForm onSubmit={handleOnSubmitShowFilter}>
+        <FilterInput value={showInput} onChange={handleOnChangeShowInput} type="text" placeholder="Filter by show name..." />
+        <FilterButtons>
           <button type="submit">Filter</button>
-        </FilterForm>
-        <button onClick={handleOnClickClear}>Clear</button>
-      </Filter>
+          <button onClick={handleOnClickClear}>Clear</button>
+        </FilterButtons>
+      </FilterForm>
       <Container>
         {
           filteredEpisodePosts.length !== 0
@@ -55,18 +55,27 @@ const Container = styled.div`
   flex-wrap: wrap;
   gap: 40px;
 `
-const Filter = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: ${props => props.theme.space.large};
-`
 const FilterForm = styled.form`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: ${props => props.theme.space.medium};
-  margin-right: ${props => props.theme.space.medium};
+  margin-bottom: ${props => props.theme.space.large};
+  flex-wrap: wrap;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
+`
+const FilterInput = styled.input`
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+`
+const FilterButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
 `
 const Text = styled.p`
   text-align: center;

@@ -86,7 +86,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   input {
-    width: 500px;
     height: 50px;
     border: none;
     font-size: 20px;
