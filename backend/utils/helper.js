@@ -7,4 +7,5 @@ const getTokenFrom = request => {
   return null
 }
 
+// Exports
 module.exports = { getTokenFrom }

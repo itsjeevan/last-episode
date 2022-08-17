@@ -3,7 +3,6 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 
-
 // GET routes
 
 // GET all users (Unused endpoint)

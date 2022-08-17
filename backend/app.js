@@ -20,7 +20,6 @@ mongoose.connect(process.env.MONGODB_URI, options)
     console.log('error connecting to MongoDB', error.message)
   })
 
-
 // Middleware
 
 // Added cross-origin resource sharing for frontend
