@@ -5,6 +5,7 @@ import styled from 'styled-components/macro'
 import notFoundEpisodeLarge from '../../assets/404-episode-large.jpg'
 import notFoundShowAndSeason from '../../assets/404-show-and-season.jpg'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 // Individual episode post
 const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMessage }) => {
@@ -143,7 +144,15 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
       </SubContainer>
     </>
   )
+}
 
+// PropTypes
+EpisodePost.propTypes = {
+  episodePost: PropTypes.object,
+  episodePosts: PropTypes.array.isRequired,
+  setEpisodePosts: PropTypes.func.isRequired,
+  user: PropTypes.object,
+  setMessage: PropTypes.func.isRequired
 }
 
 // Styles

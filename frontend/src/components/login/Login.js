@@ -4,6 +4,7 @@ import loginService from '../../services/login'
 import userService from '../../services/users'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
 
 // Login
 const Login = ({ setUser, setMessage }) => {
@@ -152,6 +153,12 @@ const Login = ({ setUser, setMessage }) => {
       }
     </>
   )
+}
+
+// PropTypes
+Login.propTypes = {
+  setUser: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired
 }
 
 // Styles

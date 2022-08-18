@@ -1,5 +1,6 @@
 // Imports
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Message = ({ message }) => {
   if (message === null) {
@@ -12,6 +13,11 @@ const Message = ({ message }) => {
       </Error>
     )
   }
+}
+
+// PropTypes
+Message.propTypes = {
+  message: PropTypes.string
 }
 
 // Styles

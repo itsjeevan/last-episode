@@ -3,6 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 // Search for shows
 const ShowSearch = ({ setShows, setSeasons, setEpisodes, user, setMessage }) => {
@@ -53,6 +54,15 @@ const ShowSearch = ({ setShows, setSeasons, setEpisodes, user, setMessage }) => 
       <Button type="submit">Search</Button>
     </Form>
   )
+}
+
+// PropTypes
+ShowSearch.propTypes = {
+  setShows: PropTypes.func.isRequired,
+  setSeasons: PropTypes.func.isRequired,
+  setEpisodes: PropTypes.func.isRequired,
+  user: PropTypes.object,
+  setMessage: PropTypes.func.isRequired
 }
 
 // Styles

@@ -2,6 +2,7 @@
 import notFoundShowAndSeason from '../../assets/404-show-and-season.jpg'
 import { onLoad } from '../../utils/helper'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 // Individual season
 const Season = ({
@@ -24,6 +25,15 @@ const Season = ({
   </Container>
 )
 
+// PropTypes
+Season.propTypes = {
+  onClickSeason: PropTypes.func.isRequired,
+  activeSeason: PropTypes.number,
+  scrollToSeasons: PropTypes.func.isRequired,
+  seasons: PropTypes.array.isRequired,
+  imageLoadCount: PropTypes.object.isRequired,
+  season: PropTypes.object.isRequired
+}
 
 // Styles
 const Container = styled.div`

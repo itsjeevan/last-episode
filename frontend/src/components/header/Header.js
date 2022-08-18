@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import logo from '../../assets/logo.svg'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 // Header
 const Header = ({ user, setUser }) => {
@@ -41,6 +42,12 @@ const Header = ({ user, setUser }) => {
       </ContentContainer>
     </Container>
   )
+}
+
+// PropTypes
+Header.propTypes = {
+  user: PropTypes.object,
+  setUser: PropTypes.func.isRequired
 }
 
 // Styles

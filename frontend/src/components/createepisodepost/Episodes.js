@@ -2,6 +2,7 @@
 import Episode from './Episode'
 import { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 // List of episodes
 const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpisodePosts, setMessage }) => {
@@ -18,7 +19,7 @@ const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpi
   }, [episodes])
 
   // Set active
-  const [activeEpisode, setActiveEpisode] = useState('')
+  const [activeEpisode, setActiveEpisode] = useState()
 
   // Store episode selected
   const [episodeSelected, setEpisodeSelected] = useState({})
@@ -51,6 +52,16 @@ const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpi
       </Container>
     </div>
   )
+}
+
+// PropTypes
+Episodes.propTypes = {
+  showSelected: PropTypes.object.isRequired,
+  seasonSelected: PropTypes.object.isRequired,
+  episodes: PropTypes.array.isRequired,
+  episodePosts: PropTypes.array.isRequired,
+  setEpisodePosts: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired
 }
 
 // Styles

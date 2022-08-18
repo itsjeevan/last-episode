@@ -3,6 +3,7 @@ import Season from './Season'
 import { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import PropTypes from 'prop-types'
 
 // List of seasons
 const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
@@ -19,7 +20,7 @@ const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
   }, [seasons])
 
   // Set active
-  const [activeSeason, setActiveSeason] = useState('')
+  const [activeSeason, setActiveSeason] = useState()
 
   // Get episodes of selected season
   const handleOnClickSeason = async season => {
@@ -50,6 +51,14 @@ const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
       </Container>
     </>
   )
+}
+
+// PropTypes
+Seasons.propTypes = {
+  showSelected: PropTypes.object.isRequired,
+  seasons: PropTypes.array.isRequired,
+  setSeasonSelected: PropTypes.func.isRequired,
+  setEpisodes: PropTypes.func.isRequired
 }
 
 // Styles

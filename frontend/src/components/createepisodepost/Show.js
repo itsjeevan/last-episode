@@ -1,6 +1,7 @@
 // Imports
 import styled from 'styled-components'
 import notFoundShowAndSeason from '../../assets/404-show-and-season.jpg'
+import PropTypes from 'prop-types'
 
 // Individual show
 const Show = ({ onClickShow, activeShow, show }) => (
@@ -17,6 +18,13 @@ const Show = ({ onClickShow, activeShow, show }) => (
     <Text>{show.name}</Text>
   </Container>
 )
+
+// PropTypes
+Show.propTypes = {
+  onClickShow: PropTypes.func.isRequired,
+  activeShow: PropTypes.number,
+  show: PropTypes.object.isRequired
+}
 
 // Styles
 const Container = styled.div`

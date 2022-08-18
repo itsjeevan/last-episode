@@ -4,6 +4,7 @@ import Episodes from './Episodes'
 import Shows from './Shows'
 import ShowSearch from './ShowSearch'
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 
 // Create an episode post
 const CreateEpisodePost = ({ episodePosts, setEpisodePosts, user, setMessage }) => {
@@ -64,6 +65,14 @@ const CreateEpisodePost = ({ episodePosts, setEpisodePosts, user, setMessage }) 
       }
     </>
   )
+}
+
+// PropTypes
+CreateEpisodePost.propTypes = {
+  episodePosts: PropTypes.array.isRequired,
+  setEpisodePosts: PropTypes.func.isRequired,
+  user: PropTypes.object,
+  setMessage: PropTypes.func.isRequired
 }
 
 // Export

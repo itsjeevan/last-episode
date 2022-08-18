@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import notFoundEpisodeSmall from '../../assets/404-episode-small.jpg'
 import { onLoad } from '../../utils/helper'
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
 
 // Individual episode and submitting data to database
 const Episode = ({
@@ -115,6 +116,22 @@ const Episode = ({
       {activeEpisode === episode.id ? <Button type="submit" onClick={handleOnSubmitFormEpisodePost}>Post</Button> : null}
     </Container>
   )
+}
+
+// PropTypes
+Episode.propTypes = {
+  episodeSelected: PropTypes.object.isRequired,
+  onClickEpisode: PropTypes.func.isRequired,
+  activeEpisode: PropTypes.number,
+  scrollToEpisodes: PropTypes.func.isRequired,
+  episodes: PropTypes.array.isRequired,
+  imageLoadCount: PropTypes.object.isRequired,
+  showSelected: PropTypes.object.isRequired,
+  seasonSelected: PropTypes.object.isRequired,
+  episode: PropTypes.object.isRequired,
+  episodePosts: PropTypes.array.isRequired,
+  setEpisodePosts: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired
 }
 
 // Styles
