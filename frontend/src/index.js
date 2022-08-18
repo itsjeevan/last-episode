@@ -5,7 +5,7 @@ import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components/macro'
 
-// Styles
+// Theme
 const theme = {
   color: {
     primary: '#282D40',

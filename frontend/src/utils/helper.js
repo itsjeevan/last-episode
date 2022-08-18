@@ -17,4 +17,5 @@ const onLoad = (ref, finalCount, scrollTo) => {
   }
 }
 
+// Exports
 export { parseToken, onLoad }
