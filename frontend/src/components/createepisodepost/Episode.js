@@ -1,11 +1,11 @@
 // Imports
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { onLoad } from '../../utils/helper'
 import episodePostService from '../../services/episodeposts'
 import episodeCommentService from '../../services/episodecomments'
-import { useNavigate } from 'react-router-dom'
 import notFoundEpisodeSmall from '../../assets/404-episode-small.jpg'
-import { onLoad } from '../../utils/helper'
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 // Individual episode and submitting data to database

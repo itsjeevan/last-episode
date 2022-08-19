@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import notFoundEpisodeSmall from '../../assets/404-episode-small.jpg'
 
+// Single EpisodePost for EpisodePosts
 const EpisodePostSingle = ({ episodePost }) => (
   <SubContainer to={`/episodepost/${episodePost.id}`} key={episodePost.id}>
     <Image

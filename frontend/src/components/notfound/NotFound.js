@@ -1,3 +1,4 @@
+// 404 page
 const NotFound = () => {
   return (
     <>
@@ -6,4 +7,5 @@ const NotFound = () => {
   )
 }
 
+// Export
 export default NotFound

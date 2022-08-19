@@ -1,14 +1,16 @@
 // Imports
-import styled from 'styled-components'
 import { useState } from 'react'
 import EpisodePostSingle from './EpisodePostSingle'
+import styled from 'styled-components'
 
 // List of episode posts
 const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePosts }) => {
 
+  // Filter input (controlled component)
   const [showInput, setShowInput] = useState('')
   const handleOnChangeShowInput = event => setShowInput(event.target.value)
 
+  // Filter submission event handler
   const handleOnSubmitShowFilter = event => {
     event.preventDefault()
     if (showInput === '') {
@@ -21,6 +23,7 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
     }
   }
 
+  // Reset filter field
   const handleOnClickClear = () => {
     setFilteredEpisodePosts(episodePosts)
     setShowInput('')

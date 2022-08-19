@@ -1,6 +1,6 @@
 // Import
-import Episode from './Episode'
 import { useRef, useEffect, useState } from 'react'
+import Episode from './Episode'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 

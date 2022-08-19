@@ -2,6 +2,7 @@
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
+// Message for to display errors and alerts
 const Message = ({ message }) => {
   if (message === null) {
     return null

@@ -1,9 +1,9 @@
 // Imports
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import loginService from '../../services/login'
 import userService from '../../services/users'
-import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
 // Login
@@ -81,6 +81,7 @@ const Login = ({ setUser, setMessage }) => {
     setLoginVisibility(!loginVisibility)
   }
 
+  // Login form render
   const loginForm = () => {
     return (
       <>
@@ -109,6 +110,7 @@ const Login = ({ setUser, setMessage }) => {
     )
   }
 
+  // Register form render
   const registerForm = () => {
     return (
       <>

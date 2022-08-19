@@ -1,9 +1,9 @@
 // Imports
+import { useState } from 'react'
 import Seasons from './Seasons'
 import Episodes from './Episodes'
 import Shows from './Shows'
 import ShowSearch from './ShowSearch'
-import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 // Create an episode post

@@ -1,10 +1,10 @@
 // Imports
-import episodeCommentService from '../../services/episodecomments'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
+import episodeCommentService from '../../services/episodecomments'
 import notFoundEpisodeLarge from '../../assets/404-episode-large.jpg'
 import notFoundShowAndSeason from '../../assets/404-show-and-season.jpg'
-import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 // Individual episode post

@@ -1,6 +1,6 @@
 // Imports
-import Season from './Season'
 import { useRef, useEffect, useState } from 'react'
+import Season from './Season'
 import styled from 'styled-components'
 import axios from 'axios'
 import PropTypes from 'prop-types'

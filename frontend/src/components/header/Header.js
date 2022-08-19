@@ -1,8 +1,8 @@
 // Imports
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components/macro'
-import logo from '../../assets/logo.svg'
 import { useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
+import logo from '../../assets/logo.svg'
 import PropTypes from 'prop-types'
 
 // Header
