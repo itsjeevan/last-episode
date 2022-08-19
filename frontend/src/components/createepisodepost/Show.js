@@ -9,7 +9,9 @@ const Show = ({ onClickShow, activeShow, show }) => (
     <Image
       className={activeShow === show.id ? 'highlight' : ''}
       alt={show.name}
-      src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
+      src={show.poster_path
+        ? `https://image.tmdb.org/t/p/w500/${show.poster_path}`
+        : notFoundShowAndSeason}
       onError={({ currentTarget }) => {
         currentTarget.onerror = null
         currentTarget.src = notFoundShowAndSeason

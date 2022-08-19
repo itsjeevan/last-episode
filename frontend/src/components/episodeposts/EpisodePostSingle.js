@@ -8,7 +8,10 @@ const EpisodePostSingle = ({ episodePost }) => (
   <SubContainer to={`/episodepost/${episodePost.id}`} key={episodePost.id}>
     <Image
       alt={episodePost.showName}
-      src={`https://image.tmdb.org/t/p/w500/${episodePost.episodeImage}`}
+      src={episodePost.episodeImage
+        ? `https://image.tmdb.org/t/p/w500/${episodePost.episodeImage}`
+        : notFoundEpisodeSmall
+      }
       onError={({ currentTarget }) => {
         currentTarget.onerror = null
         currentTarget.src = notFoundEpisodeSmall

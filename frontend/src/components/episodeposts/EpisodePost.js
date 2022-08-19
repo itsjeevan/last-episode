@@ -73,7 +73,10 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
       <MainImageContainer>
         <MainImage
           alt={`Episode ${episodePost.episodeNumber}`}
-          src={`https://image.tmdb.org/t/p/original/${episodePost.episodeImage}`}
+          src={episodePost.episodeImage
+            ? `https://image.tmdb.org/t/p/original/${episodePost.episodeImage}`
+            : notFoundEpisodeLarge
+          }
           onError={({ currentTarget }) => {
             currentTarget.onerror = null
             currentTarget.src = notFoundEpisodeLarge
@@ -96,7 +99,10 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
             <ImageContainer>
               <Image
                 alt={episodePost.showName}
-                src={`https://image.tmdb.org/t/p/w500/${episodePost.showImage}`}
+                src={episodePost.showImage
+                  ? `https://image.tmdb.org/t/p/w500/${episodePost.showImage}`
+                  : notFoundShowAndSeason
+                }
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null
                   currentTarget.src = notFoundShowAndSeason
@@ -107,7 +113,10 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
             <ImageContainer>
               <Image
                 alt={`Season ${episodePost.seasonNumber}`}
-                src={`https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`}
+                src={episodePost.seasonImage
+                  ? `https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`
+                  : notFoundShowAndSeason
+                }
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null
                   currentTarget.src = notFoundShowAndSeason

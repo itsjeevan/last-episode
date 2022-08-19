@@ -85,7 +85,10 @@ const Episode = ({
         <Image
           onLoad={() => onLoad(imageLoadCount, episodes.length, scrollToEpisodes)}
           alt={`Episode ${episode.episode_number}`}
-          src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`}
+          src={episode.still_path
+            ? `https://image.tmdb.org/t/p/w500/${episode.still_path}`
+            : notFoundEpisodeSmall
+          }
           onError={({ currentTarget }) => {
             currentTarget.onerror = null
             currentTarget.src = notFoundEpisodeSmall

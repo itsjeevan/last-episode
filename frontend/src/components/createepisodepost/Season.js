@@ -15,7 +15,10 @@ const Season = ({
       // Increment imageLoadCount, if final image loaded, scroll
       onLoad={() => onLoad(imageLoadCount, seasons.length, scrollToSeasons)}
       alt={`Season ${season.season_number}`}
-      src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`}
+      src={season.poster_path
+        ? `https://image.tmdb.org/t/p/w500/${season.poster_path}`
+        : notFoundShowAndSeason
+      }
       onError={({ currentTarget }) => {
         currentTarget.onerror = null
         currentTarget.src = notFoundShowAndSeason
