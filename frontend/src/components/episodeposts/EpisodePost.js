@@ -70,21 +70,18 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
 
   return (
     <>
-      <MainImageContainer>
-        <MainImage
-          alt={`Episode ${episodePost.episodeNumber}`}
-          src={episodePost.episodeImage
-            ? `https://image.tmdb.org/t/p/original/${episodePost.episodeImage}`
-            : notFoundEpisodeLarge
-          }
-          onError={({ currentTarget }) => {
-            currentTarget.onerror = null
-            currentTarget.src = notFoundEpisodeLarge
-          }}
-        />
-        <MainImageOverlay />
-      </MainImageContainer>
-      <h1>{episodePost.episodeName}</h1>
+      <MainImage
+        alt={`Episode ${episodePost.episodeNumber}`}
+        src={episodePost.episodeImage
+          ? `https://image.tmdb.org/t/p/original/${episodePost.episodeImage}`
+          : notFoundEpisodeLarge
+        }
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null
+          currentTarget.src = notFoundEpisodeLarge
+        }}
+      />
+      <EpisodeName>{episodePost.episodeName}</EpisodeName>
       <SubContainer>
         <FlexContainer>
           <ShowName>{episodePost.showName}</ShowName>
@@ -165,20 +162,11 @@ EpisodePost.propTypes = {
 }
 
 // Styles
-const MainImageContainer = styled.div`
-  position: relative;
-`
-const MainImageOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
-  background: linear-gradient(rgba(0, 0, 0, 0), #282D40);
+const EpisodeName = styled.h1`
+  margin-top: ${props => props.theme.space.large};
 `
 const MainImage = styled.img`
-  display: block;
+  border-radius: ${props => props.theme.radius};
   width: 100%;
 `
 const SubContainer = styled.div`
