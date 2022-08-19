@@ -1,8 +1,8 @@
 // Imports
-import Show from './Show'
-import styled from 'styled-components'
-import axios from 'axios'
 import { useState } from 'react'
+import Show from './Show'
+import axios from 'axios'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 // List of shows
