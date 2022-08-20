@@ -96,14 +96,14 @@ const Episode = ({
         />
         <TextContainer className={activeEpisode === episode.id ? 'remove-radius' : ''}>
           <EpisodeNumber>{episode.episode_number}. {episode.name}</EpisodeNumber>
-          <Text>
+          <EpisodeInfo>
             {episode.overview === ''
               ? 'No episode info found.'
               : episode.overview
             }
-          </Text>
+          </EpisodeInfo>
         </TextContainer>
-        <Form >
+        <Form>
           {activeEpisode === episode.id
             ? <>
               <Textbox
@@ -154,9 +154,9 @@ const SubContainer = styled.div`
   }
 `
 const Image = styled.img`
+  display: block; // To remove space around image
   border-radius: ${props => props.theme.radius} ${props => props.theme.radius} 0 0;
   width: 100%;
-  display: block; // To remove random space around image
 `
 const Form = styled.form`
   display: flex;
@@ -171,17 +171,21 @@ const TextContainer = styled.div`
   border-radius: 0 0 ${props => props.theme.radius} ${props => props.theme.radius};
   padding: ${props => props.theme.space.large};
 `
-const Text = styled.p`
+const EpisodeInfo = styled.p`
   font-weight: 300;
 `
 const Textbox = styled.textarea`
+  // Display & Box Model
   border-radius: 0 0 ${props => props.theme.radius} ${props => props.theme.radius};
   width: 100%;
   height: 100px;
-  font-size: 20px;
-  resize: none;
   padding: ${props => props.theme.space.medium};
-  // margin: ${props => props.theme.space.medium} 0 ${props => props.theme.space.medium} 0;
+  resize: none;
+
+  // Text
+  font-size: 20px;
+
+  // Pseudo-classes
   &:focus {
     outline-color: ${props => props.theme.color.tertiary};
   }

@@ -40,7 +40,7 @@ const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes }) => {
             ))}
           </Container>
         </>
-        : <Text>No results</Text>
+        : <TextNoResults>No results</TextNoResults>
       }
     </>
   )
@@ -62,9 +62,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: ${props => props.theme.space.large};
 `
-const Text = styled.p`
+const TextNoResults = styled.p`
   margin-top: ${props => props.theme.space.large};
   text-align: center;
 `

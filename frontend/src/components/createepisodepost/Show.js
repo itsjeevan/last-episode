@@ -17,7 +17,7 @@ const Show = ({ onClickShow, activeShow, show }) => (
         currentTarget.src = notFoundShowAndSeason
       }}
     />
-    <Text>{show.name}</Text>
+    <ShowName>{show.name}</ShowName>
   </Container>
 )
 
@@ -43,7 +43,7 @@ const Image = styled.img`
     ${props => props.theme.highlight}
   }
 `
-const Text = styled.p`
+const ShowName = styled.p`
   text-align: center;
 `
 

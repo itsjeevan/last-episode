@@ -69,7 +69,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: ${props => props.theme.space.large};
 `
 
 // Export

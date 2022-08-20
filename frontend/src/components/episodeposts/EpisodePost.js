@@ -212,12 +212,10 @@ const Textarea = styled.textarea`
   height: 100px;
   padding: ${props => props.theme.space.medium};
   margin-bottom: ${props => props.theme.space.medium};
+  resize: none;
 
   // Text
   font-size: 20px;
-
-  // Other
-  resize: none;
 
   // Pseudo-classes
   &:focus {

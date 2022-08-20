@@ -24,7 +24,7 @@ const Season = ({
         currentTarget.src = notFoundShowAndSeason
       }}
     />
-    <Text>Season {season.season_number}</Text>
+    <SeasonNumber>Season {season.season_number}</SeasonNumber>
   </Container>
 )
 
@@ -44,7 +44,7 @@ const Container = styled.div`
   flex-direction: column;
   width: calc(25% - 30px);
   cursor: pointer;
-  gap: 20px;
+  gap: ${props => props.theme.space.medium};
 `
 const Image = styled.img`
   border-radius: ${props => props.theme.radius};
@@ -53,7 +53,7 @@ const Image = styled.img`
     ${props => props.theme.highlight}
   }
 `
-const Text = styled.p`
+const SeasonNumber = styled.p`
   text-align: center;
 `
 
