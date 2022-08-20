@@ -24,12 +24,12 @@ const Header = ({ user, setUser }) => {
         <Title>Last Episode</Title>
       </LogoContainer>
       <ContentContainer>
-        <SubContainer>
+        <ContentSubContainer>
           {/* Create links that modify url */}
           <Link to="/">Browse</Link>
           <Link to="/create">Create</Link>
-        </SubContainer>
-        <SubContainer>
+        </ContentSubContainer>
+        <ContentSubContainer>
           {user
             ?
             <>
@@ -38,7 +38,7 @@ const Header = ({ user, setUser }) => {
             </>
             : <Link to="/login">Login</Link>
           }
-        </SubContainer>
+        </ContentSubContainer>
       </ContentContainer>
     </Container>
   )
@@ -52,13 +52,16 @@ Header.propTypes = {
 
 // Styles
 const Container = styled.nav`
+  // Display & Box Model
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: ${props => props.theme.space.large};
   padding: ${props => props.theme.space.large} 0;
   border-bottom: 2px solid ${props => props.theme.color.secondary};
   margin-bottom: ${props => props.theme.space.large};
-  gap: 40px;
+
+  // Media queries
   @media screen and (max-width: 767px) {
     flex-direction: column;
     align-items: flex-start;
@@ -68,15 +71,18 @@ const Container = styled.nav`
   }
 `
 const ContentContainer = styled.div`
+  // Display & Box Model
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
   justify-content: space-between;
+
+  // Media queries
   @media screen and (max-width: 575px) {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: ${props => props.theme.space.medium};
   }
 `
 const LogoContainer = styled.div`
@@ -85,7 +91,7 @@ const LogoContainer = styled.div`
   align-items: center;
   gap: ${props => props.theme.space.medium}; 
 `
-const SubContainer = styled.div`
+const ContentSubContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -100,11 +106,18 @@ const Title = styled.p`
   white-space: nowrap;
 `
 const Link = styled(NavLink)`
-  font-size: 20px;
-  text-decoration: none;
-  color: white;
+  // Display & Box Model
   padding: ${props => props.theme.space.small} ${props => props.theme.space.medium};
   border-radius: ${props => props.theme.radius};
+
+  // Color
+  color: white;
+
+  // Text
+  font-size: 20px;
+  text-decoration: none;
+
+  // Pseudo-classes
   &:hover,
   &[class*="active"] {
     background-color: ${props => props.theme.color.tertiary};

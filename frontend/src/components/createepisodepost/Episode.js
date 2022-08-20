@@ -162,11 +162,10 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  `
-const EpisodeNumber = styled.p`
-  font-size: 40px;
+`
+const EpisodeNumber = styled.h2`
   margin-bottom: ${props => props.theme.space.medium}
-  `
+`
 const TextContainer = styled.div`
   background: ${props => props.theme.color.secondary};
   border-radius: 0 0 ${props => props.theme.radius} ${props => props.theme.radius};
@@ -174,7 +173,7 @@ const TextContainer = styled.div`
 `
 const Text = styled.p`
   font-weight: 300;
-  `
+`
 const Textbox = styled.textarea`
   border-radius: 0 0 ${props => props.theme.radius} ${props => props.theme.radius};
   width: 100%;

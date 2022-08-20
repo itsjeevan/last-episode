@@ -5,7 +5,7 @@ import notFoundEpisodeSmall from '../../assets/404-episode-small.jpg'
 
 // Single EpisodePost for EpisodePosts
 const EpisodePostSingle = ({ episodePost }) => (
-  <SubContainer to={`/episodepost/${episodePost.id}`} key={episodePost.id}>
+  <Container to={`/episodepost/${episodePost.id}`} key={episodePost.id}>
     <Image
       alt={episodePost.showName}
       src={episodePost.episodeImage
@@ -18,29 +18,40 @@ const EpisodePostSingle = ({ episodePost }) => (
       }}
     />
     <TextContainer>
-      <ShowName>{episodePost.showName}</ShowName>
+      <h2>{episodePost.showName}</h2>
       <ShowSeason>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}: {episodePost.episodeName}</ShowSeason>
       <ShowInfo>{episodePost.episodeInfo
         ? episodePost.episodeInfo
         : 'No episode info found.'
       }</ShowInfo>
     </TextContainer>
-  </SubContainer>
+  </Container>
 )
 
 // Styles
-const SubContainer = styled(Link)`
+const Container = styled(Link)`
+  // Display & Box Model
   display: flex;
   flex-direction: column;
   width: calc(50% - 20px);
   height: fit-content;
   border-radius: ${props => props.theme.radius};
-  cursor: pointer;
+
+  // Color
   color: white;
+
+  // Text
   text-decoration: none;
+
+  // Other
+  cursor: pointer;
+
+  // Pseudo-classes
   &:hover {
     ${props => props.theme.highlight}
   }
+
+  // Media queries
   @media screen and (max-width: 767px) {
     width: 100%;
   }
@@ -51,11 +62,8 @@ const Image = styled.img`
 `
 const TextContainer = styled.div`
   padding: ${props => props.theme.space.large};
-  background: ${props => props.theme.color.secondary};
   border-radius: 0 0 ${props => props.theme.radius} ${props => props.theme.radius};
-`
-const ShowName = styled.p`
-  font-size: 40px;
+  background: ${props => props.theme.color.secondary};
 `
 const ShowSeason = styled.p`
   margin: ${props => props.theme.space.medium} 0;

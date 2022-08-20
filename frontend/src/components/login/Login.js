@@ -105,7 +105,7 @@ const Login = ({ setUser, setMessage }) => {
           </div>
           <Button onClick={handleOnClickLogin}>Login</Button>
         </Container>
-        <Text>Don&apos;t have an account? <Link href="" onClick={handleOnClickVisibility}>Sign Up</Link></Text>
+        <LinkText>Don&apos;t have an account? <Link href="" onClick={handleOnClickVisibility}>Sign Up</Link></LinkText>
       </>
     )
   }
@@ -142,7 +142,7 @@ const Login = ({ setUser, setMessage }) => {
           </div>
           <Button onClick={handleOnClickSignUp}>Sign Up</Button>
         </Container>
-        <Text>Have an account? <Link href="" onClick={handleOnClickVisibility}>Login</Link></Text>
+        <LinkText>Have an account? <Link href="" onClick={handleOnClickVisibility}>Login</Link></LinkText>
       </>
     )
   }
@@ -181,7 +181,7 @@ const Button = styled.button`
   margin: 0 auto;
   margin-top: calc(${props => props.theme.space.large} - ${props => props.theme.space.medium});
 `
-const Text = styled.p`
+const LinkText = styled.p`
   font-weight: 300;
   text-align: center;
 `

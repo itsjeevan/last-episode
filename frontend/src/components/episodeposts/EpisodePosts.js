@@ -44,7 +44,7 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
             ? filteredEpisodePosts.map(episodePost => (
               <EpisodePostSingle key={episodePost.id} episodePost={episodePost} />
             )).reverse()
-            : <Text>No results</Text>
+            : <TextNoResults>No results</TextNoResults>
         }
       </Container>
     </>
@@ -52,19 +52,16 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
 }
 
 // Styles
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 40px;
-`
 const FilterForm = styled.form`
+  // Display & Box Model
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: ${props => props.theme.space.medium};
   margin-bottom: ${props => props.theme.space.large};
   flex-wrap: wrap;
+
+  // Media queries
   @media screen and (max-width: 767px) {
     flex-direction: column;
   }
@@ -78,9 +75,15 @@ const FilterButtons = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 20px;
+  gap: ${props => props.theme.space.medium};
 `
-const Text = styled.p`
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: ${props => props.theme.space.large};
+`
+const TextNoResults = styled.p`
   text-align: center;
   width: 100%;
 `

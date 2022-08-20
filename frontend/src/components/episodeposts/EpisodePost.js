@@ -82,9 +82,9 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
         }}
       />
       <EpisodeName>{episodePost.episodeName}</EpisodeName>
-      <SubContainer>
+      <Container>
         <FlexContainer>
-          <ShowName>{episodePost.showName}</ShowName>
+          <h2>{episodePost.showName}</h2>
           <p>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}</p>
           <EpisodeInfo>
             {episodePost.episodeInfo
@@ -92,7 +92,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
               : 'No episode info found.'
             }
           </EpisodeInfo>
-          <ImageContainers>
+          <ImagesContainer>
             <ImageContainer>
               <Image
                 alt={episodePost.showName}
@@ -121,10 +121,10 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
               />
               <ImageText>Season {episodePost.seasonNumber}</ImageText>
             </ImageContainer>
-          </ImageContainers>
+          </ImagesContainer>
         </FlexContainer>
         <FlexContainer>
-          <CommentHeading>Comments</CommentHeading>
+          <h2>Comments</h2>
           <form onSubmit={handleOnSubmitCommentForm}>
             <Textarea
               value={commentInput}
@@ -147,7 +147,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
             }).reverse()}
           </Comments>
         </FlexContainer>
-      </SubContainer>
+      </Container>
     </>
   )
 }
@@ -169,7 +169,7 @@ const MainImage = styled.img`
   border-radius: ${props => props.theme.radius};
   width: 100%;
 `
-const SubContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${props => props.theme.space.large};
@@ -185,13 +185,10 @@ const FlexContainer = styled.div`
     width: 100%;
   }
 `
-const ShowName = styled.p`
-  font-size: 40px;
-`
 const EpisodeInfo = styled.p`
   font-weight: 300;
 `
-const ImageContainers = styled.div`
+const ImagesContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${props => props.theme.space.medium};
@@ -208,17 +205,21 @@ const Image = styled.img`
 const ImageText = styled.p`
   text-align: center;
 `
-const CommentHeading = styled.p`
-  font-size: 40px;
-`
 const Textarea = styled.textarea`
+  // Display & Box Model
   border-radius: ${props => props.theme.radius};
   width: 100%;
   height: 100px;
-  resize: none;
-  font-size: 20px;
   padding: ${props => props.theme.space.medium};
   margin-bottom: ${props => props.theme.space.medium};
+
+  // Text
+  font-size: 20px;
+
+  // Other
+  resize: none;
+
+  // Pseudo-classes
   &:focus {
     outline-color: ${props => props.theme.color.tertiary};
   }

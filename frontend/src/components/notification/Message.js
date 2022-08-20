@@ -23,16 +23,21 @@ Message.propTypes = {
 
 // Styles
 const Error = styled.div`
+  // Positioning
+  position: sticky;
   z-index: 2;
+  top: ${props => props.theme.space.large};
+
+  // Display & Box Model
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: sticky;
   border-radius: ${props => props.theme.radius};
-  top: ${props => props.theme.space.large};
   margin-bottom: ${props => props.theme.space.large};
-  background: red;
   padding: ${props => props.theme.space.small} ${props => props.theme.space.large};
+
+  // Color
+  background: red;
 `
 
 // Export

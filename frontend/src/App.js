@@ -78,33 +78,52 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto Condensed', sans-serif;
   }
   h1 {
-    font-size: 75px;
     margin: 0;
+    font-size: 75px;
+  }
+  h2 {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 400;
   }
   p {
-    font-size: 20px;
     margin: 0;
+    font-size: 20px;
   }
   input {
+    // Display & Box Model
     height: 50px;
     border: none;
-    font-size: 20px;
     border-radius: ${props => props.theme.radius};
     padding: 0 ${props => props.theme.space.large};
+
+    // Other
+    font-size: 20px;
+
+    // Pseudo-classes
     &:focus {
       outline-color: ${props => props.theme.color.tertiary};
     }
   }
   button {
-    height: 50px;
+    // Display & Box Model
     display: block;
-    background-color: ${props => props.theme.color.secondary};
-    border: none;
-    color: white;
-    font-size: 20px;
+    height: 50px;
     padding: 0 ${props => props.theme.space.large};
+    border: none;
     border-radius ${props => props.theme.radius};
+
+    // Color
+    color: white;
+    background-color: ${props => props.theme.color.secondary};
+
+    // Text
+    font-size: 20px;
+
+    // Other
     cursor: pointer;
+
+    // Pseudo-classes
     &:hover,
     &:active {
       background: ${props => props.theme.color.tertiary};
