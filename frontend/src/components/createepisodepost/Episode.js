@@ -37,7 +37,7 @@ const Episode = ({
     }
     // Validation: Frontend
     if (!episodePost.showName ||
-      !episodePost.seasonNumber ||
+      episodePost.seasonNumber === undefined ||
       !episodePost.episodeNumber ||
       !episodePost.episodeName) {
       setMessage('Error: Could not create episode post')
