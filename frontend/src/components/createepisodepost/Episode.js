@@ -12,7 +12,7 @@ import PropTypes from 'prop-types'
 const Episode = ({
   episodeSelected, onClickEpisode, activeEpisode,
   scrollToEpisodes, episodes, imageLoadCount,
-  showSelected, seasonSelected, episode, episodePosts, setEpisodePosts,
+  showSelected, seasonSelected, episode, episodePosts, setEpisodePosts, setFilteredEpisodePosts,
   setMessage }) => {
 
   const navigate = useNavigate()
@@ -76,6 +76,7 @@ const Episode = ({
       return
     }
     setEpisodePosts(episodePosts.concat(episodePostResponseFinal))
+    setFilteredEpisodePosts(episodePosts.concat(episodePostResponseFinal))
     navigate(`/episodepost/${episodePostResponseFinal.id}`)
   }
 

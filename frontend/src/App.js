@@ -52,10 +52,44 @@ const App = () => {
       <Header user={user} setUser={setUser} />
       {/* Render component based on url */}
       <Routes>
-        <Route path="/" element={<EpisodePosts episodePosts={episodePosts} filteredEpisodePosts={filteredEpisodePosts} setFilteredEpisodePosts={setFilteredEpisodePosts} />} />
-        <Route path="/episodepost/:id" element={<EpisodePost episodePost={episodePost} episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} setMessage={setMessage} />} />
-        <Route path="/create" element={<CreateEpisodePost episodePosts={episodePosts} setEpisodePosts={setEpisodePosts} user={user} setMessage={setMessage} />} />
-        <Route path="/login" element={<Login setUser={setUser} setMessage={setMessage} />} />
+        <Route
+          path="/"
+          element={
+            <EpisodePosts
+              episodePosts={episodePosts}
+              filteredEpisodePosts={filteredEpisodePosts}
+              setFilteredEpisodePosts={setFilteredEpisodePosts}
+            />
+          }
+        />
+        <Route
+          path="/episodepost/:id"
+          element={
+            <EpisodePost
+              episodePost={episodePost}
+              episodePosts={episodePosts}
+              setEpisodePosts={setEpisodePosts}
+              user={user}
+              setMessage={setMessage}
+            />
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <CreateEpisodePost
+              episodePosts={episodePosts}
+              setEpisodePosts={setEpisodePosts}
+              setFilteredEpisodePosts={setFilteredEpisodePosts}
+              user={user}
+              setMessage={setMessage}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={<Login setUser={setUser} setMessage={setMessage} />}
+        />
         <Route path="/user" element={<User />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
