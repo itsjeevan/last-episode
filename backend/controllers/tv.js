@@ -11,13 +11,13 @@ tvRouter.get('/search/:showInput', async (request, response) => {
 })
 
 // GET seasons from show
-tvRouter.get('/tv/:showId', async (request, response) => {
+tvRouter.get('/show/:showId/seasons', async (request, response) => {
   const seasonsResult = await axios.get(`https://api.themoviedb.org/3/tv/${request.params.showId}?api_key=${process.env.TMDB_API}&language=en-US`)
   response.json(seasonsResult.data.seasons)
 })
 
 // Get episodes from season
-tvRouter.get('/tv/:showId/:seasonNumber', async (request, response) => {
+tvRouter.get('/show/:showId/season/:seasonNumber/episodes', async (request, response) => {
   const seasonResult = await axios.get(`https://api.themoviedb.org/3/tv/${request.params.showId}/season/${request.params.seasonNumber}?api_key=${process.env.TMDB_API}&language=en-US`)
   response.json(seasonResult.data.episodes)
 })

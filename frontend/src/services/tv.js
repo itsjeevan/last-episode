@@ -11,13 +11,13 @@ const getShows = async showInput => {
 
 // GET seasons from show
 const getSeasons = async showId => {
-  const response = await axios.get(`${baseUrl}/tv/${showId}`)
+  const response = await axios.get(`${baseUrl}/show/${showId}/seasons`)
   return response.data
 }
 
 // GET episodes from season
 const getEpisodes = async (showId, seasonNumber) => {
-  const response = await axios.get(`${baseUrl}/tv/${showId}/${seasonNumber}`)
+  const response = await axios.get(`${baseUrl}/show/${showId}/season/${seasonNumber}/episodes`)
   return response.data
 }
 
