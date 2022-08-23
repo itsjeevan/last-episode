@@ -2,7 +2,7 @@
 import { useRef, useEffect, useState } from 'react'
 import Season from './Season'
 import styled from 'styled-components'
-import axios from 'axios'
+import tvService from '../../services/tv'
 import PropTypes from 'prop-types'
 
 // List of seasons
@@ -24,8 +24,8 @@ const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
 
   // Get episodes of selected season
   const handleOnClickSeason = async season => {
-    const seasonResult = await axios.get(`https://api.themoviedb.org/3/tv/${showSelected.id}/season/${season.season_number}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
-    setEpisodes(seasonResult.data.episodes)
+    const seasonResult = await tvService.getEpisodes(showSelected.id, season.season_number)
+    setEpisodes(seasonResult)
     setSeasonSelected(season)
     setActiveSeason(season.id)
   }

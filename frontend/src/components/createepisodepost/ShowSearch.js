@@ -1,7 +1,7 @@
 // Import
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import tvService from '../../services/tv'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
@@ -30,9 +30,9 @@ const ShowSearch = ({ setShows, setSeasons, setEpisodes, user, setMessage }) => 
     }
     // Search for shows via API
     try {
-      const showsResult = await axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${showInput}&include_adult=false`)
+      const showsResult = await tvService.getShows(showInput)
       // Store results
-      setShows(showsResult.data.results)
+      setShows(showsResult)
       // Reset seasons & episodes
       setSeasons([])
       setEpisodes([])
