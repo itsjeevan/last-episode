@@ -6,9 +6,10 @@ import PropTypes from 'prop-types'
 
 // Individual season
 const Season = ({
-  onClickSeason, activeSeason,
+  season,
   scrollToSeasons, seasons, imageLoadCount,
-  season }) => (
+  onClickSeason, activeSeason }) => (
+
   <Container onClick={() => onClickSeason(season)}>
     <Image
       className={activeSeason === season.id ? 'highlight' : ''}

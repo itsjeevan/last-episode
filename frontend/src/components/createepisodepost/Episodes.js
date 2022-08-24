@@ -5,7 +5,10 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 // List of episodes
-const Episodes = ({ showSelected, seasonSelected, episodes, episodePosts, setEpisodePosts, setFilteredEpisodePosts, setMessage }) => {
+const Episodes = ({
+  showSelected, seasonSelected,
+  episodes, episodePosts, setEpisodePosts, setFilteredEpisodePosts,
+  setMessage }) => {
 
   // Scroll to seasons section
   const episodesRef = useRef()

@@ -4,7 +4,7 @@ import notFoundShowAndSeason from '../../assets/404-show-and-season.jpg'
 import PropTypes from 'prop-types'
 
 // Individual show
-const Show = ({ onClickShow, activeShow, show }) => (
+const Show = ({ show, onClickShow, activeShow }) => (
   <Container to='/create' onClick={() => onClickShow(show)}>
     <Image
       className={activeShow === show.id ? 'highlight' : ''}

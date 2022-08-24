@@ -8,7 +8,8 @@ import notFoundShowAndSeason from '../../assets/404-show-and-season.jpg'
 import PropTypes from 'prop-types'
 
 // Individual episode post
-const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMessage }) => {
+const EpisodePost = ({
+  episodePost, episodePosts, setEpisodePosts, user, setMessage }) => {
 
   const navigate = useNavigate()
 

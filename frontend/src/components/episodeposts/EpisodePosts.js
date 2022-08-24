@@ -32,7 +32,12 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
   return (
     <>
       <FilterForm onSubmit={handleOnSubmitShowFilter}>
-        <FilterInput value={showInput} onChange={handleOnChangeShowInput} type="text" placeholder="Filter by show name..." />
+        <FilterInput
+          value={showInput}
+          onChange={handleOnChangeShowInput}
+          type="text"
+          placeholder="Filter by show name..."
+        />
         <FilterButtons>
           <button type="submit">Filter</button>
           <button onClick={handleOnClickClear}>Clear</button>

@@ -37,13 +37,10 @@ const Seasons = ({ showSelected, seasons, setSeasonSelected, setEpisodes }) => {
         {seasons.map(season => (
           <Season
             key={season.id}
-            showSelected={showSelected}
             season={season}
-            setSeasonSelected={setSeasonSelected}
-            setEpisodes={setEpisodes}
-            imageLoadCount={imageLoadCount}
-            seasons={seasons}
             scrollToSeasons={scrollToSeasons}
+            seasons={seasons}
+            imageLoadCount={imageLoadCount}
             onClickSeason={handleOnClickSeason}
             activeSeason={activeSeason}
           />

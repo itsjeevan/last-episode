@@ -31,9 +31,6 @@ const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes }) => {
               <Show
                 key={show.id}
                 show={show}
-                setShowSelected={setShowSelected}
-                setSeasons={setSeasons}
-                setEpisodes={setEpisodes}
                 onClickShow={handleOnClickShow}
                 activeShow={activeShow}
               />

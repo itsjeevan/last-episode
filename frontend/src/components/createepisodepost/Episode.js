@@ -117,7 +117,10 @@ const Episode = ({
           }
         </Form>
       </SubContainer>
-      {activeEpisode === episode.id ? <Button type="submit" onClick={handleOnSubmitFormEpisodePost}>Post</Button> : null}
+      {activeEpisode === episode.id
+        ? <Button type="submit" onClick={handleOnSubmitFormEpisodePost}>Post</Button>
+        : null
+      }
     </Container>
   )
 }
