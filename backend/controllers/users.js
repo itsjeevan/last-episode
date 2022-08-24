@@ -53,7 +53,7 @@ usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
       // Check if episode post exists to avoid duplicates
       const foundEpisodePost = finalEpisodePosts.find(finalEpisodePost => finalEpisodePost.id === episodePost.episodePost.id)
       if (!foundEpisodePost) {
-        finalEpisodePosts.push(episodePost.episodePost)
+        finalEpisodePosts.unshift(episodePost.episodePost)
       }
     }
   })

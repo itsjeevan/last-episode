@@ -25,7 +25,7 @@ const User = () => {
         {
           episodePostsCommented.map(episodePost => (
             <EpisodePostSingle key={episodePost.id} episodePost={episodePost} />
-          )).reverse()
+          ))
         }
       </Container>
     </>

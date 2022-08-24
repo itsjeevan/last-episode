@@ -16,7 +16,11 @@ episodePostsRouter.get('/', async (request, response) => {
       populate: {
         path: 'user',
         select: 'username'
-      }
+      },
+      options: { sort: { 'date': 'descending' } },
+    })
+    .sort({
+      date: 'descending'
     })
   response.json(posts)
 })

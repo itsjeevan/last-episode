@@ -43,7 +43,7 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
           filteredEpisodePosts.length !== 0
             ? filteredEpisodePosts.map(episodePost => (
               <EpisodePostSingle key={episodePost.id} episodePost={episodePost} />
-            )).reverse()
+            ))
             : <TextNoResults>No results</TextNoResults>
         }
       </Container>

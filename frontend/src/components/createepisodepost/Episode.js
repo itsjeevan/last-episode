@@ -75,8 +75,8 @@ const Episode = ({
       setTimeout(() => setMessage(null), 2000)
       return
     }
-    setEpisodePosts(episodePosts.concat(episodePostResponseFinal))
-    setFilteredEpisodePosts(episodePosts.concat(episodePostResponseFinal))
+    setEpisodePosts([episodePostResponseFinal, ...episodePosts])
+    setFilteredEpisodePosts([episodePostResponseFinal, ...episodePosts])
     navigate(`/episodepost/${episodePostResponseFinal.id}`)
   }
 

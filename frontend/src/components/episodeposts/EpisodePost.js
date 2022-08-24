@@ -48,7 +48,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
     // Create new episode post with new comment
     const newEpisodePost = {
       ...episodePost,
-      episodeComments: episodePost.episodeComments.concat(episodeCommentResponse)
+      episodeComments: [episodeCommentResponse, ...episodePost.episodeComments]
     }
     // Update episode posts
     setEpisodePosts(episodePosts.map(post => post.id !== episodePost.id ? post : newEpisodePost))
@@ -144,7 +144,7 @@ const EpisodePost = ({ episodePost, episodePosts, setEpisodePosts, user, setMess
                   </CommentInfo>
                 </Comment>
               )
-            }).reverse()}
+            })}
           </Comments>
         </FlexContainer>
       </Container>
