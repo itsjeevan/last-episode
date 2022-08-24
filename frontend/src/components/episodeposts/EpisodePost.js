@@ -31,6 +31,11 @@ const EpisodePost = ({
       setTimeout(() => setMessage(null), 2000)
       return
     }
+    if (commentInput.length >= 500) {
+      setMessage('Error: Comment too long')
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
     // Create episode comment object
     const episodeComment = {
       content: commentInput,

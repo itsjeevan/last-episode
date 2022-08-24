@@ -6,11 +6,13 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    maxLength: 30
   },
   passwordHash: {
     type: String,
-    required: true
+    required: true,
+    maxLength: 250
   },
   episodePosts: [
     {

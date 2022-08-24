@@ -49,6 +49,11 @@ const Episode = ({
       setTimeout(() => setMessage(null), 2000)
       return
     }
+    if (commentInput.length >= 500) {
+      setMessage('Error: Comment too long')
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
     // Save episode post
     try {
       var episodePostResponse = await episodePostService.create(episodePost)

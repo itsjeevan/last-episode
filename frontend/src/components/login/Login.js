@@ -58,6 +58,16 @@ const Login = ({ setUser, setMessage }) => {
       setTimeout(() => setMessage(null), 2000)
       return
     }
+    if (username.length >= 30) {
+      setMessage('Error: Username too long')
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
+    if (password.length >= 250) {
+      setMessage('Error: Password too long')
+      setTimeout(() => setMessage(null), 2000)
+      return
+    }
     if (password !== passwordConfirm) {
       setMessage('Error: Passwords do not match')
       setTimeout(() => setMessage(null), 2000)

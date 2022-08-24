@@ -5,7 +5,8 @@ const mongoose = require('mongoose')
 const episodeCommentSchema = new mongoose.Schema({
   content: {
     type: String,
-    required: true
+    required: true,
+    maxLength: 500
   },
   date: {
     type: Date,
