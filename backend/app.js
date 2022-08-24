@@ -27,6 +27,8 @@ mongoose.connect(process.env.MONGODB_URI, options)
 app.use(cors())
 // Convert JSON to JavaScript object
 app.use(express.json())
+// Make express show static content
+app.use(express.static('build'))
 
 // Routers
 
