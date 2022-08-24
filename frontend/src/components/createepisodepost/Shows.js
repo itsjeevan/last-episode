@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 // List of shows
-const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes }) => {
+const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes, setMessage }) => {
 
   // Set active show
   const [activeShow, setActiveShow] = useState()
@@ -14,10 +14,21 @@ const Shows = ({ shows, setShowSelected, setSeasons, setEpisodes }) => {
   // Get seasons of selected show
   const handleOnClickShow = async show => {
     const seasonsResult = await tvService.getSeasons(show.id)
-    setSeasons(seasonsResult)
-    setShowSelected(show)
-    setEpisodes([])
-    setActiveShow(show.id)
+    // If no seasons found for show
+    if (seasonsResult.length === 0) {
+      setMessage('Error: No seasons found for this show')
+      setTimeout(() => setMessage(null), 2000)
+      setSeasons([])
+      setShowSelected({})
+      setEpisodes([])
+      setActiveShow()
+    }
+    else {
+      setSeasons(seasonsResult)
+      setShowSelected(show)
+      setEpisodes([])
+      setActiveShow(show.id)
+    }
   }
 
   return (

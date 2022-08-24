@@ -37,6 +37,7 @@ const CreateEpisodePost = ({
           setShowSelected={setShowSelected}
           setSeasons={setSeasons}
           setEpisodes={setEpisodes}
+          setMessage={setMessage}
         />
         : null
       }
