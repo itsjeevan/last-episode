@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { parseToken } from '../utils/helper'
 
-const baseUrl = 'http://localhost:3001/api/episodecomments'
+const baseUrl = '/api/episodecomments'
 
 // Create an episode comment
 const create = async episodeCommentData => {

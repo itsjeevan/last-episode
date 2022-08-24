@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { parseToken } from '../utils/helper'
 
-const baseUrl = 'http://localhost:3001/api/episodeposts'
+const baseUrl = '/api/episodeposts'
 
 // Get all episode posts
 const getAll = async () => {

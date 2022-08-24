@@ -1,7 +1,7 @@
 // Imports
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/tv'
+const baseUrl = '/tv'
 
 // GET shows from search result
 const getShows = async showInput => {
