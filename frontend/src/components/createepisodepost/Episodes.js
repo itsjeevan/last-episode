@@ -10,7 +10,7 @@ const Episodes = ({
   episodes, episodePosts, setEpisodePosts, setFilteredEpisodePosts,
   setMessage }) => {
 
-  // Scroll to seasons section
+  // Scroll to episodes section
   const episodesRef = useRef()
   const scrollToEpisodes = () => episodesRef.current.scrollIntoView({ behavior: 'smooth' })
 
