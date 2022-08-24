@@ -15,7 +15,7 @@ const Season = ({
       className={activeSeason === season.id ? 'highlight' : ''}
       // Increment imageLoadCount, if final image loaded, scroll
       onLoad={() => onLoad(imageLoadCount, seasons.length, scrollToSeasons)}
-      alt={`Season ${season.season_number}`}
+      alt={season.name}
       src={season.poster_path
         ? `https://image.tmdb.org/t/p/w500/${season.poster_path}`
         : notFoundShowAndSeason
@@ -25,7 +25,7 @@ const Season = ({
         currentTarget.src = notFoundShowAndSeason
       }}
     />
-    <SeasonNumber>Season {season.season_number}</SeasonNumber>
+    <SeasonNumber>{season.name}</SeasonNumber>
   </Container>
 )
 

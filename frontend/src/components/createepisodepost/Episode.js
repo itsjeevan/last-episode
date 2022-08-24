@@ -28,7 +28,7 @@ const Episode = ({
     const episodePost = {
       showName: showSelected.name,
       showImage: showSelected.poster_path,
-      seasonNumber: seasonSelected.season_number,
+      seasonName: seasonSelected.name,
       seasonImage: seasonSelected.poster_path,
       episodeNumber: episodeSelected.episode_number,
       episodeName: episodeSelected.name,
@@ -37,7 +37,7 @@ const Episode = ({
     }
     // Validation: Frontend
     if (!episodePost.showName ||
-      episodePost.seasonNumber === undefined ||
+      !episodePost.seasonName ||
       !episodePost.episodeNumber ||
       !episodePost.episodeName) {
       setMessage('Error: Could not create episode post')

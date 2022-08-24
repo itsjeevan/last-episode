@@ -20,7 +20,7 @@ const EpisodePostSingle = ({ episodePost }) => (
     <TextContainer>
       <h2>{episodePost.showName}</h2>
       <ShowSeason>
-        Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}: {episodePost.episodeName}
+        {episodePost.seasonName} Episode {episodePost.episodeNumber}: {episodePost.episodeName}
       </ShowSeason>
       <ShowInfo>{episodePost.episodeInfo
         ? episodePost.episodeInfo

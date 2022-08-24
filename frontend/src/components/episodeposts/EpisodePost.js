@@ -86,7 +86,7 @@ const EpisodePost = ({
       <Container>
         <FlexContainer>
           <h2>{episodePost.showName}</h2>
-          <p>Season {episodePost.seasonNumber} Episode {episodePost.episodeNumber}</p>
+          <p>{episodePost.seasonName} Episode {episodePost.episodeNumber}</p>
           <EpisodeInfo>
             {episodePost.episodeInfo
               ? episodePost.episodeInfo
@@ -110,7 +110,7 @@ const EpisodePost = ({
             </ImageContainer>
             <ImageContainer>
               <Image
-                alt={`Season ${episodePost.seasonNumber}`}
+                alt={episodePost.seasonName}
                 src={episodePost.seasonImage
                   ? `https://image.tmdb.org/t/p/w500/${episodePost.seasonImage}`
                   : notFoundShowAndSeason
@@ -120,7 +120,7 @@ const EpisodePost = ({
                   currentTarget.src = notFoundShowAndSeason
                 }}
               />
-              <ImageText>Season {episodePost.seasonNumber}</ImageText>
+              <ImageText>{episodePost.seasonName}</ImageText>
             </ImageContainer>
           </ImagesContainer>
         </FlexContainer>

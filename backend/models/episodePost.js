@@ -10,8 +10,8 @@ const episodePostSchema = new mongoose.Schema({
   showImage: {
     type: String
   },
-  seasonNumber: {
-    type: Number,
+  seasonName: {
+    type: String,
     required: true
   },
   seasonImage: {
