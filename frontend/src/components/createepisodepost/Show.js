@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 // Individual show
 const Show = ({ show, onClickShow, activeShow }) => (
-  <Container to='/create' onClick={() => onClickShow(show)}>
+  <Container onClick={() => onClickShow(show)}>
     <Image
       className={activeShow === show.id ? 'highlight' : ''}
       alt={show.name}
