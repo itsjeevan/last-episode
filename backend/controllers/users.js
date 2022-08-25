@@ -45,7 +45,6 @@ usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
   if (!userData) {
     response.status(404).end()
   }
-  console.log(userData.episodeComments)
   const finalEpisodePosts = []
   // For each of the episode posts
   userData.episodeComments.forEach(episodeComment => {
