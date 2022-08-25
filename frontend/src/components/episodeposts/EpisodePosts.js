@@ -1,10 +1,15 @@
 // Imports
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import EpisodePostSingle from './EpisodePostSingle'
 import styled from 'styled-components'
 
 // List of episode posts
 const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePosts }) => {
+
+  // Avoid showing filtered results when leaving page and returning
+  useEffect(() => {
+    setFilteredEpisodePosts(episodePosts)
+  }, [])
 
   // Filter input (controlled component)
   const [showInput, setShowInput] = useState('')
@@ -18,6 +23,7 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
     }
     else {
       setFilteredEpisodePosts(episodePosts.filter(episodePost => {
+        console.log('showname:', episodePost.showName)
         return episodePost.showName.toLowerCase().includes(showInput.toLowerCase())
       }))
     }
