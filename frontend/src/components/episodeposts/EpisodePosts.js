@@ -23,7 +23,6 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
     }
     else {
       setFilteredEpisodePosts(episodePosts.filter(episodePost => {
-        console.log('showname:', episodePost.showName)
         return episodePost.showName.toLowerCase().includes(showInput.toLowerCase())
       }))
     }
