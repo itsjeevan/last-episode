@@ -45,7 +45,7 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
       </FilterForm>
       <Container>
         {
-          filteredEpisodePosts.length !== 0
+          filteredEpisodePosts.length
             ? filteredEpisodePosts.map(episodePost => (
               <EpisodePostSingle key={episodePost.id} episodePost={episodePost} />
             ))
