@@ -59,8 +59,9 @@ const EpisodePost = ({
     // Update episode posts
     setEpisodePosts(episodePosts.map(post => post.id !== episodePost.id ? post : newEpisodePost))
     setCommentInput('')
+    // @Improve
     setEpisodePostsCommented(prevState => {
-      const foundEpisodePost = prevState.find(finalEpisodePost => finalEpisodePost.id === newEpisodePost.id)
+      const foundEpisodePost = prevState.some(finalEpisodePost => finalEpisodePost.id === newEpisodePost.id)
       if (!foundEpisodePost) {
         return [newEpisodePost, ...prevState]
       }

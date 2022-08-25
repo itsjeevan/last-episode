@@ -51,7 +51,7 @@ usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
     // If the episode comment's episode post is not null
     if (episodeComment.episodePost) {
       // Check if episode post exists to avoid duplicates
-      const foundEpisodePost = finalEpisodePosts.find(finalEpisodePost => finalEpisodePost.id === episodeComment.episodePost.id)
+      const foundEpisodePost = finalEpisodePosts.some(finalEpisodePost => finalEpisodePost.id === episodeComment.episodePost.id)
       if (!foundEpisodePost) {
         finalEpisodePosts.unshift(episodeComment.episodePost)
       }
