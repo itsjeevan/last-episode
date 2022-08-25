@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 // Create an episode post
 const CreateEpisodePost = ({
-  episodePosts, setEpisodePosts, setFilteredEpisodePosts, user, setMessage }) => {
+  episodePosts, setEpisodePosts, setFilteredEpisodePosts, user, setMessage, setEpisodePostsCommented }) => {
 
   // Store all shows, seasons, and episodes
   const [shows, setShows] = useState(null)
@@ -63,6 +63,7 @@ const CreateEpisodePost = ({
           setEpisodePosts={setEpisodePosts}
           setFilteredEpisodePosts={setFilteredEpisodePosts}
           setMessage={setMessage}
+          setEpisodePostsCommented={setEpisodePostsCommented}
         />
         : null
       }

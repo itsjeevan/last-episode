@@ -13,7 +13,7 @@ const Episode = ({
   episodeSelected, onClickEpisode, activeEpisode,
   scrollToEpisodes, episodes, imageLoadCount,
   showSelected, seasonSelected, episode, episodePosts, setEpisodePosts, setFilteredEpisodePosts,
-  setMessage }) => {
+  setMessage, setEpisodePostsCommented }) => {
 
   const navigate = useNavigate()
 
@@ -80,8 +80,12 @@ const Episode = ({
       setTimeout(() => setMessage(null), 2000)
       return
     }
+    // Update state
     setEpisodePosts([episodePostResponseFinal, ...episodePosts])
     setFilteredEpisodePosts([episodePostResponseFinal, ...episodePosts])
+    setEpisodePostsCommented(prevState => {
+      return [episodePostResponseFinal, ...prevState]
+    })
     navigate(`/episodepost/${episodePostResponseFinal.id}`)
   }
 

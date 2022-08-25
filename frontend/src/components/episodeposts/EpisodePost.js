@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 
 // Individual episode post
 const EpisodePost = ({
-  episodePost, episodePosts, setEpisodePosts, user, setMessage }) => {
+  episodePost, episodePosts, setEpisodePosts, user, setMessage, setEpisodePostsCommented }) => {
 
   const navigate = useNavigate()
 
@@ -59,6 +59,13 @@ const EpisodePost = ({
     // Update episode posts
     setEpisodePosts(episodePosts.map(post => post.id !== episodePost.id ? post : newEpisodePost))
     setCommentInput('')
+    setEpisodePostsCommented(prevState => {
+      const foundEpisodePost = prevState.find(finalEpisodePost => finalEpisodePost.id === newEpisodePost.id)
+      if (!foundEpisodePost) {
+        return [newEpisodePost, ...prevState]
+      }
+      return prevState
+    })
   }
 
   // Parse date object

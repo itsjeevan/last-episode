@@ -8,6 +8,7 @@ import CreateEpisodePost from './components/createepisodepost/CreateEpisodePost'
 import NotFound from './components/notfound/NotFound'
 import { useState, useEffect } from 'react'
 import episodePostService from './services/episodeposts'
+import userService from './services/users'
 import styled, { createGlobalStyle } from 'styled-components'
 import { Normalize } from 'styled-normalize'
 import Message from './components/notification/Message'
@@ -19,6 +20,7 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [episodePosts, setEpisodePosts] = useState([])
   const [filteredEpisodePosts, setFilteredEpisodePosts] = useState(episodePosts)
+  const [episodePostsCommented, setEpisodePostsCommented] = useState([])
 
   // On initial render
   useEffect(() => {
@@ -32,6 +34,11 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
+      // Get episode posts user commented on
+      userService.getEpisodePostsCommented(user.id)
+        .then(response => {
+          setEpisodePostsCommented(response)
+        })
     }
   }, [])
 
@@ -49,7 +56,11 @@ const App = () => {
       <Normalize />
       <GlobalStyle />
       <Message message={message} />
-      <Header user={user} setUser={setUser} />
+      <Header
+        user={user}
+        setUser={setUser}
+        setEpisodePostsCommented={setEpisodePostsCommented}
+      />
       {/* Render component based on url */}
       <Routes>
         <Route
@@ -71,6 +82,7 @@ const App = () => {
               setEpisodePosts={setEpisodePosts}
               user={user}
               setMessage={setMessage}
+              setEpisodePostsCommented={setEpisodePostsCommented}
             />
           }
         />
@@ -83,14 +95,15 @@ const App = () => {
               setFilteredEpisodePosts={setFilteredEpisodePosts}
               user={user}
               setMessage={setMessage}
+              setEpisodePostsCommented={setEpisodePostsCommented}
             />
           }
         />
         <Route
           path="/login"
-          element={<Login setUser={setUser} setMessage={setMessage} />}
+          element={<Login setUser={setUser} setMessage={setMessage} setEpisodePostsCommented={setEpisodePostsCommented} />}
         />
-        <Route path="/user" element={<User />} />
+        <Route path="/user" element={<User episodePostsCommented={episodePostsCommented}/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Container>

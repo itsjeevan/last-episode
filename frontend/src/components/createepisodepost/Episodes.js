@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 const Episodes = ({
   showSelected, seasonSelected,
   episodes, episodePosts, setEpisodePosts, setFilteredEpisodePosts,
-  setMessage }) => {
+  setMessage, setEpisodePostsCommented }) => {
 
   // Scroll to episodes section
   const episodesRef = useRef()
@@ -51,6 +51,7 @@ const Episodes = ({
             onClickEpisode={handleOnClickEpisode}
             activeEpisode={activeEpisode}
             setMessage={setMessage}
+            setEpisodePostsCommented={setEpisodePostsCommented}
           />
         ))}
       </Container>

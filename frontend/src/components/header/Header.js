@@ -6,7 +6,7 @@ import logo from '../../assets/logo.svg'
 import PropTypes from 'prop-types'
 
 // Header
-const Header = ({ user, setUser }) => {
+const Header = ({ user, setUser, setEpisodePostsCommented }) => {
 
   const navigate = useNavigate()
 
@@ -14,6 +14,7 @@ const Header = ({ user, setUser }) => {
   const handleOnClickLogout = () => {
     localStorage.removeItem('user')
     setUser(null)
+    setEpisodePostsCommented([])
     navigate('/')
   }
 

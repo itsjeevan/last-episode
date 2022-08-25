@@ -1,22 +1,9 @@
 // Imports
-import { useEffect, useState } from 'react'
 import EpisodePostSingle from '../episodeposts/EpisodePostSingle'
-import userService from '../../services/users'
 import styled from 'styled-components'
 
 // User page showing episode posts commented on
-const User = () => {
-
-  const [episodePostsCommented, setEpisodePostsCommented] = useState([])
-
-  // Get episode posts commented on
-  useEffect(() => {
-    const user = JSON.parse(window.localStorage.getItem('user'))
-    userService.getEpisodePostsCommented(user.id)
-      .then(response => {
-        setEpisodePostsCommented(response)
-      })
-  }, [])
+const User = ({ episodePostsCommented }) => {
 
   return (
     <>

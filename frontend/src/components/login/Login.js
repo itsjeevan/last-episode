@@ -7,7 +7,7 @@ import userService from '../../services/users'
 import PropTypes from 'prop-types'
 
 // Login
-const Login = ({ setUser, setMessage }) => {
+const Login = ({ setUser, setMessage, setEpisodePostsCommented }) => {
 
   const navigate = useNavigate()
 
@@ -40,6 +40,10 @@ const Login = ({ setUser, setMessage }) => {
       setUser(user)
       setUsername('')
       setPassword('')
+      userService.getEpisodePostsCommented(user.id)
+        .then(response => {
+          setEpisodePostsCommented(response)
+        })
       navigate('/')
     }
     // Validation: Backend
