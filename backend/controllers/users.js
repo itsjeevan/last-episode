@@ -31,9 +31,9 @@ usersRouter.get('/:id', async (request, response) => {
 
 // GET episode posts that user commented on
 usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
-  // Get episode posts user commented on
-  const episodeComments = await User.findById(request.params.id)
-    .select({ 'username': 0, 'episodePosts': 0 })
+  // Get user data, populating episode comments with episode post
+  const userData = await User.findById(request.params.id)
+    .select('episodeComments')
     .populate({
       path: 'episodeComments',
       select: 'episodePost',
@@ -42,18 +42,19 @@ usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
       }
     })
   // 404 if not found
-  if (!episodeComments) {
+  if (!userData) {
     response.status(404).end()
   }
+  console.log(userData.episodeComments)
   const finalEpisodePosts = []
   // For each of the episode posts
-  episodeComments.episodeComments.forEach(episodePost => {
-    // If the episode post is not null
-    if (episodePost.episodePost) {
+  userData.episodeComments.forEach(episodeComment => {
+    // If the episode comment's episode post is not null
+    if (episodeComment.episodePost) {
       // Check if episode post exists to avoid duplicates
-      const foundEpisodePost = finalEpisodePosts.find(finalEpisodePost => finalEpisodePost.id === episodePost.episodePost.id)
+      const foundEpisodePost = finalEpisodePosts.find(finalEpisodePost => finalEpisodePost.id === episodeComment.episodePost.id)
       if (!foundEpisodePost) {
-        finalEpisodePosts.unshift(episodePost.episodePost)
+        finalEpisodePosts.unshift(episodeComment.episodePost)
       }
     }
   })
