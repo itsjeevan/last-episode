@@ -48,13 +48,10 @@ usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
   const finalEpisodePosts = []
   // For each of the episode posts
   userData.episodeComments.forEach(episodeComment => {
-    // If the episode comment's episode post is not null
-    if (episodeComment.episodePost) {
-      // Check if episode post exists to avoid duplicates
-      const foundEpisodePost = finalEpisodePosts.some(finalEpisodePost => finalEpisodePost.id === episodeComment.episodePost.id)
-      if (!foundEpisodePost) {
-        finalEpisodePosts.unshift(episodeComment.episodePost)
-      }
+    // Check if episode post exists to avoid duplicates
+    const foundEpisodePost = finalEpisodePosts.some(finalEpisodePost => finalEpisodePost.id === episodeComment.episodePost.id)
+    if (!foundEpisodePost) {
+      finalEpisodePosts.unshift(episodeComment.episodePost)
     }
   })
   response.json(finalEpisodePosts)
