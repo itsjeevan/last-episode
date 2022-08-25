@@ -10,9 +10,11 @@ const User = ({ episodePostsCommented }) => {
       <Heading>You commented on</Heading>
       <Container>
         {
-          episodePostsCommented.map(episodePost => (
-            <EpisodePostSingle key={episodePost.id} episodePost={episodePost} />
-          ))
+          episodePostsCommented.length
+            ? episodePostsCommented.map(episodePost => (
+              <EpisodePostSingle key={episodePost.id} episodePost={episodePost} />
+            ))
+            : <TextNoResults>No results</TextNoResults>
         }
       </Container>
     </>
@@ -28,6 +30,10 @@ const Container = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   gap: ${props => props.theme.space.large};
+`
+const TextNoResults = styled.p`
+  text-align: center;
+  width: 100%;
 `
 
 // Export
