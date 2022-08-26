@@ -1,5 +1,5 @@
 // Imports
-import { Routes, Route, useMatch } from 'react-router-dom'
+import { Routes, Route, useMatch, Navigate } from 'react-router-dom'
 import Login from './components/login/Login'
 import EpisodePosts from './components/episodeposts/EpisodePosts'
 import EpisodePost from './components/episodeposts/EpisodePost'
@@ -103,11 +103,26 @@ const App = () => {
           path="/login"
           element={<Login setUser={setUser} setMessage={setMessage} setEpisodePostsCommented={setEpisodePostsCommented} />}
         />
-        <Route path="/user" element={<User episodePostsCommented={episodePostsCommented}/>} />
+        <Route
+          path="/user"
+          element={
+            <ProtectedRoute user={user}>
+              <User episodePostsCommented={episodePostsCommented}/>
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Container>
   )
+}
+
+// ProtectedRoute component
+const ProtectedRoute = ({ user, children }) => {
+  if (!user) {
+    return <Navigate to="/" replace />
+  }
+  return children
 }
 
 // Styles
