@@ -1,6 +1,6 @@
 // Imports
 import { useState, useEffect } from 'react'
-import EpisodePostSingle from './EpisodePostSingle'
+import EpisodePostsSingle from './EpisodePostsSingle'
 import styled from 'styled-components'
 
 // List of episode posts
@@ -52,7 +52,7 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
         {
           filteredEpisodePosts.length
             ? filteredEpisodePosts.map(episodePost => (
-              <EpisodePostSingle key={episodePost.id} episodePost={episodePost} />
+              <EpisodePostsSingle key={episodePost.id} episodePost={episodePost} />
             ))
             : <TextNoResults>No results</TextNoResults>
         }

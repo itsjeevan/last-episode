@@ -1,5 +1,5 @@
 // Imports
-import EpisodePostSingle from '../episodeposts/EpisodePostSingle'
+import EpisodePostsSingle from '../episodeposts/EpisodePostsSingle'
 import styled from 'styled-components'
 
 // User page showing episode posts commented on
@@ -12,7 +12,7 @@ const User = ({ episodePostsCommented }) => {
         {
           episodePostsCommented.length
             ? episodePostsCommented.map(episodePost => (
-              <EpisodePostSingle key={episodePost.id} episodePost={episodePost} />
+              <EpisodePostsSingle key={episodePost.id} episodePost={episodePost} />
             ))
             : <TextNoResults>No results</TextNoResults>
         }
