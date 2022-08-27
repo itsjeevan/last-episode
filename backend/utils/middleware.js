@@ -1,6 +1,9 @@
+// Imports
+const path = require('path')
+
 // Unknown endpoint
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
+  response.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
 }
 
 // Error handler
