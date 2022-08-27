@@ -5,7 +5,7 @@ import notFoundEpisodeSmall from '../../assets/404-episode-small.jpg'
 
 // Single EpisodePost for EpisodePosts
 const EpisodePostSingle = ({ episodePost }) => (
-  <Container to={`/episodepost/${episodePost.id}`} key={episodePost.id}>
+  <Container to={`/episodeposts/${episodePost.id}`} key={episodePost.id}>
     <Image
       alt={episodePost.showName}
       src={episodePost.episodeImage

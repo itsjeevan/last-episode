@@ -43,7 +43,7 @@ const App = () => {
   }, [])
 
   // Everytime browser url changes, check for match
-  const match = useMatch('/episodepost/:id')
+  const match = useMatch('/episodeposts/:id')
   // If match found, find individual episode post
   const episodePostMatch = match
     ? episodePosts.find(episodePost => episodePost.id === match.params.id)
@@ -74,7 +74,7 @@ const App = () => {
           }
         />
         <Route
-          path="/episodepost/:id"
+          path="/episodeposts/:id"
           element={
             <EpisodePost
               episodePostMatch={episodePostMatch}
