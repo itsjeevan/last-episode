@@ -74,8 +74,6 @@ const EpisodePost = ({
     // Update episode post
     setEpisodePost(updatedEpisodePost)
     setCommentInput('')
-    // @Improve
-    // I'm not updating episode posts commented on individually
     setEpisodePostsCommented(prevState => {
       const foundEpisodePost = prevState.some(episodePostCommented => episodePostCommented.id === episodePostMatch.id)
       if (!foundEpisodePost) {
