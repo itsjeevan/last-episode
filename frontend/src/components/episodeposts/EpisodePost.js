@@ -94,7 +94,7 @@ const EpisodePost = ({
   // If directly linking to episode post or on refresh
   if (!episodePostMatch || !episodePost) {
     return (
-      <h1>Loading...</h1>
+      <LoadingText>Loading...</LoadingText>
     )
   }
 
@@ -281,6 +281,9 @@ const User = styled.p`
   font-size: 16px;
   font-weight: bold;
   margin-right: ${props => props.theme.space.small};
+`
+const LoadingText = styled.p`
+  text-align: center;
 `
 
 // Export
