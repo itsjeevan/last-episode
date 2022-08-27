@@ -45,7 +45,7 @@ const App = () => {
   // Everytime browser url changes, check for match
   const match = useMatch('/episodepost/:id')
   // If match found, find individual episode post
-  const episodePost = match
+  const episodePostMatch = match
     ? episodePosts.find(episodePost => episodePost.id === match.params.id)
     : null
 
@@ -77,7 +77,7 @@ const App = () => {
           path="/episodepost/:id"
           element={
             <EpisodePost
-              episodePost={episodePost}
+              episodePostMatch={episodePostMatch}
               episodePosts={episodePosts}
               setEpisodePosts={setEpisodePosts}
               user={user}
