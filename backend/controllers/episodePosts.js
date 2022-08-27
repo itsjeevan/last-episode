@@ -11,13 +11,19 @@ const helper = require('../utils/helper')
 episodePostsRouter.get('/', async (request, response) => {
   // Return all posts
   const posts = await episodePost.find({})
+    .select({
+      date: 0,
+      user: 0,
+    })
     .populate({
       path: 'episodeComments',
+      select: {
+        episodePost: 0,
+      },
       populate: {
         path: 'user',
         select: 'username'
-      },
-      options: { sort: { 'date': 'descending' } },
+      }
     })
     .sort({
       date: 'descending'
@@ -29,12 +35,20 @@ episodePostsRouter.get('/', async (request, response) => {
 episodePostsRouter.get('/:id', async (request, response) => {
   // Find post
   const post = await episodePost.findById(request.params.id)
+    .select({
+      date: 0,
+      user: 0,
+    })
     .populate({
       path: 'episodeComments',
+      select: {
+        episodePost: 0,
+      },
       populate: {
         path: 'user',
         select: 'username'
-      }
+      },
+      options: { sort: { 'date': 'descending' } }
     })
   // If post found
   if (post) {

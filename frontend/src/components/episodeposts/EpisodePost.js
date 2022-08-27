@@ -1,17 +1,32 @@
 // Imports
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import episodeCommentService from '../../services/episodecomments'
+import episodePostService from '../../services/episodeposts'
 import notFoundEpisodeLarge from '../../assets/404-episode-large.jpg'
 import notFoundShowAndSeason from '../../assets/404-show-and-season.jpg'
 import PropTypes from 'prop-types'
 
 // Individual episode post
 const EpisodePost = ({
-  episodePost, episodePosts, setEpisodePosts, user, setMessage, setEpisodePostsCommented }) => {
+  episodePostMatch, user, setMessage, setEpisodePostsCommented }) => {
 
   const navigate = useNavigate()
+
+  const [episodePost, setEpisodePost] = useState()
+
+  // On initial render
+  useEffect(() => {
+    // If directly loading an episode post
+    if (episodePostMatch) {
+      // Get episode post
+      episodePostService.getOne(episodePostMatch.id)
+        .then(response => {
+          setEpisodePost(response)
+        })
+    }
+  }, [episodePostMatch])
 
   // Comment input (controlled component)
   const [commentInput, setCommentInput] = useState('')
@@ -39,7 +54,7 @@ const EpisodePost = ({
     // Create episode comment object
     const episodeComment = {
       content: commentInput,
-      episodePostId: episodePost.id
+      episodePostId: episodePostMatch.id
     }
     // Save episode comment
     try {
@@ -52,18 +67,19 @@ const EpisodePost = ({
       return
     }
     // Create new episode post with new comment
-    const newEpisodePost = {
+    const updatedEpisodePost = {
       ...episodePost,
       episodeComments: [episodeCommentResponse, ...episodePost.episodeComments]
     }
-    // Update episode posts
-    setEpisodePosts(episodePosts.map(post => post.id !== episodePost.id ? post : newEpisodePost))
+    // Update episode post
+    setEpisodePost(updatedEpisodePost)
     setCommentInput('')
     // @Improve
+    // I'm not updating episode posts commented on individually
     setEpisodePostsCommented(prevState => {
-      const foundEpisodePost = prevState.some(finalEpisodePost => finalEpisodePost.id === newEpisodePost.id)
+      const foundEpisodePost = prevState.some(episodePostCommented => episodePostCommented.id === episodePostMatch.id)
       if (!foundEpisodePost) {
-        return [newEpisodePost, ...prevState]
+        return [episodePostMatch, ...prevState]
       }
       return prevState
     })
@@ -76,7 +92,7 @@ const EpisodePost = ({
   }
 
   // If directly linking to episode post or on refresh
-  if (!episodePost) {
+  if (!episodePostMatch || !episodePost) {
     return (
       <h1>Loading...</h1>
     )
