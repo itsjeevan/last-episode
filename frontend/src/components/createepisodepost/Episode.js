@@ -86,7 +86,7 @@ const Episode = ({
     setEpisodePostsCommented(prevState => {
       return [episodePostResponseFinal, ...prevState]
     })
-    navigate(`/episodepost/${episodePostResponseFinal.id}`)
+    navigate(`/episodeposts/${episodePostResponseFinal.id}`)
   }
 
   return (
