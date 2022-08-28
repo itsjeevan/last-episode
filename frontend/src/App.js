@@ -29,8 +29,9 @@ const App = () => {
       setEpisodePosts(episodePosts)
       setFilteredEpisodePosts(episodePosts)
     })
-    // Check if user details found in local storage
+    // @Improve: Security vulnerability
     const loggedUserJSON = window.localStorage.getItem('user')
+    // Check if user details found in local storage
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)

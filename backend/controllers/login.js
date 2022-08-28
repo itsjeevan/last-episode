@@ -31,7 +31,7 @@ loginRouter.post('/', async (request, response) => {
     id: user._id,
   }
 
-  // Create token digitally signed using environment variable
+  // @Improve: Security vulnerability, no token expiration
   const token = jwt.sign(
     userForToken,
     process.env.JWT_SECRET

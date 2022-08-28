@@ -34,7 +34,7 @@ const Login = ({ setUser, setMessage, setEpisodePostsCommented }) => {
     // Try to login user
     try {
       const user = await loginService.login({ username, password })
-      // Save user info to local storage
+      // @Improve: Security vulnerability
       window.localStorage.setItem('user', JSON.stringify(user))
       // Set user state to response (token and username)
       setUser(user)
