@@ -90,12 +90,14 @@ episodeCommentsRouter.post('/', async (request, response) => {
       error: 'Error: Could not create comment'
     })
   }
+
   response.json(await savedEpisodeComment.populate({
     path: 'user',
     select: {
       username: 1
     }
   }))
+
 })
 
 // Exports
