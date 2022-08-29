@@ -92,7 +92,9 @@ episodeCommentsRouter.post('/', async (request, response) => {
   }
   response.json(await savedEpisodeComment.populate({
     path: 'user',
-    select: 'username'
+    select: {
+      username: 1
+    }
   }))
 })
 
