@@ -12,18 +12,11 @@ episodePostsRouter.get('/', async (request, response) => {
   // Return all posts
   const posts = await episodePost.find({})
     .select({
-      date: 0,
-      user: 0,
-    })
-    .populate({
-      path: 'episodeComments',
-      select: {
-        episodePost: 0,
-      },
-      populate: {
-        path: 'user',
-        select: 'username'
-      }
+      showName: 1,
+      episodeNumber: 1,
+      episodeName: 1,
+      episodeInfo: 1,
+      episodeImage: 1,
     })
     .sort({
       date: 'descending'

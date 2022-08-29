@@ -30,7 +30,7 @@ usersRouter.get('/:id', async (request, response) => {
 })
 
 // GET episode posts that user commented on
-usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
+usersRouter.get('/:id/episodecomments/episodeposts', async (request, response) => {
   // Get user data, populating episode comments with episode post
   const userData = await User.findById(request.params.id)
     .select('episodeComments')
@@ -38,7 +38,14 @@ usersRouter.get('/:id/comments/episodeposts', async (request, response) => {
       path: 'episodeComments',
       select: 'episodePost',
       populate: {
-        path: 'episodePost'
+        path: 'episodePost',
+        select: {
+          showName: 1,
+          episodeNumber: 1,
+          episodeName: 1,
+          episodeInfo: 1,
+          episodeImage: 1,
+        }
       }
     })
   // 404 if not found
