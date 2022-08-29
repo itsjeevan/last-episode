@@ -11,7 +11,7 @@ const create = async userData => {
 
 // Get episode posts commented on by user id
 const getEpisodePostsCommented = async id => {
-  const response = await axios.get(`${baseUrl}/${id}/comments/episodeposts`)
+  const response = await axios.get(`${baseUrl}/${id}/episodecomments/episodeposts`)
   return response.data
 }
 
