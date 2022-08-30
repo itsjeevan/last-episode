@@ -228,6 +228,7 @@ const ImageContainer = styled.div`
   gap: ${props => props.theme.space.medium};
 `
 const Image = styled.img`
+  width: 100%;
   border-radius: ${props => props.theme.radius};
 `
 const ImageText = styled.p`
