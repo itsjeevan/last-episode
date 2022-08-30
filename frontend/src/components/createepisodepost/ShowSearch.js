@@ -51,7 +51,7 @@ const ShowSearch = ({ setShows, setSeasons, setEpisodes, user, setMessage }) => 
         onChange={handleOnChangeShowInput}
         placeholder="Search for a show..."
       />
-      <Button type="submit">Search</Button>
+      <button type="submit">Search</button>
     </Form>
   )
 }
@@ -69,9 +69,11 @@ ShowSearch.propTypes = {
 const Form = styled.form`
   display: flex;
   flex-direction: row;
-`
-const Button = styled.button`
-  margin-left: ${props => props.theme.space.large};
+  gap: ${props => props.theme.space.medium};
+  @media screen and (max-width: 575px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 // Export
