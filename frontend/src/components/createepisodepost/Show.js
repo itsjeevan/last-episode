@@ -35,6 +35,9 @@ const Container = styled.div`
   width: calc(25% - 30px);
   cursor: pointer;
   gap: ${props => props.theme.space.medium};
+  @media screen and (max-width: 767px) {
+    width: calc(50% - 20px);
+  }
 `
 const Image = styled.img`
   border-radius: ${props => props.theme.radius};
