@@ -16,7 +16,7 @@ const Login = ({ setUser, setMessage, setEpisodePostsCommented }) => {
 
   // Username & password inputs (controlled components)
   const [username, setUsername] = useState('')
-  const handleOnChangeUsername = event => setUsername(event.target.value)
+  const handleOnChangeUsername = event => setUsername(event.target.value.toLowerCase())
   const [password, setPassword] = useState('')
   const handleOnChangePassword = event => setPassword(event.target.value)
   const [passwordConfirm, setPasswordConfirm] = useState('')
