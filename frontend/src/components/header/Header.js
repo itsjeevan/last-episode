@@ -61,14 +61,11 @@ const Container = styled.nav`
   padding: ${props => props.theme.space.large} 0;
   border-bottom: 2px solid ${props => props.theme.color.secondary};
   margin-bottom: ${props => props.theme.space.large};
+  flex-wrap: wrap;
 
   // Media queries
   @media screen and (max-width: 767px) {
     flex-direction: column;
-    align-items: flex-start;
-  }
-  @media screen and (max-width: 575px) {
-    align-items: center;
   }
 `
 const ContentContainer = styled.div`
@@ -76,11 +73,11 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  flex-grow: 1;
   justify-content: space-between;
 
   // Media queries
-  @media screen and (max-width: 575px) {
+  @media screen and (max-width: 767px) {
     flex-direction: column;
     align-items: center;
     gap: ${props => props.theme.space.medium};
