@@ -37,7 +37,7 @@ const EpisodePosts = ({ episodePosts, filteredEpisodePosts, setFilteredEpisodePo
   return (
     <>
       <FilterForm onSubmit={handleOnSubmitShowFilter}>
-        <FilterInput
+        <input
           value={showInput}
           onChange={handleOnChangeShowInput}
           type="text"
@@ -74,11 +74,6 @@ const FilterForm = styled.form`
   // Media queries
   @media screen and (max-width: 767px) {
     flex-direction: column;
-  }
-`
-const FilterInput = styled.input`
-  @media screen and (max-width: 767px) {
-    width: 100%;
   }
 `
 const FilterButtons = styled.div`
