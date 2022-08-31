@@ -72,7 +72,6 @@ const Episode = ({
     // Save episode comment
     try {
       await episodeCommentService.create(episodeComment)
-      var episodePostResponseFinal = await episodePostService.getOne(episodePostResponse.id)
     }
     // Validation: Backend
     catch(exception) {
@@ -81,12 +80,12 @@ const Episode = ({
       return
     }
     // Update state
-    setEpisodePosts([episodePostResponseFinal, ...episodePosts])
-    setFilteredEpisodePosts([episodePostResponseFinal, ...episodePosts])
+    setEpisodePosts([episodePostResponse, ...episodePosts])
+    setFilteredEpisodePosts([episodePostResponse, ...episodePosts])
     setEpisodePostsCommented(prevState => {
-      return [episodePostResponseFinal, ...prevState]
+      return [episodePostResponse, ...prevState]
     })
-    navigate(`/episodeposts/${episodePostResponseFinal.id}`)
+    navigate(`/episodeposts/${episodePostResponse.id}`)
   }
 
   return (
