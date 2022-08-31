@@ -30,7 +30,7 @@ const Header = ({ user, setUser, setEpisodePostsCommented }) => {
           <Link to="/">Browse</Link>
           <Link to="/create">Create</Link>
         </ContentSubContainer>
-        <ContentSubContainer>
+        <UserContainer>
           {user
             ?
             <>
@@ -39,7 +39,7 @@ const Header = ({ user, setUser, setEpisodePostsCommented }) => {
             </>
             : <Link to="/login">Login</Link>
           }
-        </ContentSubContainer>
+        </UserContainer>
       </ContentContainer>
     </Container>
   )
@@ -94,6 +94,16 @@ const ContentSubContainer = styled.div`
   flex-direction: row;
   align-items: center;
   gap: ${props => props.theme.space.small};
+`
+const UserContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: ${props => props.theme.space.small};
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 const Logo = styled.img`
   width: 75px;
