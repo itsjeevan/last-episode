@@ -142,7 +142,10 @@ const GlobalStyle = createGlobalStyle`
   }
   h1 {
     margin: 0;
-    font-size: 75px;
+    font-size: 60px;
+    @media screen and (max-width: 576px) {
+      font-size: 50px;
+    }
   }
   h2 {
     margin: 0;
