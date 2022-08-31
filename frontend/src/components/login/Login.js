@@ -62,12 +62,12 @@ const Login = ({ setUser, setMessage, setEpisodePostsCommented }) => {
       setTimeout(() => setMessage(null), 2000)
       return
     }
-    if (username.length >= 30) {
+    if (username.length > 20) {
       setMessage('Error: Username too long')
       setTimeout(() => setMessage(null), 2000)
       return
     }
-    if (password.length >= 250) {
+    if (password.length > 250) {
       setMessage('Error: Password too long')
       setTimeout(() => setMessage(null), 2000)
       return
