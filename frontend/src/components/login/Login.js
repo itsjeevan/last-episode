@@ -79,7 +79,7 @@ const Login = ({ setUser, setMessage, setEpisodePostsCommented }) => {
     }
     // Try to login user
     try {
-      await userService.create({ username, password })
+      await userService.create({ username, password, passwordConfirm })
       handleOnClickLogin(event)
     }
     // Validation: Backend

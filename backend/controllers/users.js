@@ -68,7 +68,7 @@ usersRouter.get('/:id/episodecomments/episodeposts', async (request, response) =
 
 // POST new user
 usersRouter.post('/', async (request, response) => {
-  const { username, password } = request.body
+  const { username, password, passwordConfirm } = request.body
 
   // Check if username is taken
   const userFound = await User.findOne({ username })
@@ -76,6 +76,11 @@ usersRouter.post('/', async (request, response) => {
     return response.status(400).json({
       error: 'Error: Username taken'
     })
+  }
+
+  // If passwords don't match return error
+  if (password !== passwordConfirm) {
+    return response.status(422).json({ error: 'Error: Passwords do not match'})
   }
 
   // Create hashed password
