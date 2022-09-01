@@ -11,7 +11,7 @@ const errorHandler = (error, request, response, next) => {
   console.log(error.message)
   // If unique entry exists in MongoDB already
   if (error.name === 'MongoServerError') {
-    return response.status(400).send({ error: 'Error: Only one entry allowed' })
+    return response.status(422).send({ error: 'Error: Only one entry allowed' })
   }
   // If accessing an incorrect 'id'
   else if (error.name === 'CastError') {
@@ -19,7 +19,7 @@ const errorHandler = (error, request, response, next) => {
   }
   // If data entered into MongoDB doesn't pass validation
   else if (error.name === 'ValidationError') {
-    return response.status(400).json({ error: 'Error: Data not valid' })
+    return response.status(422).json({ error: 'Error: Data not valid' })
   }
   // If JWT error
   else if (error.name === 'JsonWebTokenError') {
@@ -31,7 +31,7 @@ const errorHandler = (error, request, response, next) => {
   }
   // If accessing property of null (user._id from a user that is not found)
   else if (error.name === 'TypeError') {
-    return response.status(400).json({ error: 'Error: Type error' })
+    return response.status(422).json({ error: 'Error: Type error' })
   }
   next(error)
 }

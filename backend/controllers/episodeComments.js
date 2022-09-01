@@ -62,10 +62,10 @@ episodeCommentsRouter.post('/', async (request, response) => {
   }
   // Error handle TypeError
   if (!userFound) {
-    return response.status(400).json({ error: 'Error: No user found' })
+    return response.status(422).json({ error: 'Error: No user found' })
   }
   if (!episodePostFound) {
-    return response.status(400).json({ error: 'Error: No episode post found' })
+    return response.status(422).json({ error: 'Error: No episode post found' })
   }
 
   // Create comment object

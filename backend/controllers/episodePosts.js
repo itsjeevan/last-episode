@@ -73,7 +73,7 @@ episodePostsRouter.post('/', async (request, response) => {
   // Check if episode post already exists
   const episodePostFound = await episodePost.find({ showName, seasonName, episodeNumber })
   if (episodePostFound.length !== 0) {
-    return response.status(400).json({
+    return response.status(422).json({
       error: 'Error: Episode post already exists'
     })
   }
@@ -88,7 +88,7 @@ episodePostsRouter.post('/', async (request, response) => {
   }
   // Error handle TypeError
   if (!userFound) {
-    return response.status(400).json({ error: 'Error: No user found' })
+    return response.status(422).json({ error: 'Error: No user found' })
   }
 
   // Create post object

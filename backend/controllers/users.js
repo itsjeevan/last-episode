@@ -73,7 +73,7 @@ usersRouter.post('/', async (request, response) => {
   // Check if username is taken
   const userFound = await User.findOne({ username })
   if (userFound) {
-    return response.status(400).json({
+    return response.status(422).json({
       error: 'Error: Username taken'
     })
   }
