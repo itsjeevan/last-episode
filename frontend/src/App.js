@@ -155,6 +155,7 @@ const GlobalStyle = createGlobalStyle`
   p {
     margin: 0;
     font-size: 20px;
+    line-height: 125%;
   }
   input {
     // Display & Box Model
