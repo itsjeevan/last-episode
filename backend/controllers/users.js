@@ -21,11 +21,11 @@ usersRouter.get('/:id', async (request, response) => {
     .populate('episodeComments')
   // If user found
   if (user) {
-    response.json(user)
+    return response.json(user)
   }
   // 404 if not found
   else {
-    response.status(404).end()
+    return response.status(404).end()
   }
 })
 
@@ -50,7 +50,7 @@ usersRouter.get('/:id/episodecomments/episodeposts', async (request, response) =
     })
   // 404 if not found
   if (!userData) {
-    response.status(404).end()
+    return response.status(404).end()
   }
   const finalEpisodePosts = []
   // For each of the episode posts
@@ -61,7 +61,7 @@ usersRouter.get('/:id/episodecomments/episodeposts', async (request, response) =
       finalEpisodePosts.unshift(episodeComment.episodePost)
     }
   })
-  response.json(finalEpisodePosts)
+  return response.json(finalEpisodePosts)
 })
 
 // POST routes
@@ -97,7 +97,7 @@ usersRouter.post('/', async (request, response) => {
   try {
     // Save user
     const savedUser = await user.save()
-    response.json(savedUser)
+    return response.json(savedUser)
   }
   catch(exception) {
     return response.status(422).json({

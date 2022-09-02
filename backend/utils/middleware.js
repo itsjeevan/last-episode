@@ -3,7 +3,7 @@ const path = require('path')
 
 // Unknown endpoint
 const unknownEndpoint = (request, response) => {
-  response.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
+  return response.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
 }
 
 // Error handler
