@@ -8,7 +8,6 @@ const unknownEndpoint = (request, response) => {
 
 // Error handler
 const errorHandler = (error, request, response, next) => {
-  console.log(error.message)
   // If unique entry exists in MongoDB already
   if (error.name === 'MongoServerError') {
     return response.status(422).send({ error: 'Error: Only one entry allowed' })
