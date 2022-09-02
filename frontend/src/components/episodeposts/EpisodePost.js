@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 
 // Individual episode post
 const EpisodePost = ({
-  episodePostMatch, user, setMessage, setEpisodePostsCommented }) => {
+  match, user, setMessage, setEpisodePostsCommented }) => {
 
   const navigate = useNavigate()
 
@@ -19,14 +19,17 @@ const EpisodePost = ({
   // On initial render
   useEffect(() => {
     // If directly loading an episode post
-    if (episodePostMatch) {
+    if (match) {
       // Get episode post
-      episodePostService.getOne(episodePostMatch.id)
+      episodePostService.getOne(match.params.id)
         .then(response => {
           setEpisodePost(response)
         })
+        .catch(() => {
+          navigate('/notfound')
+        })
     }
-  }, [episodePostMatch])
+  }, [match])
 
   // Comment input (controlled component)
   const [commentInput, setCommentInput] = useState('')
@@ -54,7 +57,7 @@ const EpisodePost = ({
     // Create episode comment object
     const episodeComment = {
       content: commentInput,
-      episodePostId: episodePostMatch.id
+      episodePostId: episodePost.id
     }
     // Save episode comment
     try {
@@ -75,9 +78,9 @@ const EpisodePost = ({
     setEpisodePost(updatedEpisodePost)
     setCommentInput('')
     setEpisodePostsCommented(prevState => {
-      const foundEpisodePost = prevState.some(episodePostCommented => episodePostCommented.id === episodePostMatch.id)
+      const foundEpisodePost = prevState.some(episodePostCommented => episodePostCommented.id === episodePost.id)
       if (!foundEpisodePost) {
-        return [episodePostMatch, ...prevState]
+        return [episodePost, ...prevState]
       }
       return prevState
     })
@@ -89,8 +92,8 @@ const EpisodePost = ({
     return `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`
   }
 
-  // If directly linking to episode post or on refresh
-  if (!episodePostMatch || !episodePost) {
+  // If loading episode post
+  if (!episodePost) {
     return (
       <LoadingText>Loading...</LoadingText>
     )
@@ -182,11 +185,10 @@ const EpisodePost = ({
 
 // PropTypes
 EpisodePost.propTypes = {
-  episodePost: PropTypes.object,
-  episodePosts: PropTypes.array.isRequired,
-  setEpisodePosts: PropTypes.func.isRequired,
+  match: PropTypes.object,
   user: PropTypes.object,
-  setMessage: PropTypes.func.isRequired
+  setMessage: PropTypes.func.isRequired,
+  setEpisodePostsCommented: PropTypes.func.isRequired,
 }
 
 // Styles

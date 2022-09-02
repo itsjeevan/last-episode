@@ -21,6 +21,7 @@ const App = () => {
   const [episodePosts, setEpisodePosts] = useState([])
   const [filteredEpisodePosts, setFilteredEpisodePosts] = useState(episodePosts)
   const [episodePostsCommented, setEpisodePostsCommented] = useState([])
+  const [message, setMessage] = useState(null)
 
   // On initial render
   useEffect(() => {
@@ -45,12 +46,6 @@ const App = () => {
 
   // Everytime browser url changes, check for match
   const match = useMatch('/episodeposts/:id')
-  // If match found, find individual episode post
-  const episodePostMatch = match
-    ? episodePosts.find(episodePost => episodePost.id === match.params.id)
-    : null
-
-  const [message, setMessage] = useState(null)
 
   return (
     <Container>
@@ -78,9 +73,7 @@ const App = () => {
           path="/episodeposts/:id"
           element={
             <EpisodePost
-              episodePostMatch={episodePostMatch}
-              episodePosts={episodePosts}
-              setEpisodePosts={setEpisodePosts}
+              match={match}
               user={user}
               setMessage={setMessage}
               setEpisodePostsCommented={setEpisodePostsCommented}
@@ -112,6 +105,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="notfound" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Container>
