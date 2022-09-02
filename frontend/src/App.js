@@ -41,6 +41,12 @@ const App = () => {
         .then(response => {
           setEpisodePostsCommented(response)
         })
+        // If user doesn't exist in database
+        .catch(() => {
+          localStorage.removeItem('user')
+          setUser(null)
+          setEpisodePostsCommented([])
+        })
     }
   }, [])
 
