@@ -21,7 +21,7 @@ episodePostsRouter.get('/', async (request, response) => {
     .sort({
       date: 'descending'
     })
-  response.json(posts)
+  return response.json(posts)
 })
 
 // GET episode post by id
@@ -45,11 +45,11 @@ episodePostsRouter.get('/:id', async (request, response) => {
     })
   // If post found
   if (post) {
-    response.json(post)
+    return response.json(post)
   }
   // 404 if not found
   else {
-    response.status(404).end()
+    return response.status(404).end()
   }
 })
 
@@ -119,7 +119,7 @@ episodePostsRouter.post('/', async (request, response) => {
     })
   }
 
-  response.json(savedEpisodePost)
+  return response.json(savedEpisodePost)
 })
 
 // Exports

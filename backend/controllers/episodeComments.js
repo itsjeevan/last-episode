@@ -14,7 +14,7 @@ episodeCommentsRouter.get('/', async (request, response) => {
   const comments = await episodeComment.find({})
     .populate('user')
     .populate('episodePost')
-  response.json(comments)
+  return response.json(comments)
 })
 
 // GET episode comment by id (Unused endpoint)
@@ -25,11 +25,11 @@ episodeCommentsRouter.get('/:id', async (request, response) => {
     .populate('episodePost')
   // If comment found
   if (comment) {
-    response.json(comment)
+    return response.json(comment)
   }
   // 404 if not found
   else {
-    response.status(404).end()
+    return response.status(404).end()
   }
 })
 
@@ -91,7 +91,7 @@ episodeCommentsRouter.post('/', async (request, response) => {
     })
   }
 
-  response.json(await savedEpisodeComment.populate({
+  return response.json(await savedEpisodeComment.populate({
     path: 'user',
     select: {
       username: 1
