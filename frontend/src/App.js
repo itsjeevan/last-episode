@@ -101,7 +101,15 @@ const App = () => {
         />
         <Route
           path="/login"
-          element={<Login setUser={setUser} setMessage={setMessage} setEpisodePostsCommented={setEpisodePostsCommented} />}
+          element={
+            <PublicRoute user={user}>
+              <Login
+                setUser={setUser}
+                setMessage={setMessage}
+                setEpisodePostsCommented={setEpisodePostsCommented}
+              />
+            </PublicRoute>
+          }
         />
         <Route
           path="/user"
@@ -121,7 +129,16 @@ const App = () => {
 // ProtectedRoute component
 const ProtectedRoute = ({ user, children }) => {
   if (!user) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/" />
+  }
+  return children
+
+}
+
+// PublicRoute component
+const PublicRoute = ({ user, children }) => {
+  if (user) {
+    return <Navigate to="/" />
   }
   return children
 }
