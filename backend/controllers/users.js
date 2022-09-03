@@ -41,6 +41,7 @@ usersRouter.get('/:id/episodecomments/episodeposts', async (request, response) =
         path: 'episodePost',
         select: {
           showName: 1,
+          seasonName: 1,
           episodeNumber: 1,
           episodeName: 1,
           episodeInfo: 1,

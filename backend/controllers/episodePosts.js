@@ -13,6 +13,7 @@ episodePostsRouter.get('/', async (request, response) => {
   const posts = await episodePost.find({})
     .select({
       showName: 1,
+      seasonName: 1,
       episodeNumber: 1,
       episodeName: 1,
       episodeInfo: 1,
