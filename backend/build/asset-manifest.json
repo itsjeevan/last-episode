@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/static/js/main.7dda3acd.js",
+    "main.js": "/static/js/main.d1431766.js",
     "static/media/404-episode-large.jpg": "/static/media/404-episode-large.f6273290d263ec22921b.jpg",
     "static/media/404-show-and-season.jpg": "/static/media/404-show-and-season.82e62fc2ef43a4beda85.jpg",
     "static/media/404-episode-small.jpg": "/static/media/404-episode-small.c46a49474bae35061ffc.jpg",
     "static/media/logo.svg": "/static/media/logo.004f7c6df3349d4435305a12de561c26.svg",
     "index.html": "/index.html",
-    "main.7dda3acd.js.map": "/static/js/main.7dda3acd.js.map"
+    "main.d1431766.js.map": "/static/js/main.d1431766.js.map"
   },
   "entrypoints": [
-    "static/js/main.7dda3acd.js"
+    "static/js/main.d1431766.js"
   ]
 }
